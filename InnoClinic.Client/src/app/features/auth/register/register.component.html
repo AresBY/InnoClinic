@@ -1,0 +1,110 @@
+<div class="p-4">
+  <div class="d-flex justify-content-end">
+    <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+  </div>
+
+  <h2 class="mb-4 text-center">Register</h2>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        class="form-control"
+        [class.is-invalid]="email?.invalid && (email?.touched || submitted)"
+        placeholder="name@example.com"
+        [disabled]="isSubmitting"
+        (blur)="checkEmailExists()"
+      />
+      <div *ngIf="email?.errors && (email?.touched || submitted)" class="invalid-feedback">
+        <ng-container *ngIf="email.errors['server']; else emailClientErrors">
+          {{ email.errors['server'] }}
+        </ng-container>
+        <ng-template #emailClientErrors>
+          <div *ngIf="email.errors['required']">Please, enter the email</div>
+          <div *ngIf="email.errors['email']">You've entered an invalid email</div>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        class="form-control"
+        [class.is-invalid]="password?.invalid && (password?.touched || submitted)"
+        placeholder="Enter password"
+        [disabled]="isSubmitting"
+      />
+      <div *ngIf="password?.errors && (password?.touched || submitted)" class="invalid-feedback">
+        <ng-container *ngIf="password.errors['server']; else passwordClientErrors">
+          {{ password.errors['server'] }}
+        </ng-container>
+        <ng-template #passwordClientErrors>
+          <div *ngIf="password.errors['required']">Please, enter the password</div>
+          <div *ngIf="password.errors['minlength']">Password must be at least 6 characters</div>
+          <div *ngIf="password.errors['maxlength']">Password must not exceed 15 characters</div>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Repeat Password -->
+    <div class="mb-3">
+      <label for="reEnteredPassword" class="form-label">Repeat Password</label>
+      <input
+        id="reEnteredPassword"
+        type="password"
+        formControlName="reEnteredPassword"
+        class="form-control"
+        [class.is-invalid]="
+          (reEnteredPassword?.invalid && (reEnteredPassword?.touched || submitted)) ||
+          (registerForm.errors?.passwordsMismatch && (reEnteredPassword?.touched || submitted))
+        "
+        placeholder="Repeat password"
+        [disabled]="isSubmitting"
+      />
+      <div
+        *ngIf="reEnteredPassword?.errors && (reEnteredPassword?.touched || submitted)"
+        class="invalid-feedback"
+      >
+        <ng-container *ngIf="reEnteredPassword.errors['server']; else reEnterClientErrors">
+          {{ reEnteredPassword.errors['server'] }}
+        </ng-container>
+        <ng-template #reEnterClientErrors>
+          <div *ngIf="reEnteredPassword.errors['required']">Please, reenter the password</div>
+        </ng-template>
+      </div>
+      <div
+        *ngIf="registerForm.errors?.passwordsMismatch && (reEnteredPassword?.touched || submitted)"
+        class="invalid-feedback"
+      >
+        The passwords you’ve entered don’t coincide
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button
+      class="btn btn-primary w-100"
+      type="submit"
+      [disabled]="registerForm.invalid || isSubmitting"
+    >
+      Sign Up
+    </button>
+
+    <!-- Messages -->
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+
+    <div class="mt-3 text-center">
+      <a href="#" class="text-decoration-none" (click)="openSignInModal($event)">
+        Already have an account? <strong>Sign in</strong>
+      </a>
+    </div>
+  </form>
+</div>

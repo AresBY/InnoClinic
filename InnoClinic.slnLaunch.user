@@ -1,0 +1,23 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "InnoClinic.Server\\InnoClinic.API\\InnoClinic.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "InnoClinic.Server\\InnoClinic.Application\\InnoClinic.Application.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "InnoClinic.Server\\InnoClinic.Infrastructure\\InnoClinic.Infrastructure.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "InnoClinic.Server\\InnoClinic.Domain\\InnoClinic.Domain.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
