@@ -52,3 +52,22 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# Angular / Node
+node_modules/
+dist/
+tmp/
+out-tsc/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Angular build output
+.angular/
+
+# IDE and OS files (если их нет)
+.vscode/
+.DS_Store
+Thumbs.db
+.vs/
