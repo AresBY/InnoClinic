@@ -1,0 +1,12 @@
+<div class="container mt-5" *ngIf="confirmationResult !== null">
+  <div
+    class="alert"
+    [ngClass]="{
+      'alert-success': confirmationResult === 'Email успешно подтверждён.',
+      'alert-danger': confirmationResult !== 'Email успешно подтверждён.'
+    }"
+    role="alert"
+  >
+    {{ confirmationResult }}
+  </div>
+</div>

@@ -1,0 +1,98 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { RegisterRequest } from '../models/register-request.model';
+<<<<<<< HEAD
+import { Observable } from 'rxjs';
+import { environment } from '@environments/environment';
+=======
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+>>>>>>> ea861df (Added JWT tokens and log out)
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+<<<<<<< HEAD
+  constructor(private http: HttpClient) {}
+
+  register(data: RegisterRequest) {
+    return this.http.post(`${environment.authUrl}/Register`, data);
+=======
+  private readonly registerUrl = '/api/Auth/Register';
+  private readonly checkEmailUrl = '/api/Auth/CheckEmailExists';
+  private readonly signInUrl = '/api/Auth/SignIn';
+  private readonly accessTokenKey = 'accessToken';
+
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
+  public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
+  constructor(private http: HttpClient) {}
+
+  register(data: RegisterRequest): Observable<any> {
+    return this.http.post(this.registerUrl, data);
+>>>>>>> ea861df (Added JWT tokens and log out)
+  }
+
+  checkEmailExists(email: string): Observable<any> {
+    const params = new HttpParams().set('email', email.toLowerCase());
+<<<<<<< HEAD
+    return this.http.get(`${environment.authUrl}/CheckEmailExists`, { params });
+  }
+
+  confirmEmail$(userId: string): Observable<any> {
+    return this.http.post(`${environment.authUrl}/ConfirmEmail`, { userId });
+=======
+    return this.http.get(this.checkEmailUrl, { params });
+  }
+
+  signIn(credentials: { email: string; password: string }): Observable<any> {
+    return this.http.post(this.signInUrl, credentials, { withCredentials: true }).pipe(
+      tap((response: any) => {
+        this.setAccessToken(response.accessToken);
+      })
+    );
+  }
+
+  setAccessToken(token: string): void {
+    localStorage.setItem(this.accessTokenKey, token);
+    this.isAuthenticatedSubject.next(true);
+  }
+
+  getAccessToken(): string | null {
+    return localStorage.getItem(this.accessTokenKey);
+  }
+
+  isLoggedIn(): boolean {
+    return this.getAccessToken() !== null;
+  }
+
+  logout(): void {
+    localStorage.removeItem(this.accessTokenKey);
+    this.isAuthenticatedSubject.next(false);
+
+    this.http.post('/api/Auth/Logout', {}, { withCredentials: true }).subscribe({
+      next: () => {
+        console.log('Logged out successfully');
+      },
+      error: (err) => {
+        console.error('Logout failed', err);
+      }
+    });
+  }
+
+  refreshToken(): Observable<string> {
+    return this.http
+      .post<{ accessToken: string }>('/api/Auth/RefreshToken', {}, { withCredentials: true })
+      .pipe(
+        tap((response) => {
+          this.setAccessToken(response.accessToken);
+        }),
+        map((response) => response.accessToken)
+      );
+  }
+
+  private hasToken(): boolean {
+    return !!this.getAccessToken();
+>>>>>>> ea861df (Added JWT tokens and log out)
+  }
+}
