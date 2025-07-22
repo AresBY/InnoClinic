@@ -11,5 +11,8 @@ public class Patient
     public DateTimeOffset CreatedAt { get; set; }
 
     public bool IsEmailConfirmed { get; set; }
+
+    public string RefreshToken { get; set; } = string.Empty;
+    public DateTime? RefreshTokenExpiryTime { get; set; }
 }
 

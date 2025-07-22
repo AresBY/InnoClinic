@@ -51,4 +51,10 @@ public class PatientRepository : IPatientRepository
             .FirstOrDefaultAsync(p => p.Email == email, cancellationToken);
     }
 
+    public Task<Patient?> GetByTokenAsync(string refreshToken, CancellationToken cancellationToken)
+    {
+        return _context.Patients
+           .AsNoTracking()
+           .FirstOrDefaultAsync(p => p.RefreshToken == refreshToken, cancellationToken);
+    }
 }

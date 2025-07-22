@@ -72,5 +72,4 @@ public class RegisterPatientCommandHandler : IRequestHandler<RegisterPatientComm
             throw new ApplicationException("Failed to register the patient.", ex);
         }
     }
-
 }

@@ -4,7 +4,11 @@ using InnoClinic.API.Middleware;
 using InnoClinic.Application.JWT;
 using InnoClinic.Infrastructure.Auth;
 using InnoClinic.Infrastructure.Email;
+<<<<<<< HEAD
+=======
 using InnoClinic.Infrastructure.Settings;
+using InnoClinic.Server.Application.Common.Mappings;
+>>>>>>> ea861df (Added JWT tokens and log out)
 using InnoClinic.Server.Application.Features.Auth.Commands;
 using InnoClinic.Server.Application.Interfaces;
 using InnoClinic.Server.Application.Interfaces.Repositories;
@@ -82,9 +86,14 @@ builder.Services.AddTransient<IEmailSender, GmailEmailSender>();
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();
 
+<<<<<<< HEAD
+=======
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 
+>>>>>>> ea861df (Added JWT tokens and log out)
 
 if (IsDevelopment || IsDocker)
 {
@@ -117,8 +126,12 @@ if (IsDevelopment || IsDocker)
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors(policy =>
+    policy.AllowAnyOrigin()
+          .AllowAnyHeader()
+          .AllowAnyMethod());
+
 }
-app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();

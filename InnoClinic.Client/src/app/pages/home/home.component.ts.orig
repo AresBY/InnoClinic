@@ -19,17 +19,19 @@ export class HomeComponent implements OnDestroy {
     this.sub = this.authService.isAuthenticated$.subscribe((auth) => (this.isAuthenticated = auth));
   }
 
-  public openSignInModal() {
+  openSignInModal() {
     const dialogRef = this.dialog.open(SignInComponent, {
       width: '600px'
     });
+<<<<<<< HEAD
+=======
   }
 
-  public logout() {
+  logout() {
     this.authService.logout();
   }
 
-  public onAuthButtonClick() {
+  onAuthButtonClick() {
     if (this.isAuthenticated) {
       this.logout();
     } else {
@@ -39,5 +41,6 @@ export class HomeComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+>>>>>>> ea861df (Added JWT tokens and log out)
   }
 }

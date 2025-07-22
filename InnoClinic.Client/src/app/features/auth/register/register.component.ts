@@ -55,13 +55,13 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('reEnteredPassword');
   }
 
-  passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
+  public passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
     const pass = group.get('password')?.value;
     const rePass = group.get('reEnteredPassword')?.value;
     return pass === rePass ? null : { passwordsMismatch: true };
   }
 
-  onSubmit() {
+  public onSubmit() {
     this.submitted = true;
     this.errorMessage = null;
     this.successMessage = null;
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
 
     this.isSubmitting = true;
 
-    this.authService.register(this.registerForm.value).subscribe({
+    this.authService.register$(this.registerForm.value).subscribe({
       next: () => {
         this.successMessage = 'Registration successful!';
         this.isSubmitting = false;
@@ -83,7 +83,6 @@ export class RegisterComponent implements OnInit {
         if (error.status === 400 && error.error?.errors) {
           const errors = error.error.errors;
           Object.keys(errors).forEach((field) => {
-            // Конвертируем поле с заглавной буквы в camelCase, чтобы совпало с именами в форме
             const formField = field.charAt(0).toLowerCase() + field.slice(1);
             const control = this.registerForm.get(formField);
             if (control) {
@@ -98,22 +97,19 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  checkEmailExists() {
+  public checkEmailExists() {
     const emailControl = this.email;
     if (!emailControl || emailControl.invalid) {
-      // если email невалиден, не проверяем
       return;
     }
 
-    const emailValue = emailControl.value.toLowerCase(); // приводим к нижнему регистру
+    const emailValue = emailControl.value.toLowerCase();
 
-    this.authService.checkEmailExists(emailValue).subscribe({
+    this.authService.checkEmailExists$(emailValue).subscribe({
       next: (exists: boolean) => {
         if (exists) {
-          // если email уже существует, ставим ошибку с текстом от сервера
           emailControl.setErrors({ server: 'User with this email already exists' });
         } else {
-          // если email свободен — убираем серверную ошибку, если она была
           if (emailControl.hasError('server')) {
             const errors = { ...emailControl.errors };
             delete errors['server'];
@@ -127,7 +123,6 @@ export class RegisterComponent implements OnInit {
         }
       },
       error: (error) => {
-        // Обработка ошибок сервера, например если сервер вернул 409 с сообщением
         if (error.status === 409 && error.error?.message) {
           emailControl.setErrors({ server: error.error.message });
         }
@@ -135,7 +130,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  openSignInModal(event: Event) {
+  public openSignInModal(event: Event) {
     event.preventDefault();
 
     this.dialog.open(SignInComponent, {

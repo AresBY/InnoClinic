@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RegisterComponent } from '@auth/register/register.component';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -20,7 +20,7 @@ export class SignInComponent implements OnInit {
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<SignInComponent>,
     private fb: FormBuilder,
-    private http: HttpClient
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -48,15 +48,14 @@ export class SignInComponent implements OnInit {
 
     this.isSubmitting = true;
 
-    this.http.post('/api/Auth/SignIn', this.signInForm.value).subscribe({
+    this.authService.signIn$(this.signInForm.value).subscribe({
       next: (response: any) => {
         this.isSubmitting = false;
-        alert(response.message);
+        this.authService.setAccessToken(response.accessToken);
         this.dialogRef.close();
       },
       error: (error) => {
         this.isSubmitting = false;
-
         if (error.status === 400 && error.error?.errors) {
           const errors = error.error.errors;
 
