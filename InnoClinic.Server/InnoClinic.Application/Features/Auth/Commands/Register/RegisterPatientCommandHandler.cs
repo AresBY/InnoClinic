@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using InnoClinic.Application.Resources;
+﻿using InnoClinic.Application.Resources;
 using InnoClinic.Server.Application.DTOs;
 using InnoClinic.Server.Application.Exceptions;
 using InnoClinic.Server.Application.Interfaces;
@@ -38,7 +37,7 @@ public class RegisterPatientCommandHandler : IRequestHandler<RegisterPatientComm
         {
             Id = Guid.NewGuid(),
             Email = request.Email,
-            CreatedAt = DateTime.UtcNow,
+            CreatedAt = DateTimeOffset.UtcNow,
             IsEmailConfirmed = false
         };
 

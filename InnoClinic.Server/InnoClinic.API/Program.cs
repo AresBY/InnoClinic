@@ -2,7 +2,6 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using InnoClinic.API.Middleware;
 using InnoClinic.Infrastructure.Email;
-using InnoClinic.Server.Application.Common.Mappings;
 using InnoClinic.Server.Application.Features.Auth.Commands;
 using InnoClinic.Server.Application.Interfaces;
 using InnoClinic.Server.Application.Interfaces.Repositories;
@@ -64,8 +63,6 @@ builder.Services.AddTransient<IEmailSender, GmailEmailSender>();
 
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();
-
-builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 
 if (IsDevelopment || IsDocker)

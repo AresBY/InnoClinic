@@ -8,7 +8,7 @@ public class Patient
 
     public string PasswordHash { get; set; } = string.Empty;
 
-    public DateTime CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
 
     public bool IsEmailConfirmed { get; set; }
 }

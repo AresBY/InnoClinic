@@ -13,12 +13,5 @@ export class HomeComponent {
     const dialogRef = this.dialog.open(SignInComponent, {
       width: '600px'
     });
-
-    /* dialogRef.afterClosed().subscribe((result) => {
-      if (result?.success) {
-        console.log('User signed in');
-        // возможно, обновление состояния, навигация и т.п.
-      }
-    }); */
   }
 }

@@ -6,9 +6,10 @@
       "@services/*": ["app/services/*"],
       "@models/*": ["app/models/*"],
       "@features/*": ["app/features/*"],
-      "@core/*": ["src/app/core/*"],
-      "@shared/*": ["src/app/shared/*"],
-      "@auth/*": ["app/features/auth/*"]
+      "@core/*": ["app/core/*"],
+      "@shared/*": ["app/shared/*"],
+      "@auth/*": ["app/features/auth/*"],
+      "@environments/*": ["environments/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
