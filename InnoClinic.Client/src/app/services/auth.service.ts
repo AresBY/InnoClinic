@@ -18,8 +18,8 @@ export class AuthService {
 
   constructor(private readonly http: HttpClient) {}
 
-  public register$(data: RegisterRequest): Observable<any> {
-    return this.http.post<any>(`${environment.authUrl}/Register`, data);
+  public registerPatient$(data: RegisterRequest): Observable<any> {
+    return this.http.post<any>(`${environment.authUrl}/RegisterPatient`, data);
   }
 
   public checkEmailExists$(email: string): Observable<any> {
@@ -31,7 +31,10 @@ export class AuthService {
     return this.http.post<any>(`${environment.authUrl}/ConfirmEmail`, { userId });
   }
 
-  public signIn$(credentials: { email: string; password: string }): Observable<any> {
+  public signIn$(
+    credentials: { email: string; password: string },
+    isDoctor = false
+  ): Observable<any> {
     return this.http
       .post<any>(`${environment.authUrl}/SignIn`, credentials, { withCredentials: true })
       .pipe(tap((response) => this.setAccessToken(response.accessToken)));

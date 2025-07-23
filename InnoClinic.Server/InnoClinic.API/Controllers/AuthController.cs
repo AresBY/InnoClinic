@@ -1,5 +1,6 @@
 ﻿using InnoClinic.Application.Features.Auth.Commands;
 using InnoClinic.Application.Features.Auth.Queries;
+using InnoClinic.Domain.Common.Enums;
 using InnoClinic.Server.Application.Features.Auth.Commands;
 using InnoClinic.Server.Application.Features.Auth.Queries;
 using MediatR;
@@ -28,28 +29,46 @@ namespace InnoClinic.Server.WebAPI.Controllers
         /// </summary>
         /// <param name="command">Registration data including email and password</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Basic patient info (ID and email)</returns>
-        [HttpPost(nameof(Register))]
-        public async Task<IActionResult> Register([FromBody] RegisterPatientCommand command, CancellationToken cancellationToken)
+        /// <returns>Basic user info (ID and email)</returns>
+        [HttpPost(nameof(RegisterPatient))]
+        public async Task<IActionResult> RegisterPatient([FromBody] RegisterUserCommand command, CancellationToken cancellationToken)
         {
+            command.Role = UserRole.Patient;
+
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(Register), new { id = result.Id }, result);
+            return CreatedAtAction(nameof(RegisterPatient), new { id = result.Id }, result);
         }
 
         /// <summary>
-        /// Returns a list of all registered patients.
+        /// Registers a new doctor and sends a confirmation email.
+        /// </summary>
+        /// <param name="command">Registration data including email and password</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Basic user info (ID and email)</returns>
+        [HttpPost(nameof(RegisterDoctor))]
+        public async Task<IActionResult> RegisterDoctor([FromBody] RegisterUserCommand command, CancellationToken cancellationToken)
+        {
+            command.Role = UserRole.Doctor;
+
+            var result = await _mediator.Send(command, cancellationToken);
+            return CreatedAtAction(nameof(RegisterDoctor), new { id = result.Id }, result);
+        }
+
+
+        /// <summary>
+        /// Returns a list of all registered users.
         /// </summary>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>List of basic patient info (ID and email)</returns>
-        [HttpGet(nameof(GetAllPatients))]
-        public async Task<IActionResult> GetAllPatients(CancellationToken cancellationToken)
+        /// <returns>List of basic user info (ID and email)</returns>
+        [HttpGet(nameof(GetAllUsers))]
+        public async Task<IActionResult> GetAllUsers(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetAllPatientsQuery(), cancellationToken);
+            var result = await _mediator.Send(new GetAllUsersQuery(), cancellationToken);
             return Ok(result);
         }
 
         /// <summary>
-        /// Confirms a patient's email address.
+        /// Confirms a user's email address.
         /// </summary>
         /// <param name="command">User ID to confirm</param>
         /// <param name="cancellationToken">Cancellation token</param>
@@ -74,15 +93,8 @@ namespace InnoClinic.Server.WebAPI.Controllers
 
             if (result.IsSuccess)
             {
-                var cookieOptions = new CookieOptions
-                {
-                    HttpOnly = true,
-                    Secure = true,
-                    SameSite = SameSiteMode.Strict,
-                    Expires = DateTime.UtcNow.AddDays(30)
-                };
+                UpdateRefreshTokenCookie(result.RefreshToken!);
 
-                Response.Cookies.Append("refreshToken", result.RefreshToken!, cookieOptions);
                 return Ok(new
                 {
                     result.IsSuccess,
@@ -125,13 +137,7 @@ namespace InnoClinic.Server.WebAPI.Controllers
         [HttpPost(nameof(Logout))]
         public IActionResult Logout()
         {
-            Response.Cookies.Append("refreshToken", "", new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.Strict,
-                Expires = DateTime.UtcNow.AddDays(-1)
-            });
+            UpdateRefreshTokenCookie(remove:true);
 
             return Ok(new { message = "Logged out successfully." });
         }
@@ -162,20 +168,25 @@ namespace InnoClinic.Server.WebAPI.Controllers
             if (!result.IsSuccess)
                 return Unauthorized(new { message = result.ErrorMessage });
 
-            var cookieOptions = new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.Strict,
-                Expires = DateTime.UtcNow.AddDays(30)
-            };
-
-            Response.Cookies.Append("refreshToken", result.RefreshToken!, cookieOptions);
+            UpdateRefreshTokenCookie(result.RefreshToken!);
 
             return Ok(new
             {
                 accessToken = result.AccessToken
             });
+        }
+
+        private void UpdateRefreshTokenCookie(string refreshToken = "", bool remove = false)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.UtcNow.AddDays(remove ? -1 : 30)
+            };
+
+            Response.Cookies.Append("refreshToken", remove ? "" : refreshToken, cookieOptions);
         }
     }
 }

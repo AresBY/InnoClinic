@@ -9,16 +9,16 @@ namespace InnoClinic.Application.Features.Auth.Queries
 {
     public class CheckEmailExistsQueryHandler : IRequestHandler<CheckEmailExistsQuery, bool>
     {
-        private readonly IPatientRepository _patientRepository;
+        private readonly IUserRepository _userRepository;
 
-        public CheckEmailExistsQueryHandler(IPatientRepository patientRepository)
+        public CheckEmailExistsQueryHandler(IUserRepository userRepository)
         {
-            _patientRepository = patientRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<bool> Handle(CheckEmailExistsQuery request, CancellationToken cancellationToken)
         {
-            bool exists = await _patientRepository.ExistsAsync(request.Email, cancellationToken);
+            bool exists = await _userRepository.ExistsAsync(request.Email, cancellationToken);
             if (exists)
             {
                 throw new ConflictException(ErrorMessages.UserExist);
