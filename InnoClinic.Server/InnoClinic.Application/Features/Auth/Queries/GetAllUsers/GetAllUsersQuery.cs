@@ -3,6 +3,6 @@ using MediatR;
 
 namespace InnoClinic.Server.Application.Features.Auth.Queries;
 
-public class GetAllPatientsQuery : IRequest<List<PatientDto>>
+public class GetAllUsersQuery : IRequest<List<UserDto>>
 {
 }

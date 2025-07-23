@@ -1,14 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { RegisterComponent } from '@auth/register/register.component';
+import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html'
+  templateUrl: './sign-in.doctor.component.html'
 })
-export class SignInComponent implements OnInit {
+export class SignInDoctorComponent implements OnInit {
   @Output() switchToSignUp = new EventEmitter<void>();
 
   signInForm!: FormGroup;
@@ -17,8 +16,7 @@ export class SignInComponent implements OnInit {
   isSubmitting = false;
 
   constructor(
-    private dialog: MatDialog,
-    private dialogRef: MatDialogRef<SignInComponent>,
+    private dialogRef: MatDialogRef<SignInDoctorComponent>,
     private fb: FormBuilder,
     private authService: AuthService
   ) {}
@@ -26,7 +24,8 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
     this.signInForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]]
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+      role: [2]
     });
   }
 
@@ -48,7 +47,7 @@ export class SignInComponent implements OnInit {
 
     this.isSubmitting = true;
 
-    this.authService.signIn$(this.signInForm.value).subscribe({
+    this.authService.signIn$(this.signInForm.value, true).subscribe({
       next: (response: any) => {
         this.isSubmitting = false;
         this.authService.setAccessToken(response.accessToken);
@@ -71,16 +70,6 @@ export class SignInComponent implements OnInit {
           this.errorMessage = error.error?.message || 'Server error during sign in.';
         }
       }
-    });
-  }
-
-  openRegisterModal(event: Event) {
-    event.preventDefault();
-
-    this.dialogRef.close();
-
-    this.dialog.open(RegisterComponent, {
-      width: '600px'
     });
   }
 

@@ -8,13 +8,13 @@ import {
 } from '@angular/forms';
 import { AuthService } from '@services/auth.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SignInComponent } from '../sign-in/sign-in.component';
+import { SignInPatientComponent } from '../sign-in-patient/sign-in.patient.component';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html'
+  templateUrl: './register.patient.component.html'
 })
-export class RegisterComponent implements OnInit {
+export class RegisterPatientComponent implements OnInit {
   @Output() switchToSignIn = new EventEmitter<void>();
 
   registerForm!: FormGroup;
@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    public dialogRef: MatDialogRef<RegisterComponent>,
+    public dialogRef: MatDialogRef<RegisterPatientComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private authService: AuthService
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
 
     this.isSubmitting = true;
 
-    this.authService.register$(this.registerForm.value).subscribe({
+    this.authService.registerPatient$(this.registerForm.value).subscribe({
       next: () => {
         this.successMessage = 'Registration successful!';
         this.isSubmitting = false;
@@ -133,7 +133,7 @@ export class RegisterComponent implements OnInit {
   public openSignInModal(event: Event) {
     event.preventDefault();
 
-    this.dialog.open(SignInComponent, {
+    this.dialog.open(SignInPatientComponent, {
       width: '600px'
     });
 

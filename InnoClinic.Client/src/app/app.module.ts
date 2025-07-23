@@ -8,12 +8,12 @@ import { AuthModule } from './features/auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmEmailComponent } from './features/auth/confirm-email/confirm-email.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './pages/home/home.component';
+import { HomePatientComponent } from './pages/home-patient/home.patient.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [AppComponent, ConfirmEmailComponent, HomeComponent],
+  declarations: [AppComponent, ConfirmEmailComponent, HomePatientComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

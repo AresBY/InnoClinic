@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RegisterComponent } from './features/auth/register/register.component';
-import { SignInComponent } from './features/auth/sign-in/sign-in.component';
 import { ConfirmEmailComponent } from './features/auth/confirm-email/confirm-email.component';
-import { HomeComponent } from './pages/home/home.component';
+import { HomePatientComponent } from './pages/home-patient/home.patient.component';
+
+import { HomeDoctorComponent } from './pages/home-doctor/home.doctor.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'sign-in', component: SignInComponent },
+  { path: '', component: HomeDoctorComponent },
+
+  // Patient routes
+  { path: 'patient', component: HomePatientComponent },
+
+  // Doctor routes
+  { path: 'doctor', component: HomeDoctorComponent },
+
   { path: 'confirm-email', component: ConfirmEmailComponent },
   { path: '**', redirectTo: '' }
 ];

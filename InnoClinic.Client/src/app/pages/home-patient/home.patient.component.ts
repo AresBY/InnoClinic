@@ -1,14 +1,14 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SignInComponent } from '@auth/sign-in/sign-in.component';
+import { SignInPatientComponent } from '@features/auth/sign-in-patient/sign-in.patient.component';
 import { AuthService } from '@services/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html'
+  templateUrl: './home.patient.component.html'
 })
-export class HomeComponent implements OnDestroy {
+export class HomePatientComponent implements OnDestroy {
   isAuthenticated = false;
   private sub!: Subscription;
 
@@ -20,7 +20,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   public openSignInModal() {
-    const dialogRef = this.dialog.open(SignInComponent, {
+    const dialogRef = this.dialog.open(SignInPatientComponent, {
       width: '600px'
     });
   }

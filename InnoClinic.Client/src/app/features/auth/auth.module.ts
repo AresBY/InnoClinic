@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisterComponent } from './register/register.component';
-import { SignInComponent } from './sign-in/sign-in.component';
+import { RegisterPatientComponent } from './register-patient/register.patient.component';
+import { SignInPatientComponent } from './sign-in-patient/sign-in.patient.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '@auth/auth.interceptor';
+import { SignInDoctorComponent } from './sign-in-doctor/sign-in.doctor.component';
 
 @NgModule({
-  declarations: [RegisterComponent, SignInComponent],
+  declarations: [RegisterPatientComponent, SignInPatientComponent, SignInDoctorComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, HttpClientModule],
-  exports: [RegisterComponent, SignInComponent],
+  exports: [RegisterPatientComponent, SignInPatientComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

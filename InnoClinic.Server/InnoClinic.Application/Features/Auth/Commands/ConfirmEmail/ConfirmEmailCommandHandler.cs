@@ -5,24 +5,24 @@ namespace InnoClinic.Server.Application.Features.Auth.Commands
 {
     public class ConfirmEmailCommandHandler : IRequestHandler<ConfirmEmailCommand, Unit>
     {
-        private readonly IPatientRepository _patientRepository;
+        private readonly IUserRepository _userRepository;
 
-        public ConfirmEmailCommandHandler(IPatientRepository patientRepository)
+        public ConfirmEmailCommandHandler(IUserRepository userRepository)
         {
-            _patientRepository = patientRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<Unit> Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
         {
-            var patient = await _patientRepository.GetByIdAsync(request.UserId, cancellationToken);
+            var user = await _userRepository.GetByIdAsync(request.UserId, cancellationToken);
 
-            if (patient == null)
-                throw new KeyNotFoundException("Patient not found.");
+            if (user == null)
+                throw new KeyNotFoundException("User not found.");
 
-            if (!patient.IsEmailConfirmed)
+            if (!user.IsEmailConfirmed)
             {
-                patient.IsEmailConfirmed = true;
-                await _patientRepository.UpdateAsync(patient, cancellationToken);
+                user.IsEmailConfirmed = true;
+                await _userRepository.UpdateAsync(user, cancellationToken);
             }
 
             return Unit.Value;
