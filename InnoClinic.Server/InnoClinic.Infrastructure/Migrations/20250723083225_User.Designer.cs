@@ -4,6 +4,7 @@ using InnoClinic.Server.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InnoClinic.Server.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250723083225_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace InnoClinic.Server.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("InnoClinic.Server.Domain.Entities.User", b =>
+            modelBuilder.Entity("InnoClinic.Server.Domain.Entities.Patient", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,30 +52,9 @@ namespace InnoClinic.Server.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("RefreshTokenExpiryTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
-
-                    b.HasDiscriminator<int>("Role");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("InnoClinic.Server.Domain.Entities.Doctor", b =>
-                {
-                    b.HasBaseType("InnoClinic.Server.Domain.Entities.User");
-
-                    b.HasDiscriminator().HasValue(2);
-                });
-
-            modelBuilder.Entity("InnoClinic.Server.Domain.Entities.Patient", b =>
-                {
-                    b.HasBaseType("InnoClinic.Server.Domain.Entities.User");
-
-                    b.HasDiscriminator().HasValue(1);
+                    b.ToTable("Patients");
                 });
 #pragma warning restore 612, 618
         }

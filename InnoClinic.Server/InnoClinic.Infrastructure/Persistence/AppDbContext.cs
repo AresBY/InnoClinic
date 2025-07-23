@@ -1,18 +1,35 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using InnoClinic.Domain.Common.Enums;
 using InnoClinic.Server.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace InnoClinic.Server.Infrastructure.Persistence;
-
-public class AppDbContext : DbContext
+namespace InnoClinic.Server.Infrastructure.Persistence
 {
-    public DbSet<Patient> Patients => Set<Patient>();
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
+    public class AppDbContext : DbContext
     {
-    }
+        public DbSet<User> Users { get; set; } = null!;
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+        {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Конфигурация TPH (Table per Hierarchy)
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(u => u.Id);
+
+                entity.Property(u => u.Email).IsRequired();
+                entity.Property(u => u.PasswordHash).IsRequired();
+                entity.Property(u => u.Role).IsRequired();
+
+                entity.HasDiscriminator<UserRole>("Role")
+                      .HasValue<Patient>(UserRole.Patient)
+                      .HasValue<Doctor>(UserRole.Doctor);
+            });
+        }
     }
 }

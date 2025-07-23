@@ -1,0 +1,23 @@
+﻿using InnoClinic.Domain.Common.Enums;
+
+namespace InnoClinic.Server.Domain.Entities;
+
+public abstract class User
+{
+    public Guid Id { get; set; } = Guid.NewGuid();
+
+    public string Email { get; set; } = string.Empty;
+
+    public string PasswordHash { get; set; } = string.Empty;
+
+    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
+
+    public UserRole Role { get; protected set; }
+
+    public bool IsEmailConfirmed { get; set; } = false;
+
+    public string RefreshToken { get; set; } = string.Empty;
+
+    public DateTimeOffset? RefreshTokenExpiryTime { get; set; }
+}
+

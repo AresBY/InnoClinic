@@ -1,12 +1,11 @@
 ﻿using InnoClinic.Domain.Common.Enums;
 
 namespace InnoClinic.Server.Domain.Entities;
-
-public class Patient : User
+public class Doctor : User
 {
-    public Patient()
+    public Doctor()
     {
-        Role = UserRole.Patient;
+        Role = UserRole.Doctor;
     }
 }
 

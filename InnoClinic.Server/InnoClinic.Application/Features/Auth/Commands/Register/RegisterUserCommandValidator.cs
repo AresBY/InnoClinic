@@ -3,9 +3,9 @@ using InnoClinic.Application.Resources;
 
 namespace InnoClinic.Server.Application.Features.Auth.Commands;
 
-public class RegisterPatientCommandValidator : AbstractValidator<RegisterPatientCommand>
+public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
 {
-    public RegisterPatientCommandValidator()
+    public RegisterUserCommandValidator()
     {
         RuleFor(x => x.Email)
             .NotEmpty().WithMessage(ValidationMessages.EmailIsRequired)

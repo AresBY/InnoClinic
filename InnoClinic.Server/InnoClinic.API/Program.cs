@@ -69,13 +69,13 @@ else if(IsDocker)
 
 builder.Services.AddMediatR(cfg =>
 {
-    cfg.RegisterServicesFromAssembly(typeof(RegisterPatientCommand).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
 });
-builder.Services.AddValidatorsFromAssemblyContaining<RegisterPatientCommand>();
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserCommand>();
 
-builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-builder.Services.AddScoped<IPasswordHasher<Patient>, PasswordHasher<Patient>>();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 builder.Services.AddTransient<IEmailSender, GmailEmailSender>();
 
@@ -104,6 +104,22 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+//    bool deleted = await dbContext.Database.EnsureDeletedAsync();
+
+//    if (deleted)
+//    {
+//        Console.WriteLine("Database was deleted successfully.");
+//    }
+//    else
+//    {
+//        Console.WriteLine("Database does not exist or could not be deleted.");
+//    }
+//}
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 

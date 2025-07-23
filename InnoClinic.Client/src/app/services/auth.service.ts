@@ -19,7 +19,7 @@ export class AuthService {
   constructor(private readonly http: HttpClient) {}
 
   public register$(data: RegisterRequest): Observable<any> {
-    return this.http.post<any>(`${environment.authUrl}/Register`, data);
+    return this.http.post<any>(`${environment.authUrl}/RegisterPatient`, data);
   }
 
   public checkEmailExists$(email: string): Observable<any> {
