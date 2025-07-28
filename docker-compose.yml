@@ -14,7 +14,7 @@ services:
   backend:
     build:
       context: .
-      dockerfile: InnoClinic.Server/InnoClinic.API/Dockerfile
+      dockerfile: Authorization/Server/API/Dockerfile
     ports:
       - "5179:80"
     depends_on:
