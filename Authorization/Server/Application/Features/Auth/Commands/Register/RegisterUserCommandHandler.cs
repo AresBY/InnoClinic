@@ -8,6 +8,7 @@ using InnoClinic.Authorization.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using InnoClinicCommon.Enums;
 
 namespace InnoClinic.Authorization.Application.Features.Auth.Commands;
 public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, UserDto>

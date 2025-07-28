@@ -1,6 +1,7 @@
 ﻿using InnoClinic.Authorization.Application.Features.Auth.Commands;
 using InnoClinic.Authorization.Application.Features.Auth.Queries;
 using InnoClinic.Authorization.Domain.Common.Enums;
+using InnoClinicCommon.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
