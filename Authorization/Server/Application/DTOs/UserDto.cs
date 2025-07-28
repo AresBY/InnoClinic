@@ -1,4 +1,5 @@
 ﻿using InnoClinic.Authorization.Domain.Common.Enums;
+using InnoClinicCommon.Enums;
 
 namespace InnoClinic.Authorization.Application.DTOs;
 public record UserDto

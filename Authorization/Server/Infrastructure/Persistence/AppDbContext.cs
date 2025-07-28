@@ -1,5 +1,5 @@
-﻿using InnoClinic.Authorization.Domain.Common.Enums;
-using InnoClinic.Authorization.Domain.Entities;
+﻿using InnoClinic.Authorization.Domain.Entities;
+using InnoClinicCommon.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace InnoClinic.Authorization.Infrastructure.Persistence

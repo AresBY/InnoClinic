@@ -4,16 +4,15 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<RootNamespace>InnoClinic.Offices.Domain</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Common\Interfaces\**" />
-    <EmbeddedResource Remove="Common\Interfaces\**" />
-    <None Remove="Common\Interfaces\**" />
+    <PackageReference Include="InnoClinicCommon" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="InnoClinicCommon" Version="1.0.0" />
+    <Folder Include="Common\" />
   </ItemGroup>
 
 </Project>

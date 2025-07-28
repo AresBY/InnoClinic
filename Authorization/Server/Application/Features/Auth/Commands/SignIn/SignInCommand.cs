@@ -1,6 +1,7 @@
 ﻿using InnoClinic.Authorization.Domain.Common.Enums;
 using InnoClinic.Authorization.Application.DTOs;
 using MediatR;
+using InnoClinicCommon.Enums;
 
 namespace InnoClinic.Authorization.Application.Features.Auth.Commands
 {

@@ -4,7 +4,6 @@ using InnoClinic.Authorization.Application.JWT;
 using InnoClinic.Authorization.Infrastructure.Auth;
 using InnoClinic.Authorization.Infrastructure.Email;
 using InnoClinic.Authorization.Infrastructure.Settings;
-using InnoClinic.Authorization.API.Middleware;
 using InnoClinic.Authorization.Application.Features.Auth.Commands;
 using InnoClinic.Authorization.Application.Interfaces;
 using InnoClinic.Authorization.Application.Interfaces.Repositories;
@@ -17,6 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using InnoClinicCommon.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
