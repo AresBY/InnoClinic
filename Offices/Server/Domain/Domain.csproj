@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="InnoClinicCommon" Version="1.0.0" />
+    <Folder Include="Common\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
+    <PackageReference Include="InnoClinicCommon" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

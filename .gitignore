@@ -33,6 +33,8 @@ ScaffoldingReadMe.txt
 
 # NuGet Packages
 *.nupkg
+!LocalNugetPackages/*.nupkg
+
 # NuGet Symbol Packages
 *.snupkg
 
