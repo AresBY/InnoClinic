@@ -1,16 +1,13 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Копируем проекты
-COPY Offices ./Offices
-
-# Копируем nuget.config и локальные пакеты
+COPY Offices /src/Offices
 COPY ["NuGet.config", "NuGet.config"]
-COPY LocalNugetPackages ./LocalNugetPackages
+COPY LocalNugetPackages /src/LocalNugetPackages
 
-# Указываем restore с config и локальным источником
 WORKDIR /src/Offices/API
-RUN dotnet restore "API.csproj" --configfile /src/NuGet.config
+
+RUN dotnet restore "API.csproj"
 RUN dotnet build "API.csproj" -c Release -o /app/build
 RUN dotnet publish "API.csproj" -c Release -o /app/publish
 

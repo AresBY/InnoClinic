@@ -1,14 +1,13 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY Authorization ./Authorization
-
-# Копируем nuget.config и локальные пакеты
+COPY Authorization /src/Authorization
 COPY ["NuGet.config", "NuGet.config"]
-COPY LocalNugetPackages ./LocalNugetPackages
+COPY LocalNugetPackages /src/LocalNugetPackages
 
-WORKDIR /src/Authorization/Server/API
-RUN dotnet restore "API.csproj" --configfile /src/NuGet.config
+WORKDIR /src/Authorization/API
+
+RUN dotnet restore "API.csproj"
 RUN dotnet build "API.csproj" -c Release -o /app/build
 RUN dotnet publish "API.csproj" -c Release -o /app/publish
 
