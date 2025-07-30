@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  office-mongo:
+    image: mongo:6.0
+    container_name: dev-office-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  offices:
+    build:
+      context: ./API
+      dockerfile: Dockerfile
+    ports:
+      - "5180:80"
+    depends_on:
+      - office-mongo
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - Mongo__ConnectionString=mongodb://office-mongo:27017
+      - Mongo__DatabaseName=InnoClinic_Offices
+
+volumes:
+  mongo_data:
