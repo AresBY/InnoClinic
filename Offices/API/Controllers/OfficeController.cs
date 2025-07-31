@@ -1,10 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading;
-using System.Threading.Tasks;
-using InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice;
 using InnoClinicCommon.Enums;
+using InnoClinic.Offices.Application.Features.Office.Commands;
+using InnoClinic.Offices.Application.Features.Office.Queries;
 
 namespace InnoClinic.Offices.API.Controllers
 {
@@ -29,12 +28,24 @@ namespace InnoClinic.Offices.API.Controllers
         /// <param name="command">Office creation data</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ID of the created office</returns>
-        [HttpPost(nameof(CreateOffice))]
+        [HttpPost(nameof(Create))]
         [Authorize(Roles = nameof(UserRole.Receptionist))]
-        public async Task<IActionResult> CreateOffice([FromBody] CreateOfficeCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create([FromBody] CreateCommand command, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateOffice), new { id = result }, result);
+            return CreatedAtAction(nameof(Create), new { id = result }, result);
+        }
+
+        /// <summary>
+        /// Gets a list of all offices.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>List of offices</returns>
+        [HttpGet(nameof(GetAll))]
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(new GetAllQuery(), cancellationToken);
+            return Ok(result);
         }
     }
 }

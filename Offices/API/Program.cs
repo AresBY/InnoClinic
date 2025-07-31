@@ -1,6 +1,6 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice;
+using InnoClinic.Offices.Application.Features.Office.Commands;
 using InnoClinic.Offices.Infrastructure.Extensions;
 using InnoClinicCommon.JWT;
 using InnoClinicCommon.Middleware;
@@ -11,9 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Application services
 builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(typeof(CreateOfficeCommand).Assembly)
+    cfg.RegisterServicesFromAssembly(typeof(CreateCommand).Assembly)
 );
-builder.Services.AddValidatorsFromAssembly(typeof(CreateOfficeCommandValidator).Assembly);
+builder.Services.AddValidatorsFromAssembly(typeof(CreateCommandValidator).Assembly);
 
 bool IsDevelopment = builder.Environment.IsEnvironment("Development");
 bool IsDocker = builder.Environment.IsEnvironment("Docker");

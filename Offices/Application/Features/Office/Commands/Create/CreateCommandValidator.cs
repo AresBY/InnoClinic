@@ -1,11 +1,10 @@
 ﻿using FluentValidation;
-using InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice;
 
-namespace InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice
+namespace InnoClinic.Offices.Application.Features.Office.Commands
 {
-    public class CreateOfficeCommandValidator : AbstractValidator<CreateOfficeCommand>
+    public class CreateCommandValidator : AbstractValidator<CreateCommand>
     {
-        public CreateOfficeCommandValidator()
+        public CreateCommandValidator()
         {
             RuleFor(x => x.City)
                 .NotEmpty().WithMessage("Please, enter the office’s city");

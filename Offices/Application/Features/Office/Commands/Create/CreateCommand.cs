@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice
+namespace InnoClinic.Offices.Application.Features.Office.Commands
 {
-    public class CreateOfficeCommand : IRequest<string>
+    public class CreateCommand : IRequest<string>
     {
         public string? PhotoUrl { get; set; }
         public string City { get; set; } = default!;
