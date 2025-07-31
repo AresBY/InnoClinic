@@ -5,12 +5,14 @@ import { ConfirmEmailComponent } from './features/auth/confirm-email/confirm-ema
 
 import { HomeComponent } from './pages/home/home.component';
 import { OfficesComponent } from './pages/offices/offices.component';
+import { OfficeDetailsComponent } from './pages/offices/office-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
 
   { path: 'doctor', component: HomeComponent },
   { path: 'offices', component: OfficesComponent },
+  { path: 'offices/:id', component: OfficeDetailsComponent },
 
   { path: 'confirm-email', component: ConfirmEmailComponent },
   { path: '**', redirectTo: '' }

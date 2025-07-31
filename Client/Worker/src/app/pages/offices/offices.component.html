@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let office of offices">
+      <tr *ngFor="let office of offices" (click)="onOfficeClick(office.id)" style="cursor: pointer">
         <td>{{ office.address }}</td>
         <td>
           <div class="form-check form-check-inline">

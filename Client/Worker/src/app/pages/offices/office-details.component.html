@@ -1,0 +1,42 @@
+<div *ngIf="isLoading" class="text-center my-5">
+  <div class="spinner-border"></div>
+</div>
+
+<div *ngIf="!isLoading" class="container mt-4">
+  <h2>Office Information</h2>
+
+  <div class="mb-3">
+    <img
+      *ngIf="office.photoUrl"
+      [src]="office.photoUrl"
+      alt="Office photo"
+      class="img-thumbnail"
+      style="max-width: 300px"
+    />
+    <p *ngIf="!office.photoUrl"><i>No photo uploaded</i></p>
+  </div>
+
+  <div class="mb-3"><strong>City:</strong> {{ office.city }}</div>
+
+  <div class="mb-3"><strong>Street:</strong> {{ office.street }}</div>
+
+  <div class="mb-3"><strong>House number:</strong> {{ office.houseNumber }}</div>
+
+  <div class="mb-3"><strong>Office number:</strong> {{ office.officeNumber || '-' }}</div>
+
+  <div class="mb-3"><strong>Registry phone number:</strong> +{{ office.registryPhoneNumber }}</div>
+
+  <div class="mb-3">
+    <strong>Status:</strong><br />
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" [checked]="office.status" disabled />
+      <label class="form-check-label">Active</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" [checked]="!office.status" disabled />
+      <label class="form-check-label">Inactive</label>
+    </div>
+  </div>
+
+  <button class="btn btn-primary">Edit</button>
+</div>

@@ -17,6 +17,6 @@ namespace InnoClinic.Offices.Domain.Entities
         public string? OfficeNumber { get; set; }
         public string RegistryPhoneNumber { get; set; } = default!;
         public bool Status { get; set; } = default!;
-        public DateTime CreatedAt { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
     }
 }

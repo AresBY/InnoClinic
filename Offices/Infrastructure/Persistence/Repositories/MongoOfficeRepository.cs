@@ -37,5 +37,11 @@ namespace InnoClinic.Offices.Infrastructure.Persistence.Repositories
             var filter = Builders<Office>.Filter.Eq(o => o.Id, office.Id);
             await _officeCollection.ReplaceOneAsync(filter, office, cancellationToken: cancellationToken);
         }
+
+        public async Task<Office?> GetByIdAsync(string id, CancellationToken cancellationToken)
+        {
+            var filter = Builders<Office>.Filter.Eq(o => o.Id, id);
+            return await _officeCollection.Find(filter).FirstOrDefaultAsync(cancellationToken);
+        }
     }
 }
