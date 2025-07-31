@@ -14,6 +14,7 @@ import { CreateOfficeDialogComponent } from './pages/offices/create-office-dialo
 import { MatRadioModule } from '@angular/material/radio';
 import { OfficesComponent } from './pages/offices/offices.component';
 import { CancelConfirmDialogComponent } from '@shared/dialogs/cancel-confirm-dialog/cancel-confirm-dialog.component';
+import { NavbarComponent } from '@shared/menu/navbar.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CancelConfirmDialogComponent } from '@shared/dialogs/cancel-confirm-dia
     ConfirmEmailComponent,
     CreateOfficeDialogComponent,
     OfficesComponent,
-    CancelConfirmDialogComponent
+    CancelConfirmDialogComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

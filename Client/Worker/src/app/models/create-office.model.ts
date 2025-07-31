@@ -1,4 +1,4 @@
-export interface CreateOfficeCommand {
+export interface CreateOffice {
   photoUrl?: string;
   city: string;
   street: string;

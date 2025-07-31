@@ -9,7 +9,7 @@ import {
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { OfficeService } from '@services/office.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CreateOfficeCommand } from '@models/create-office-command';
+import { CreateOffice } from '@models/create-office.model';
 import { CancelConfirmDialogComponent } from '@shared/dialogs/cancel-confirm-dialog/cancel-confirm-dialog.component';
 
 @Component({
@@ -84,7 +84,7 @@ export class CreateOfficeDialogComponent {
 
     const formValue = this.officeForm.value;
 
-    const officeDto: CreateOfficeCommand = {
+    const officeDto: CreateOffice = {
       city: formValue.city!,
       street: formValue.street!,
       houseNumber: formValue.houseNumber!,
