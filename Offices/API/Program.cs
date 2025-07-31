@@ -1,8 +1,11 @@
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice;
 using InnoClinic.Offices.Infrastructure.Extensions;
-using FluentValidation.AspNetCore;
+using InnoClinicCommon.JWT;
 using InnoClinicCommon.Middleware;
+using InnoClinicCommon.Swagger;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,17 +18,31 @@ builder.Services.AddValidatorsFromAssembly(typeof(CreateOfficeCommandValidator).
 bool IsDevelopment = builder.Environment.IsEnvironment("Development");
 bool IsDocker = builder.Environment.IsEnvironment("Docker");
 
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+JwtServiceExtensions.AddJwtAuthentication(builder.Services, builder.Configuration);
+
 // Infrastructure
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // Swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+SwaggerServiceExtensions.AddSwaggerWithJwt(builder.Services);
+
 
 // Controllers
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();
 //builder.Services.AddFluentValidationClientsideAdapters();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:4200", "http://localhost:4300")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
 
 var app = builder.Build();
 
@@ -38,5 +55,10 @@ if (IsDevelopment || IsDocker)
 }
 
 app.UseHttpsRedirection();
+app.UseCors();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 app.Run();

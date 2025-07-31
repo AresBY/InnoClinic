@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h5 class="modal-title">Confirm Cancel</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="onNo()"></button>
+</div>
+
+<div class="modal-body">
+  <p>Do you really want to cancel? Entered data will not be saved.</p>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="onNo()">No</button>
+  <button type="button" class="btn btn-primary" (click)="onYes()">Yes</button>
+</div>

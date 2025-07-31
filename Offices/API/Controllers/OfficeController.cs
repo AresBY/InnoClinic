@@ -30,7 +30,7 @@ namespace InnoClinic.Offices.API.Controllers
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ID of the created office</returns>
         [HttpPost(nameof(CreateOffice))]
-        [Authorize(Roles = nameof(UserRole.Receptionist) + "," + nameof(UserRole.Admin))]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> CreateOffice([FromBody] CreateOfficeCommand command, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(command, cancellationToken);

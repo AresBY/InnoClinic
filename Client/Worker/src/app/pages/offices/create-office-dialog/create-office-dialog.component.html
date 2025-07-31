@@ -1,0 +1,206 @@
+<div class="p-4" [formGroup]="officeForm" novalidate>
+  <h2 class="mb-4 text-center">Create Office</h2>
+
+  <!-- Photo upload -->
+  <div class="mb-3">
+    <label for="photo" class="form-label">Photo</label>
+    <input id="photo" type="file" class="form-control" (change)="onPhotoChange($event)" />
+  </div>
+
+  <!-- City (required) -->
+  <div class="mb-3">
+    <label for="city" class="form-label">City *</label>
+    <input
+      id="city"
+      type="text"
+      formControlName="city"
+      class="form-control"
+      [class.is-invalid]="
+        officeForm.get('city')?.invalid &&
+        (officeForm.get('city')?.touched || officeForm.get('city')?.dirty)
+      "
+      placeholder="Enter city"
+      (blur)="officeForm.get('city')?.markAsTouched()"
+    />
+    <div class="invalid-feedback" *ngIf="officeForm.get('city')?.errors">
+      <ng-container *ngIf="officeForm.get('city')?.hasError('serverError'); else cityClientErrors">
+        {{ officeForm.get('city')?.getError('serverError') }}
+      </ng-container>
+      <ng-template #cityClientErrors>
+        <div *ngIf="officeForm.get('city')?.hasError('required')">
+          Please, enter the office’s city
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Street (required) -->
+  <div class="mb-3">
+    <label for="street" class="form-label">Street *</label>
+    <input
+      id="street"
+      type="text"
+      formControlName="street"
+      class="form-control"
+      [class.is-invalid]="
+        officeForm.get('street')?.invalid &&
+        (officeForm.get('street')?.touched || officeForm.get('street')?.dirty)
+      "
+      placeholder="Enter street"
+      (blur)="officeForm.get('street')?.markAsTouched()"
+    />
+    <div class="invalid-feedback" *ngIf="officeForm.get('street')?.errors">
+      <ng-container
+        *ngIf="officeForm.get('street')?.hasError('serverError'); else streetClientErrors"
+      >
+        {{ officeForm.get('street')?.getError('serverError') }}
+      </ng-container>
+      <ng-template #streetClientErrors>
+        <div *ngIf="officeForm.get('street')?.hasError('required')">
+          Please, enter the office’s street
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- House Number (required) -->
+  <div class="mb-3">
+    <label for="houseNumber" class="form-label">House Number *</label>
+    <input
+      id="houseNumber"
+      type="text"
+      formControlName="houseNumber"
+      class="form-control"
+      [class.is-invalid]="
+        officeForm.get('houseNumber')?.invalid &&
+        (officeForm.get('houseNumber')?.touched || officeForm.get('houseNumber')?.dirty)
+      "
+      placeholder="Enter house number"
+      (blur)="officeForm.get('houseNumber')?.markAsTouched()"
+    />
+    <div class="invalid-feedback" *ngIf="officeForm.get('houseNumber')?.errors">
+      <ng-container
+        *ngIf="officeForm.get('houseNumber')?.hasError('serverError'); else houseNumberClientErrors"
+      >
+        {{ officeForm.get('houseNumber')?.getError('serverError') }}
+      </ng-container>
+      <ng-template #houseNumberClientErrors>
+        <div *ngIf="officeForm.get('houseNumber')?.hasError('required')">
+          Please, enter the office’s house number
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Office Number (required) -->
+  <div class="mb-3">
+    <label for="officeNumber" class="form-label">Office Number *</label>
+    <input
+      id="officeNumber"
+      type="text"
+      formControlName="officeNumber"
+      class="form-control"
+      [class.is-invalid]="
+        officeForm.get('officeNumber')?.invalid &&
+        (officeForm.get('officeNumber')?.touched || officeForm.get('officeNumber')?.dirty)
+      "
+      placeholder="Enter office number"
+      (blur)="officeForm.get('officeNumber')?.markAsTouched()"
+    />
+    <div class="invalid-feedback" *ngIf="officeForm.get('officeNumber')?.errors">
+      <ng-container
+        *ngIf="
+          officeForm.get('officeNumber')?.hasError('serverError');
+          else officeNumberClientErrors
+        "
+      >
+        {{ officeForm.get('officeNumber')?.getError('serverError') }}
+      </ng-container>
+      <ng-template #officeNumberClientErrors>
+        <div *ngIf="officeForm.get('officeNumber')?.hasError('required')">
+          Please, enter the office’s number
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Registry Phone Number (required) -->
+  <div class="mb-3">
+    <label for="registryPhoneNumber" class="form-label">Registry Phone Number *</label>
+    <div class="input-group">
+      <span class="input-group-text">+</span>
+      <input
+        id="registryPhoneNumber"
+        type="tel"
+        formControlName="registryPhoneNumber"
+        class="form-control"
+        [class.is-invalid]="
+          officeForm.get('registryPhoneNumber')?.invalid &&
+          (officeForm.get('registryPhoneNumber')?.touched ||
+            officeForm.get('registryPhoneNumber')?.dirty)
+        "
+        placeholder="1234567890"
+        (blur)="officeForm.get('registryPhoneNumber')?.markAsTouched()"
+        maxlength="15"
+      />
+    </div>
+    <div class="invalid-feedback" *ngIf="officeForm.get('registryPhoneNumber')?.errors">
+      <ng-container
+        *ngIf="
+          officeForm.get('registryPhoneNumber')?.hasError('serverError');
+          else phoneClientErrors
+        "
+      >
+        {{ officeForm.get('registryPhoneNumber')?.getError('serverError') }}
+      </ng-container>
+      <ng-template #phoneClientErrors>
+        <div *ngIf="officeForm.get('registryPhoneNumber')?.hasError('required')">
+          Please, enter the phone number
+        </div>
+        <div *ngIf="officeForm.get('registryPhoneNumber')?.hasError('invalidPhone')">
+          You've entered an invalid phone number
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Status radio buttons -->
+  <fieldset class="mb-4">
+    <legend>Status *</legend>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        id="statusActive"
+        value="Active"
+        formControlName="status"
+      />
+      <label class="form-check-label" for="statusActive">Active</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        id="statusInactive"
+        value="Inactive"
+        formControlName="status"
+      />
+      <label class="form-check-label" for="statusInactive">Inactive</label>
+    </div>
+  </fieldset>
+
+  <!-- Action buttons -->
+  <div class="d-flex justify-content-end gap-2">
+    <button type="button" class="btn btn-secondary" (click)="openCancelConfirmDialog()">
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      [disabled]="officeForm.invalid"
+      (click)="onConfirm()"
+    >
+      Confirm
+    </button>
+  </div>
+</div>

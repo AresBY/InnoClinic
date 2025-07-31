@@ -1,7 +1,6 @@
 ﻿using InnoClinic.Authorization.Application.JWT;
-using InnoClinic.Authorization.Domain.Entities;
-using InnoClinic.Authorization.Infrastructure.Settings;
 using InnoClinicCommon.Enums;
+using InnoClinicCommon.JWT;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;

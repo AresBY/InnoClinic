@@ -3,19 +3,15 @@
     "Name": "New Profile",
     "Projects": [
       {
-        "Path": "InnoClinic.Server\\InnoClinic.API\\API.csproj",
+        "Path": "Authorization\\API\\API.csproj",
         "Action": "Start"
       },
       {
-        "Path": "InnoClinic.Server\\InnoClinic.Application\\Application.csproj",
+        "Path": "Offices\\API\\API.csproj",
         "Action": "Start"
       },
       {
-        "Path": "InnoClinic.Server\\InnoClinic.Infrastructure\\Infrastructure.csproj",
-        "Action": "Start"
-      },
-      {
-        "Path": "InnoClinic.Server\\InnoClinic.Domain\\Domain.csproj",
+        "Path": "SwaggerAggregator\\SwaggerAggregator.csproj",
         "Action": "Start"
       }
     ]
