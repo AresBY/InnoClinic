@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SignInComponent } from '@features/auth/sign-in/sign-in.component';
 import { AuthService } from '@services/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,14 +15,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.sub = this.authService.isAuthenticated$.subscribe((auth) => {
       this.isAuthenticated = auth;
 
-      // Если пользователь не авторизован, сразу показываем окно входа
       if (!auth) {
         this.openSignInModal();
       }
@@ -45,6 +46,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     } else {
       this.openSignInModal();
     }
+  }
+
+  public goToOffices() {
+    console.log('goToOffices');
+    this.router.navigate(['/offices']);
   }
 
   ngOnDestroy() {

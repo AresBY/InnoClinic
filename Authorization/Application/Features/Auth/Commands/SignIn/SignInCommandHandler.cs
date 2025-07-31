@@ -33,7 +33,7 @@ public class SignInCommandHandler : IRequestHandler<SignInCommand, SignInResultD
     {
         var user = await _userRepository.GetByEmailAsync(request.Email, cancellationToken);
 
-        if (user is null || request.Role != user.Role)
+        if (user is null)
         {
             return new SignInResultDto { IsSuccess = false, ErrorMessage = ErrorMessages.SignInFailedMessage };
         }
