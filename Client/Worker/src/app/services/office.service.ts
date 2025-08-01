@@ -10,17 +10,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OfficeService {
+  private readonly baseUrl = environment.officeUrl;
+
   constructor(private http: HttpClient) {}
 
   createOffice(command: CreateOffice): Observable<string> {
-    return this.http.post<string>(`${environment.officeUrl}/Create`, command);
+    return this.http.post<string>(`${this.baseUrl}/Create`, command);
   }
 
   getAllOffices(): Observable<Office[]> {
-    return this.http.get<Office[]>(`${environment.officeUrl}/GetAll`);
+    return this.http.get<Office[]>(`${this.baseUrl}/GetAll`);
   }
 
   getOfficeById(id: string): Observable<OfficeDetails> {
-    return this.http.get<OfficeDetails>(`${environment.officeUrl}/Get/${id}`);
+    return this.http.get<OfficeDetails>(`${this.baseUrl}/Get/${id}`);
+  }
+
+  updateOffice(officeId: string, editedOffice: OfficeDetails): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/UpdateOffice/${officeId}`, editedOffice);
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-cancel-confirm-dialog',
@@ -14,5 +14,27 @@ export class CancelConfirmDialogComponent {
 
   onNo() {
     this.dialogRef.close(false);
+  }
+
+  public static open(
+    dialog: MatDialog,
+    config?: MatDialogConfig
+  ): MatDialogRef<CancelConfirmDialogComponent> {
+    const defaultConfig: MatDialogConfig = {
+      width: '360px',
+      disableClose: true,
+      data: {
+        title: 'Are you sure?',
+        message: 'Do you really want to cancel?',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+      }
+    };
+
+    return dialog.open(CancelConfirmDialogComponent, {
+      ...defaultConfig,
+      ...config,
+      data: { ...defaultConfig.data, ...(config?.data || {}) }
+    });
   }
 }

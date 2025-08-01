@@ -40,5 +40,21 @@ namespace InnoClinic.Offices.Application.Mappings
                 Status = command.Status,
             };
         }
+
+        public static Office ToEntity(this UpdateCommand command)
+        {
+            return new Office
+            {
+                Id = command.Id,
+                PhotoUrl = command.PhotoUrl,
+                City = command.City,
+                Street = command.Street,
+                HouseNumber = command.HouseNumber,
+                OfficeNumber = command.OfficeNumber,
+                RegistryPhoneNumber = command.RegistryPhoneNumber,
+                Status = command.Status,
+                CreatedAt = command.CreatedAt,
+            };
+        }
     }
 }

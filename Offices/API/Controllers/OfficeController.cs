@@ -37,6 +37,32 @@ namespace InnoClinic.Offices.API.Controllers
         }
 
         /// <summary>
+        /// Updates an existing office with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the office to update, passed in the URL.</param>
+        /// <param name="command">The update command containing office details.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Returns 200 OK if update is successful; 400 Bad Request if IDs do not match.</returns>
+        [HttpPut(nameof(UpdateOffice) + "/{id}")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> UpdateOffice(string id, [FromBody] UpdateCommand command, CancellationToken cancellationToken)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest("URL id and command id do not match.");
+            }
+
+            var result = await _mediator.Send(command, cancellationToken);
+
+            // TODO: If the office status was changed to "Inactive",
+            // then mark all related doctors and receptionists as "Inactive" as well.
+            // This logic will be implemented in a future story.
+
+            return Ok(result);
+        }
+
+
+        /// <summary>
         /// Gets a list of all offices.
         /// </summary>
         /// <param name="cancellationToken">Cancellation token</param>

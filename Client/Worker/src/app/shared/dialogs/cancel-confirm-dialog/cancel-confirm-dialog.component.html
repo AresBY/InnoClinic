@@ -1,13 +1,12 @@
-<div class="modal-header">
-  <h5 class="modal-title">Confirm Cancel</h5>
+<div class="modal-header py-3 px-4">
   <button type="button" class="btn-close" aria-label="Close" (click)="onNo()"></button>
 </div>
 
-<div class="modal-body">
-  <p>Do you really want to cancel? Entered data will not be saved.</p>
+<div class="modal-body px-4 pb-3">
+  <p class="mb-0">Do you really want to cancel? Entered data will not be saved.</p>
 </div>
 
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="onNo()">No</button>
+<div class="modal-footer px-4 pt-2 pb-3">
+  <button type="button" class="btn btn-secondary me-2" (click)="onNo()">No</button>
   <button type="button" class="btn btn-primary" (click)="onYes()">Yes</button>
 </div>
