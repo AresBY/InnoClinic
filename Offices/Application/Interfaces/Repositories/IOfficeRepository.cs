@@ -12,6 +12,8 @@ namespace InnoClinic.Offices.Application.Interfaces.Repositories
         Task InsertAsync(Office office, CancellationToken cancellationToken);
         Task<List<Office>> GetAllAsync(CancellationToken cancellationToken);
 
+        Task<Office?> GetByIdAsync(string id, CancellationToken cancellationToken);
+
         Task UpdateAsync(Office office, CancellationToken cancellationToken);
 
         Task DeleteAsync(string id, CancellationToken cancellationToken);

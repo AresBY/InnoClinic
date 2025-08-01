@@ -1,4 +1,5 @@
 ﻿using InnoClinic.Offices.Application.Interfaces.Repositories;
+using InnoClinic.Offices.Application.Mappings;
 using MediatR;
 using MongoDB.Bson;
 
@@ -16,20 +17,12 @@ namespace InnoClinic.Offices.Application.Features.Office.Commands
 
         public async Task<string> Handle(CreateCommand command, CancellationToken cancellationToken)
         {
-            var office = new Domain.Entities.Office
-            {
-                Id = ObjectId.GenerateNewId().ToString(),
-                PhotoUrl = command.PhotoUrl,
-                City = command.City,
-                Street = command.Street,
-                HouseNumber = command.HouseNumber,
-                OfficeNumber = command.OfficeNumber,
-                RegistryPhoneNumber = command.RegistryPhoneNumber,
-                Status = command.Status,
-                CreatedAt = DateTime.UtcNow
-            };
+            var office = command.ToEntity();
+
+            office.CreatedAt = DateTimeOffset.UtcNow;
 
             await _repository.InsertAsync(office, cancellationToken);
+
             return office.Id;
         }
     }

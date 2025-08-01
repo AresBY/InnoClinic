@@ -6,6 +6,8 @@ using InnoClinicCommon.JWT;
 using InnoClinicCommon.Middleware;
 using InnoClinicCommon.Swagger;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +27,10 @@ JwtServiceExtensions.AddJwtAuthentication(builder.Services, builder.Configuratio
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // Swagger
-SwaggerServiceExtensions.AddSwaggerWithJwt(builder.Services);
+if (IsDevelopment || IsDocker)
+{
+    SwaggerServiceExtensions.AddSwaggerWithJwt(builder.Services);
+}
 
 
 // Controllers
@@ -52,6 +57,8 @@ if (IsDevelopment || IsDocker)
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+
 }
 
 app.UseHttpsRedirection();

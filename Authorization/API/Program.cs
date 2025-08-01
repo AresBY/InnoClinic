@@ -1,3 +1,4 @@
+using Application.Features.Auth.Examples;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using InnoClinic.Authorization.Application.Features.Auth.Commands;
@@ -83,8 +84,8 @@ if (IsDevelopment || IsDocker)
 {
     SwaggerServiceExtensions.AddSwaggerWithJwt(builder.Services);
 
-    // Регистрируем все примеры из сборки с примерами
-    builder.Services.AddSwaggerExamplesFromAssemblyOf<Application.Features.Auth.Examples.SignInCommandExample>();
+    builder.Services.AddSwaggerExamplesFromAssemblyOf<SignInCommandExample>();
+    builder.Services.AddSwaggerGen(c => c.ExampleFilters());
 }
 
 
@@ -145,6 +146,8 @@ if (IsDevelopment || IsDocker)
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+
 }
 app.UseCors();
 

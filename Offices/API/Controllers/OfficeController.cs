@@ -47,5 +47,21 @@ namespace InnoClinic.Offices.API.Controllers
             var result = await _mediator.Send(new GetAllQuery(), cancellationToken);
             return Ok(result);
         }
+
+        /// <summary>
+        /// Gets detailed information about an office by its ID.
+        /// </summary>
+        /// <param name="id">Office identifier</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Office details</returns>
+        [HttpGet("Get/{id}")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> Get(string id, CancellationToken cancellationToken)
+        {
+            var office = await _mediator.Send(new GetByIdQuery(id), cancellationToken);
+            if (office == null)
+                return NotFound();
+            return Ok(office);
+        }
     }
 }

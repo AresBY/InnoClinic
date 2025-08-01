@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateOfficeDialogComponent } from './create-office-dialog/create-office-dialog.component';
 import { OfficeService } from '@services/office.service';
 import { Office } from '@models/office.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-offices',
@@ -15,7 +16,8 @@ export class OfficesComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private officeService: OfficeService
+    private officeService: OfficeService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,5 +48,9 @@ export class OfficesComponent implements OnInit {
         this.loadOffices();
       }
     });
+  }
+
+  public onOfficeClick(officeId: string): void {
+    this.router.navigate(['/offices', officeId]);
   }
 }

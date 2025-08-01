@@ -1,5 +1,7 @@
 ﻿using InnoClinic.Offices.Application.DTOs;
+using InnoClinic.Offices.Application.Features.Office.Commands;
 using InnoClinic.Offices.Domain.Entities;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +17,27 @@ namespace InnoClinic.Offices.Application.Mappings
             return new OfficeDto
             {
                 Id = office.Id,
+                PhotoUrl = office.PhotoUrl,
+                City = office.City,
+                Street = office.Street,
+                HouseNumber = office.HouseNumber,
+                OfficeNumber = office.OfficeNumber,
                 Status = office.Status,
                 RegistryPhoneNumber = office.RegistryPhoneNumber
+            };
+        }
+        public static Office ToEntity(this CreateCommand command)
+        {
+            return new Office
+            {
+                Id = ObjectId.GenerateNewId().ToString(),
+                PhotoUrl = command.PhotoUrl,
+                City = command.City,
+                Street = command.Street,
+                HouseNumber = command.HouseNumber,
+                OfficeNumber = command.OfficeNumber,
+                RegistryPhoneNumber = command.RegistryPhoneNumber,
+                Status = command.Status,
             };
         }
     }
