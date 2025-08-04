@@ -1,11 +1,6 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace InnoClinic.Authorization.Application.Features.Auth.Commands
+namespace InnoClinic.Authorization.Application.Features.Auth.Commands.ConfirmEmail
 {
     public sealed class ConfirmEmailCommand : IRequest<Unit>
     {

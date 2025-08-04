@@ -17,9 +17,9 @@ import { CancelConfirmDialogComponent } from '@shared/dialogs/cancel-confirm-dia
   templateUrl: './create-office-dialog.component.html'
 })
 export class CreateOfficeDialogComponent {
-  serverErrors: Record<string, string> = {};
+  public serverErrors: Record<string, string> = {};
 
-  officeForm = this.fb.group({
+  public officeForm = this.fb.group({
     photo: [null],
     city: ['', Validators.required],
     street: ['', Validators.required],
@@ -29,14 +29,14 @@ export class CreateOfficeDialogComponent {
     status: ['Active', Validators.required]
   });
 
-  constructor(
+  public constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CreateOfficeDialogComponent>,
     private dialog: MatDialog,
     private officeService: OfficeService
   ) {}
 
-  private phoneValidator(): ValidatorFn {
+  public phoneValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const val = control.value;
       if (!val) return null;
@@ -46,12 +46,12 @@ export class CreateOfficeDialogComponent {
     };
   }
 
-  onPhotoChange(event: Event): void {
+  public onPhotoChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.officeForm.patchValue({ photo: input.files?.[0] ?? null });
   }
 
-  openCancelConfirmDialog(): void {
+  public openCancelConfirmDialog(): void {
     CancelConfirmDialogComponent.open(this.dialog, {
       disableClose: false
     })
@@ -63,11 +63,11 @@ export class CreateOfficeDialogComponent {
       });
   }
 
-  onCancel(): void {
+  public onCancel(): void {
     this.openCancelConfirmDialog();
   }
 
-  onConfirm(): void {
+  public onConfirm(): void {
     this.serverErrors = {};
     Object.keys(this.officeForm.controls).forEach((field) => {
       const control = this.officeForm.get(field);

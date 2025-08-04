@@ -12,21 +12,21 @@ import { Observable } from 'rxjs';
 export class OfficeService {
   private readonly baseUrl = environment.officeUrl;
 
-  constructor(private http: HttpClient) {}
+  public constructor(private http: HttpClient) {}
 
-  createOffice(command: CreateOffice): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/Create`, command);
+  public createOffice(command: CreateOffice): Observable<string> {
+    return this.http.post<string>(`${this.baseUrl}/CreateOffice`, command);
   }
 
-  getAllOffices(): Observable<Office[]> {
-    return this.http.get<Office[]>(`${this.baseUrl}/GetAll`);
+  public getAllOffices(): Observable<Office[]> {
+    return this.http.get<Office[]>(`${this.baseUrl}/GetOfficeAll`);
   }
 
-  getOfficeById(id: string): Observable<OfficeDetails> {
-    return this.http.get<OfficeDetails>(`${this.baseUrl}/Get/${id}`);
+  public getOfficeById(id: string): Observable<OfficeDetails> {
+    return this.http.get<OfficeDetails>(`${this.baseUrl}/GetOffice/${id}`);
   }
 
-  updateOffice(officeId: string, editedOffice: OfficeDetails): Observable<void> {
+  public updateOffice(officeId: string, editedOffice: OfficeDetails): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}/UpdateOffice/${officeId}`, editedOffice);
   }
 }

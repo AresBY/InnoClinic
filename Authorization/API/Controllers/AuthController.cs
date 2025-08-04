@@ -1,12 +1,19 @@
 ﻿using Application.Features.Auth.Examples;
-using InnoClinic.Authorization.Application.Features.Auth.Commands;
-using InnoClinic.Authorization.Application.Features.Auth.Queries;
-using InnoClinic.Authorization.Domain.Common.Enums;
+
+using InnoClinic.Authorization.Application.Features.Auth.Commands.ConfirmEmail;
+using InnoClinic.Authorization.Application.Features.Auth.Commands.RefreshToken;
+using InnoClinic.Authorization.Application.Features.Auth.Commands.RegisterUser;
+using InnoClinic.Authorization.Application.Features.Auth.Commands.SignIn;
+using InnoClinic.Authorization.Application.Features.Auth.Queries.CheckEmailExists;
+using InnoClinic.Authorization.Application.Features.Auth.Queries.GetAllUsers;
+
 using InnoClinicCommon.Enums;
+
 using MediatR;
+
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 using Swashbuckle.AspNetCore.Filters;
 
 namespace InnoClinic.Authorization.API.Controllers
@@ -140,7 +147,7 @@ namespace InnoClinic.Authorization.API.Controllers
         [HttpPost(nameof(Logout))]
         public IActionResult Logout()
         {
-            UpdateRefreshTokenCookie(remove:true);
+            UpdateRefreshTokenCookie(remove: true);
 
             return Ok(new { message = "Logged out successfully." });
         }

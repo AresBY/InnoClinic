@@ -1,12 +1,8 @@
 ﻿using InnoClinic.Authorization.Application.DTOs;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace InnoClinic.Authorization.Application.Features.Auth.Commands
+using MediatR;
+
+namespace InnoClinic.Authorization.Application.Features.Auth.Commands.RefreshToken
 {
     public class RefreshTokenCommand : IRequest<RefreshTokenResultDto>
     {

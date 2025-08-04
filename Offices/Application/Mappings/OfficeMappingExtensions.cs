@@ -1,12 +1,9 @@
 ﻿using InnoClinic.Offices.Application.DTOs;
-using InnoClinic.Offices.Application.Features.Office.Commands;
+using InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice;
+using InnoClinic.Offices.Application.Features.Office.Commands.UpdateOffice;
 using InnoClinic.Offices.Domain.Entities;
+
 using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InnoClinic.Offices.Application.Mappings
 {
@@ -26,7 +23,7 @@ namespace InnoClinic.Offices.Application.Mappings
                 RegistryPhoneNumber = office.RegistryPhoneNumber
             };
         }
-        public static Office ToEntity(this CreateCommand command)
+        public static Office ToEntity(this CreateOfficeCommand command)
         {
             return new Office
             {
@@ -41,7 +38,7 @@ namespace InnoClinic.Offices.Application.Mappings
             };
         }
 
-        public static Office ToEntity(this UpdateCommand command)
+        public static Office ToEntity(this UpdateOfficeCommand command)
         {
             return new Office
             {

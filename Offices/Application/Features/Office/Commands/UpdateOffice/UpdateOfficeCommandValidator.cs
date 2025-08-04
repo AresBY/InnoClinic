@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace InnoClinic.Offices.Application.Features.Office.Commands;
+namespace InnoClinic.Offices.Application.Features.Office.Commands.UpdateOffice;
 
-public class UpdateCommandValidator : AbstractValidator<UpdateCommand>
+public class UpdateOfficeCommandValidator : AbstractValidator<UpdateOfficeCommand>
 {
-    public UpdateCommandValidator()
+    public UpdateOfficeCommandValidator()
     {
         RuleFor(x => x.Id).NotEmpty();
         RuleFor(x => x.City).NotEmpty().WithMessage("Please, enter the office’s city");

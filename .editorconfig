@@ -1,0 +1,11 @@
+[*.cs]
+# Formatting
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = true
+
+# Remove unused usings
+dotnet_remove_unnecessary_usings = true
+
+# Indentation and others
+indent_style = space
+indent_size = 4

@@ -8,32 +8,33 @@ import { environment } from '@environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly accessTokenKey: string = 'access_token';
+  public readonly accessTokenKey: string = 'access_token';
 
-  private isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+  public isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     this.hasToken()
   );
   public readonly isAuthenticated$: Observable<boolean> =
     this.isAuthenticatedSubject.asObservable();
 
-  constructor(private readonly http: HttpClient) {}
+  public constructor(private readonly http: HttpClient) {}
 
-  public registerPatient$(data: RegisterRequest): Observable<any> {
-    return this.http.post<any>(`${environment.authUrl}/RegisterPatient`, data);
+  public registerPatient$(data: RegisterRequest): Observable<unknown> {
+    return this.http.post<unknown>(`${environment.authUrl}/RegisterPatient`, data);
   }
 
-  public checkEmailExists$(email: string): Observable<any> {
+  public checkEmailExists$(email: string): Observable<unknown> {
     const params: HttpParams = new HttpParams().set('email', email.toLowerCase());
-    return this.http.get<any>(`${environment.authUrl}/CheckEmailExists`, { params });
+    return this.http.get<unknown>(`${environment.authUrl}/CheckEmailExists`, { params });
   }
 
-  public confirmEmail$(userId: string): Observable<any> {
-    return this.http.post<any>(`${environment.authUrl}/ConfirmEmail`, { userId });
+  public confirmEmail$(userId: string): Observable<unknown> {
+    return this.http.post<unknown>(`${environment.authUrl}/ConfirmEmail`, { userId });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public signIn$(credentials: { email: string; password: string }): Observable<any> {
     return this.http
-      .post<any>(`${environment.authUrl}/SignIn`, credentials, { withCredentials: true })
+      .post<unknown>(`${environment.authUrl}/SignIn`, credentials, { withCredentials: true })
       .pipe(tap((response) => this.setAccessToken(response.accessToken)));
   }
 
@@ -54,10 +55,12 @@ export class AuthService {
     localStorage.removeItem(this.accessTokenKey);
     this.isAuthenticatedSubject.next(false);
 
-    this.http.post<any>(`${environment.authUrl}/Logout`, {}, { withCredentials: true }).subscribe({
-      next: () => console.log('Logged out successfully'),
-      error: (err) => console.error('Logout failed', err)
-    });
+    this.http
+      .post<unknown>(`${environment.authUrl}/Logout`, {}, { withCredentials: true })
+      .subscribe({
+        next: () => console.log('Logged out successfully'),
+        error: (err) => console.error('Logout failed', err)
+      });
   }
 
   public refreshToken$(): Observable<string> {

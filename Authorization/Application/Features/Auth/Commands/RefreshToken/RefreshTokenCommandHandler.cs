@@ -1,9 +1,12 @@
 ﻿using InnoClinic.Authorization.Application.DTOs;
-using InnoClinic.Authorization.Application.JWT;
 using InnoClinic.Authorization.Application.Interfaces.Repositories;
-using MediatR;
-using Microsoft.Extensions.Options;
+using InnoClinic.Authorization.Application.JWT;
+
 using InnoClinicCommon.JWT;
+
+using MediatR;
+
+using Microsoft.Extensions.Options;
 
 namespace InnoClinic.Authorization.Application.Features.Auth.Commands.RefreshToken
 {

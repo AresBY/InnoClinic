@@ -10,17 +10,17 @@ import { Router } from '@angular/router';
   templateUrl: './offices.component.html'
 })
 export class OfficesComponent implements OnInit {
-  offices: Office[] = [];
-  loading = false;
-  error = '';
+  public offices: Office[] = [];
+  public loading = false;
+  public error = '';
 
-  constructor(
+  public constructor(
     private dialog: MatDialog,
     private officeService: OfficeService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loadOffices();
   }
 

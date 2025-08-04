@@ -8,15 +8,15 @@ import { AuthService } from '@services/auth.service';
   templateUrl: './confirm-email.component.html'
 })
 export class ConfirmEmailComponent implements OnInit {
-  confirmationResult: string | null = null;
+  public confirmationResult: string | null = null;
 
-  constructor(
+  public constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
     private authService: AuthService
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const userId = this.route.snapshot.queryParamMap.get('userId');
 
     if (userId) {

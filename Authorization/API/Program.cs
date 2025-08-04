@@ -1,7 +1,11 @@
+using System.Text.Json.Serialization;
+
 using Application.Features.Auth.Examples;
+
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using InnoClinic.Authorization.Application.Features.Auth.Commands;
+
+using InnoClinic.Authorization.Application.Features.Auth.Commands.RegisterUser;
 using InnoClinic.Authorization.Application.Interfaces;
 using InnoClinic.Authorization.Application.Interfaces.Repositories;
 using InnoClinic.Authorization.Application.JWT;
@@ -10,22 +14,16 @@ using InnoClinic.Authorization.Infrastructure.Auth;
 using InnoClinic.Authorization.Infrastructure.Email;
 using InnoClinic.Authorization.Infrastructure.Persistence;
 using InnoClinic.Authorization.Infrastructure.Persistence.Repositories;
+
 using InnoClinicCommon.Enums;
 using InnoClinicCommon.JWT;
 using InnoClinicCommon.Middleware;
 using InnoClinicCommon.Swagger;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+
 using Swashbuckle.AspNetCore.Filters;
-using System;
-using System.Reflection;
-using System.Security.Claims;
-using System.Text;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 

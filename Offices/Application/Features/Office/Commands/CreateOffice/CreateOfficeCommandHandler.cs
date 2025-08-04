@@ -1,21 +1,21 @@
 ﻿using InnoClinic.Offices.Application.Interfaces.Repositories;
 using InnoClinic.Offices.Application.Mappings;
+
 using MediatR;
-using MongoDB.Bson;
 
 
-namespace InnoClinic.Offices.Application.Features.Office.Commands
+namespace InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice
 {
-    public class CreateCommandHandler : IRequestHandler<CreateCommand, string>
+    public class CreateOfficeCommandHandler : IRequestHandler<CreateOfficeCommand, string>
     {
         private readonly IOfficeRepository _repository;
 
-        public CreateCommandHandler(IOfficeRepository repository)
+        public CreateOfficeCommandHandler(IOfficeRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<string> Handle(CreateCommand command, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateOfficeCommand command, CancellationToken cancellationToken)
         {
             var office = command.ToEntity();
 

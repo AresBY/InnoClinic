@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-declare const bootstrap: any;
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
