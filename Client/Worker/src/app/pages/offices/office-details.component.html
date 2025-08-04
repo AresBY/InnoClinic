@@ -2,41 +2,165 @@
   <div class="spinner-border"></div>
 </div>
 
-<div *ngIf="!isLoading" class="container mt-4">
-  <h2>Office Information</h2>
+<form *ngIf="!isLoading && officeForm" [formGroup]="officeForm" class="container" novalidate>
+  <h2 class="mb-4 text-center">{{ isEditing ? 'Edit Office' : 'Office Details' }}</h2>
 
   <div class="mb-3">
-    <img
-      *ngIf="office.photoUrl"
-      [src]="office.photoUrl"
-      alt="Office photo"
-      class="img-thumbnail"
-      style="max-width: 300px"
+    <label for="photoUrl" class="form-label">Photo URL</label>
+    <input
+      type="text"
+      class="form-control"
+      id="photoUrl"
+      formControlName="photoUrl"
+      [readonly]="!isEditing"
     />
-    <p *ngIf="!office.photoUrl"><i>No photo uploaded</i></p>
   </div>
-
-  <div class="mb-3"><strong>City:</strong> {{ office.city }}</div>
-
-  <div class="mb-3"><strong>Street:</strong> {{ office.street }}</div>
-
-  <div class="mb-3"><strong>House number:</strong> {{ office.houseNumber }}</div>
-
-  <div class="mb-3"><strong>Office number:</strong> {{ office.officeNumber || '-' }}</div>
-
-  <div class="mb-3"><strong>Registry phone number:</strong> +{{ office.registryPhoneNumber }}</div>
 
   <div class="mb-3">
-    <strong>Status:</strong><br />
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" [checked]="office.status" disabled />
-      <label class="form-check-label">Active</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" [checked]="!office.status" disabled />
-      <label class="form-check-label">Inactive</label>
+    <label for="city" class="form-label">City *</label>
+    <input
+      type="text"
+      class="form-control"
+      id="city"
+      formControlName="city"
+      [readonly]="!isEditing"
+      [class.is-invalid]="
+        officeForm.get('city')?.invalid &&
+        (officeForm.get('city')?.touched || officeForm.get('city')?.dirty)
+      "
+      (blur)="officeForm.get('city')?.markAsTouched()"
+    />
+    <div class="invalid-feedback" *ngIf="officeForm.get('city')?.errors">
+      <div *ngIf="officeForm.get('city')?.hasError('required')">
+        Please, enter the office’s city
+      </div>
     </div>
   </div>
 
-  <button class="btn btn-primary">Edit</button>
-</div>
+  <div class="mb-3">
+    <label for="street" class="form-label">Street *</label>
+    <input
+      type="text"
+      class="form-control"
+      id="street"
+      formControlName="street"
+      [readonly]="!isEditing"
+      [class.is-invalid]="
+        officeForm.get('street')?.invalid &&
+        (officeForm.get('street')?.touched || officeForm.get('street')?.dirty)
+      "
+      (blur)="officeForm.get('street')?.markAsTouched()"
+    />
+    <div class="invalid-feedback" *ngIf="officeForm.get('street')?.errors">
+      <div *ngIf="officeForm.get('street')?.hasError('required')">
+        Please, enter the office’s street
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="houseNumber" class="form-label">House Number *</label>
+    <input
+      type="text"
+      class="form-control"
+      id="houseNumber"
+      formControlName="houseNumber"
+      [readonly]="!isEditing"
+      [class.is-invalid]="
+        officeForm.get('houseNumber')?.invalid &&
+        (officeForm.get('houseNumber')?.touched || officeForm.get('houseNumber')?.dirty)
+      "
+      (blur)="officeForm.get('houseNumber')?.markAsTouched()"
+    />
+    <div class="invalid-feedback" *ngIf="officeForm.get('houseNumber')?.errors">
+      <div *ngIf="officeForm.get('houseNumber')?.hasError('required')">
+        Please, enter the office’s house number
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="officeNumber" class="form-label">Office Number</label>
+    <input
+      type="text"
+      class="form-control"
+      id="officeNumber"
+      formControlName="officeNumber"
+      [readonly]="!isEditing"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="registryPhoneNumber" class="form-label">Registry Phone Number *</label>
+    <div class="input-group">
+      <span class="input-group-text">+</span>
+      <input
+        type="text"
+        class="form-control"
+        id="registryPhoneNumber"
+        formControlName="registryPhoneNumber"
+        [readonly]="!isEditing"
+        [class.is-invalid]="
+          officeForm.get('registryPhoneNumber')?.invalid &&
+          (officeForm.get('registryPhoneNumber')?.touched ||
+            officeForm.get('registryPhoneNumber')?.dirty)
+        "
+        maxlength="15"
+        (blur)="officeForm.get('registryPhoneNumber')?.markAsTouched()"
+      />
+    </div>
+    <div class="invalid-feedback" *ngIf="officeForm.get('registryPhoneNumber')?.errors">
+      <div *ngIf="officeForm.get('registryPhoneNumber')?.hasError('required')">
+        Please, enter the phone number
+      </div>
+      <div *ngIf="officeForm.get('registryPhoneNumber')?.hasError('pattern')">
+        You've entered an invalid phone number
+      </div>
+    </div>
+  </div>
+
+  <fieldset class="mb-4">
+    <legend>Status *</legend>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        id="statusActive"
+        [value]="true"
+        formControlName="status"
+        [disabled]="!isEditing"
+      />
+      <label class="form-check-label" for="statusActive">Active</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        id="statusInactive"
+        [value]="false"
+        formControlName="status"
+        [disabled]="!isEditing"
+      />
+      <label class="form-check-label" for="statusInactive">Inactive</label>
+    </div>
+  </fieldset>
+
+  <div class="d-flex justify-content-end gap-2">
+    <ng-container *ngIf="isEditing; else viewButtons">
+      <button type="button" class="btn btn-secondary" (click)="onEditCancel()">Cancel</button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="officeForm.invalid"
+        (click)="onSave()"
+      >
+        Save changes
+      </button>
+    </ng-container>
+
+    <ng-template #viewButtons>
+      <button type="button" class="btn btn-secondary" (click)="onViewCancel()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="onEdit()">Edit</button>
+    </ng-template>
+  </div>
+</form>

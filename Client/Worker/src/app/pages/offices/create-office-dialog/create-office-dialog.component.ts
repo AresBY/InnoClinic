@@ -52,16 +52,15 @@ export class CreateOfficeDialogComponent {
   }
 
   openCancelConfirmDialog(): void {
-    const dialogRef = this.dialog.open(CancelConfirmDialogComponent, {
-      width: '320px',
-      disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === true) {
-        this.dialogRef.close();
-      }
-    });
+    CancelConfirmDialogComponent.open(this.dialog, {
+      disableClose: false
+    })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result === true) {
+          this.dialogRef.close();
+        }
+      });
   }
 
   onCancel(): void {
