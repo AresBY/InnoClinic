@@ -8,20 +8,20 @@ import { AuthService } from '@services/auth.service';
   templateUrl: './sign-in.component.html'
 })
 export class SignInComponent implements OnInit {
-  @Output() switchToSignUp = new EventEmitter<void>();
+  @Output() public switchToSignUp = new EventEmitter<void>();
 
-  signInForm!: FormGroup;
-  submitted = false;
-  errorMessage: string | null = null;
-  isSubmitting = false;
+  public signInForm!: FormGroup;
+  public submitted = false;
+  public errorMessage: string | null = null;
+  public isSubmitting = false;
 
-  constructor(
+  public constructor(
     private dialogRef: MatDialogRef<SignInComponent>,
     private fb: FormBuilder,
     private authService: AuthService
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.signInForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
@@ -29,15 +29,15 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  get email(): AbstractControl | null {
+  public get email(): AbstractControl | null {
     return this.signInForm.get('email');
   }
 
-  get password(): AbstractControl | null {
+  public get password(): AbstractControl | null {
     return this.signInForm.get('password');
   }
 
-  onSubmit() {
+  public onSubmit() {
     this.submitted = true;
     this.errorMessage = null;
 
@@ -48,6 +48,7 @@ export class SignInComponent implements OnInit {
     this.isSubmitting = true;
 
     this.authService.signIn$(this.signInForm.value).subscribe({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         this.isSubmitting = false;
         this.authService.setAccessToken(response.accessToken);
@@ -73,7 +74,7 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  close() {
+  public close() {
     this.dialogRef.close();
   }
 }

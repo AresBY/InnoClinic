@@ -1,5 +1,4 @@
-﻿using InnoClinic.Authorization.Domain.Common.Enums;
-using InnoClinicCommon.Enums;
+﻿using InnoClinicCommon.Enums;
 
 namespace InnoClinic.Authorization.Domain.Entities;
 

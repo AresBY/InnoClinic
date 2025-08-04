@@ -11,14 +11,14 @@ import { CancelConfirmDialogComponent } from '@shared/dialogs/cancel-confirm-dia
   templateUrl: './office-details.component.html'
 })
 export class OfficeDetailsComponent implements OnInit {
-  officeId!: string;
-  office!: OfficeDetails;
-  isLoading = true;
-  isEditing = false;
+  public isLoading = true;
+  public isEditing = false;
 
-  officeForm!: FormGroup;
+  public officeId!: string;
+  public office!: OfficeDetails;
+  public officeForm!: FormGroup;
 
-  constructor(
+  public constructor(
     private route: ActivatedRoute,
     private officeService: OfficeService,
     private fb: FormBuilder,
@@ -26,7 +26,7 @@ export class OfficeDetailsComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.officeId = this.route.snapshot.paramMap.get('id')!;
     this.officeService.getOfficeById(this.officeId).subscribe({
       next: (data) => {
@@ -42,7 +42,7 @@ export class OfficeDetailsComponent implements OnInit {
     });
   }
 
-  buildForm(data: OfficeDetails): void {
+  public buildForm(data: OfficeDetails): void {
     this.officeForm = this.fb.group({
       photoUrl: [data.photoUrl],
       city: [data.city, Validators.required],
@@ -57,12 +57,12 @@ export class OfficeDetailsComponent implements OnInit {
     });
   }
 
-  onEdit(): void {
+  public onEdit(): void {
     this.isEditing = true;
     this.officeForm.enable();
   }
 
-  onEditCancel(): void {
+  public onEditCancel(): void {
     const dialogRef = this.dialog.open(CancelConfirmDialogComponent);
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
@@ -75,11 +75,11 @@ export class OfficeDetailsComponent implements OnInit {
     });
   }
 
-  onViewCancel(): void {
+  public onViewCancel(): void {
     this.router.navigate(['/offices']);
   }
 
-  onSave(): void {
+  public onSave(): void {
     if (this.officeForm.invalid) return;
 
     const updated: OfficeDetails = {

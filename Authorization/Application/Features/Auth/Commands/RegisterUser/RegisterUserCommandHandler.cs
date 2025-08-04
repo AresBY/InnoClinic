@@ -1,16 +1,18 @@
-﻿using InnoClinic.Authorization.Domain.Common.Enums;
-using InnoClinic.Authorization.Application.DTOs;
+﻿using InnoClinic.Authorization.Application.DTOs;
 using InnoClinic.Authorization.Application.Exceptions;
 using InnoClinic.Authorization.Application.Interfaces;
 using InnoClinic.Authorization.Application.Interfaces.Repositories;
 using InnoClinic.Authorization.Application.Resources;
 using InnoClinic.Authorization.Domain.Entities;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
+
 using InnoClinicCommon.Enums;
 
-namespace InnoClinic.Authorization.Application.Features.Auth.Commands;
+using MediatR;
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+
+namespace InnoClinic.Authorization.Application.Features.Auth.Commands.RegisterUser;
 public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, UserDto>
 {
     private readonly IUserRepository _userRepository;
@@ -73,7 +75,8 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, U
             return new UserDto
             {
                 Id = addedPatientId,
-                Email = request.Email
+                Email = request.Email,
+                Role = request.Role
             };
         }
         catch (Exception ex)

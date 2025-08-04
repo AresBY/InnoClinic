@@ -1,10 +1,9 @@
 ﻿using MediatR;
 
-namespace InnoClinic.Offices.Application.Features.Office.Commands
+namespace InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice
 {
-    public sealed class UpdateCommand : IRequest<string>
+    public sealed class CreateOfficeCommand : IRequest<string>
     {
-        public string Id { get; set; } = default!;
         public string? PhotoUrl { get; set; }
         public string City { get; set; } = default!;
         public string Street { get; set; } = default!;
@@ -12,6 +11,5 @@ namespace InnoClinic.Offices.Application.Features.Office.Commands
         public string? OfficeNumber { get; set; }
         public string RegistryPhoneNumber { get; set; } = default!;
         public bool Status { get; set; } = true;
-        public DateTimeOffset CreatedAt { get; set; }
     }
 }

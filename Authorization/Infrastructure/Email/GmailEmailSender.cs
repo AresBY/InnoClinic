@@ -1,8 +1,10 @@
-﻿using InnoClinic.Authorization.Infrastructure.Email;
-using InnoClinic.Authorization.Application.Interfaces;
+﻿using InnoClinic.Authorization.Application.Interfaces;
+
 using MailKit.Net.Smtp;
 using MailKit.Security;
+
 using Microsoft.Extensions.Options;
+
 using MimeKit;
 
 namespace InnoClinic.Authorization.Infrastructure.Email;

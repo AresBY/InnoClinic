@@ -1,21 +1,20 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using InnoClinic.Offices.Application.Features.Office.Commands;
+
+using InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice;
 using InnoClinic.Offices.Infrastructure.Extensions;
+
 using InnoClinicCommon.JWT;
 using InnoClinicCommon.Middleware;
 using InnoClinicCommon.Swagger;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
-using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Application services
 builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(typeof(CreateCommand).Assembly)
+    cfg.RegisterServicesFromAssembly(typeof(CreateOfficeCommand).Assembly)
 );
-builder.Services.AddValidatorsFromAssembly(typeof(CreateCommandValidator).Assembly);
+builder.Services.AddValidatorsFromAssembly(typeof(CreateOfficeCommandValidator).Assembly);
 
 bool IsDevelopment = builder.Environment.IsEnvironment("Development");
 bool IsDocker = builder.Environment.IsEnvironment("Docker");

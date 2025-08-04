@@ -1,11 +1,10 @@
 ﻿using InnoClinic.Authorization.Application.Exceptions;
 using InnoClinic.Authorization.Application.Interfaces.Repositories;
 using InnoClinic.Authorization.Application.Resources;
-using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace InnoClinic.Authorization.Application.Features.Auth.Queries
+using MediatR;
+
+namespace InnoClinic.Authorization.Application.Features.Auth.Queries.CheckEmailExists
 {
     public class CheckEmailExistsQueryHandler : IRequestHandler<CheckEmailExistsQuery, bool>
     {

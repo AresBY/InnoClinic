@@ -1,6 +1,8 @@
-﻿using Swashbuckle.AspNetCore.Filters;
-using InnoClinic.Authorization.Application.Features.Auth.Commands;
+﻿using InnoClinic.Authorization.Application.Features.Auth.Commands.SignIn;
+
 using InnoClinicCommon.Enums;
+
+using Swashbuckle.AspNetCore.Filters;
 
 namespace Application.Features.Auth.Examples
 {

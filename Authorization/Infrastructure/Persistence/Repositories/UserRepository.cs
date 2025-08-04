@@ -1,5 +1,6 @@
 ﻿using InnoClinic.Authorization.Application.Interfaces.Repositories;
 using InnoClinic.Authorization.Domain.Entities;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace InnoClinic.Authorization.Infrastructure.Persistence.Repositories;

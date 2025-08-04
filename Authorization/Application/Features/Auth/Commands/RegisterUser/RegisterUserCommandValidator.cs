@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
+
 using InnoClinic.Authorization.Application.Resources;
 
-namespace InnoClinic.Authorization.Application.Features.Auth.Commands;
+namespace InnoClinic.Authorization.Application.Features.Auth.Commands.RegisterUser;
 
 public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
 {
@@ -13,8 +14,8 @@ public class RegisterUserCommandValidator : AbstractValidator<RegisterUserComman
 
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage(ValidationMessages.PasswordIsRequired)
-            .Length(6, 15).WithMessage(ValidationMessages.PasswordLengthInvalid); 
-   
+            .Length(6, 15).WithMessage(ValidationMessages.PasswordLengthInvalid);
+
         RuleFor(x => x.ReEnteredPassword)
             .NotEmpty().WithMessage(ValidationMessages.PasswordIsRequired)
             .Equal(x => x.Password).WithMessage(ValidationMessages.PasswordsDoNotMatch);

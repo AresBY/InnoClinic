@@ -1,7 +1,8 @@
 ﻿using InnoClinic.Authorization.Application.Interfaces.Repositories;
+
 using MediatR;
 
-namespace InnoClinic.Authorization.Application.Features.Auth.Commands
+namespace InnoClinic.Authorization.Application.Features.Auth.Commands.ConfirmEmail
 {
     public class ConfirmEmailCommandHandler : IRequestHandler<ConfirmEmailCommand, Unit>
     {

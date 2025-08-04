@@ -1,19 +1,15 @@
 ﻿using InnoClinic.Authorization.Application.DTOs;
-using InnoClinic.Authorization.Application.Features.Auth.Commands;
 using InnoClinic.Authorization.Application.Interfaces.Repositories;
 using InnoClinic.Authorization.Application.JWT;
 using InnoClinic.Authorization.Application.Resources;
 using InnoClinic.Authorization.Domain.Common.Enums;
 using InnoClinic.Authorization.Domain.Entities;
-using InnoClinicCommon.Enums;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Authentication;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace InnoClinic.Authorization.Application.Features.Auth.Commands;
+using MediatR;
+
+using Microsoft.AspNetCore.Identity;
+
+namespace InnoClinic.Authorization.Application.Features.Auth.Commands.SignIn;
 
 public class SignInCommandHandler : IRequestHandler<SignInCommand, SignInResultDto>
 {

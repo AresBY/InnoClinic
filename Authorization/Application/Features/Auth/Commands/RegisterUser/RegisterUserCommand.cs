@@ -1,9 +1,10 @@
-﻿using InnoClinic.Authorization.Domain.Common.Enums;
-using InnoClinic.Authorization.Application.DTOs;
-using MediatR;
+﻿using InnoClinic.Authorization.Application.DTOs;
+
 using InnoClinicCommon.Enums;
 
-namespace InnoClinic.Authorization.Application.Features.Auth.Commands;
+using MediatR;
+
+namespace InnoClinic.Authorization.Application.Features.Auth.Commands.RegisterUser;
 
 public class RegisterUserCommand : IRequest<UserDto>
 {

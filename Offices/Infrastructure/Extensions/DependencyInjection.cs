@@ -1,8 +1,10 @@
 ﻿using InnoClinic.Offices.Application.Interfaces.Repositories;
 using InnoClinic.Offices.Infrastructure.Persistence.Repositories;
-using Microsoft.Extensions.DependencyInjection;
-using MongoDB.Driver;
+
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+using MongoDB.Driver;
 
 namespace InnoClinic.Offices.Infrastructure.Extensions
 {

@@ -1,10 +1,10 @@
 ﻿using InnoClinic.Authorization.Application.DTOs;
 using InnoClinic.Authorization.Application.Extensions;
-using InnoClinic.Authorization.Application.Features.Auth.Queries;
 using InnoClinic.Authorization.Application.Interfaces.Repositories;
+
 using MediatR;
 
-namespace InnoClinic.Authorization.Application.Features.Auth.Queries;
+namespace InnoClinic.Authorization.Application.Features.Auth.Queries.GetAllUsers;
 
 public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, List<UserDto>>
 {

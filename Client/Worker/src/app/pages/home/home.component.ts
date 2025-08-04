@@ -10,21 +10,22 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  isAuthenticated = false;
+  public isAuthenticated = false;
   private sub!: Subscription;
 
-  constructor(
+  public constructor(
     private dialog: MatDialog,
     private authService: AuthService,
     private router: Router
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.sub = this.authService.isAuthenticated$.subscribe((auth) => {
       this.isAuthenticated = auth;
 
       if (!auth) {
         this.openSignInModal();
+        console.log('!');
       }
     });
   }
@@ -49,11 +50,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public goToOffices() {
-    console.log('goToOffices');
     this.router.navigate(['/offices']);
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.sub.unsubscribe();
   }
 }

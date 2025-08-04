@@ -1,9 +1,7 @@
-﻿using InnoClinic.Offices.Domain.Entities;
-using InnoClinic.Offices.Application.Interfaces.Repositories;
+﻿using InnoClinic.Offices.Application.Interfaces.Repositories;
+using InnoClinic.Offices.Domain.Entities;
+
 using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace InnoClinic.Offices.Infrastructure.Persistence.Repositories
 {

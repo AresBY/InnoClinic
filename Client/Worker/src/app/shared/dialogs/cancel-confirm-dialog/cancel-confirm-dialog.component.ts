@@ -6,13 +6,13 @@ import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dial
   templateUrl: './cancel-confirm-dialog.component.html'
 })
 export class CancelConfirmDialogComponent {
-  constructor(private dialogRef: MatDialogRef<CancelConfirmDialogComponent>) {}
+  public constructor(private dialogRef: MatDialogRef<CancelConfirmDialogComponent>) {}
 
-  onYes() {
+  public onYes() {
     this.dialogRef.close(true);
   }
 
-  onNo() {
+  public onNo() {
     this.dialogRef.close(false);
   }
 

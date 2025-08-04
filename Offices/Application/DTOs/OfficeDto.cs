@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace InnoClinic.Offices.Application.DTOs
+﻿namespace InnoClinic.Offices.Application.DTOs
 {
     public record OfficeDto
     {

@@ -1,20 +1,22 @@
 ﻿using InnoClinic.Offices.Application.Interfaces.Repositories;
-using InnoClinicCommon.Exception;
 using InnoClinic.Offices.Application.Mappings;
+
+using InnoClinicCommon.Exception;
+
 using MediatR;
 
-namespace InnoClinic.Offices.Application.Features.Office.Commands;
+namespace InnoClinic.Offices.Application.Features.Office.Commands.UpdateOffice;
 
-public class UpdateCommandHandler : IRequestHandler<UpdateCommand, string>
+public class UpdateOfficeCommandHandler : IRequestHandler<UpdateOfficeCommand, string>
 {
     private readonly IOfficeRepository _repository;
 
-    public UpdateCommandHandler(IOfficeRepository repository)
+    public UpdateOfficeCommandHandler(IOfficeRepository repository)
     {
         _repository = repository;
     }
 
-    public async Task<string> Handle(UpdateCommand request, CancellationToken cancellationToken)
+    public async Task<string> Handle(UpdateOfficeCommand request, CancellationToken cancellationToken)
     {
         var office = await _repository.GetByIdAsync(request.Id, cancellationToken);
         if (office == null)

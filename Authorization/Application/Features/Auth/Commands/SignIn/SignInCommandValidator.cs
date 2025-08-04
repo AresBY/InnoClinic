@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
+
 using InnoClinic.Authorization.Application.Resources;
 
-namespace InnoClinic.Authorization.Application.Features.Auth.Commands;
+namespace InnoClinic.Authorization.Application.Features.Auth.Commands.SignIn;
 public class SignInCommandValidator : AbstractValidator<SignInCommand>
 {
     public SignInCommandValidator()
