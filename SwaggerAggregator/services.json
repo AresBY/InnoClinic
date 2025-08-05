@@ -1,0 +1,20 @@
+[
+  {
+    "Key": "profile",
+    "Name": "Profile API",
+    "Port": 5181,
+    "Controllers": [ "Doctor"]
+  },
+  {
+    "Key": "office",
+    "Name": "Office API",
+    "Port": 5180,
+    "Controllers": [ "Office" ]
+  },
+  {
+    "Key": "auth",
+    "Name": "Auth API",
+    "Port": 5179,
+    "Controllers": [ "Auth" ]
+  }
+]

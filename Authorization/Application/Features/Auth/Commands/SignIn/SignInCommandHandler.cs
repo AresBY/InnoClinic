@@ -2,8 +2,9 @@
 using InnoClinic.Authorization.Application.Interfaces.Repositories;
 using InnoClinic.Authorization.Application.JWT;
 using InnoClinic.Authorization.Application.Resources;
-using InnoClinic.Authorization.Domain.Common.Enums;
 using InnoClinic.Authorization.Domain.Entities;
+
+using InnoClinicCommon.Enums;
 
 using MediatR;
 
@@ -38,12 +39,12 @@ public class SignInCommandHandler : IRequestHandler<SignInCommand, SignInResultD
         {
             var allowedStatuses = new[]
             {
-                Status.AtWork,
-                Status.OnVacation,
-                Status.SickDay,
-                Status.SickLeave,
-                Status.SelfIsolation,
-                Status.LeaveWithoutPay
+                DoctorStatus.AtWork,
+                DoctorStatus.OnVacation,
+                DoctorStatus.SickDay,
+                DoctorStatus.SickLeave,
+                DoctorStatus.SelfIsolation,
+                DoctorStatus.LeaveWithoutPay
             };
 
             if (!allowedStatuses.Contains(doctor.WorkerStatus))

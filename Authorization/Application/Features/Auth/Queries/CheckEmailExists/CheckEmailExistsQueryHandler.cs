@@ -1,6 +1,7 @@
-﻿using InnoClinic.Authorization.Application.Exceptions;
-using InnoClinic.Authorization.Application.Interfaces.Repositories;
+﻿using InnoClinic.Authorization.Application.Interfaces.Repositories;
 using InnoClinic.Authorization.Application.Resources;
+
+using InnoClinicCommon.Exception;
 
 using MediatR;
 
