@@ -6,18 +6,18 @@ using InnoClinicCommon.Exception;
 
 using MediatR;
 
-namespace InnoClinic.Profiles.Application.Features.Doctor.Queries.GetPatientProfile
+namespace InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByOwn
 {
-    public class GetPatientProfileQueryHandler : IRequestHandler<GetPatientProfileQuery, PatientProfileDto>
+    public class GetPatientProfileByOwnHandler : IRequestHandler<GetPatientProfileByOwnQuery, PatientProfileDto>
     {
         private readonly IPatientRepository _repository;
 
-        public GetPatientProfileQueryHandler(IPatientRepository repository)
+        public GetPatientProfileByOwnHandler(IPatientRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<PatientProfileDto> Handle(GetPatientProfileQuery request, CancellationToken cancellationToken)
+        public async Task<PatientProfileDto> Handle(GetPatientProfileByOwnQuery request, CancellationToken cancellationToken)
         {
             var profile = await _repository.GetPatientProfileByOwnerIdAsync(request.OwnerId, cancellationToken);
 

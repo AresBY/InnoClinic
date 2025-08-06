@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/Doctor/{everything}",
+      "DownstreamPathTemplate": "/api/DoctorProfile/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,7 +9,7 @@
           "Port": 5181
         }
       ],
-      "UpstreamPathTemplate": "/api/Doctor/{everything}",
+      "UpstreamPathTemplate": "/api/DoctorProfile/{everything}",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
@@ -19,7 +19,7 @@
       ]
     },
     {
-      "DownstreamPathTemplate": "/api/Patient/{everything}",
+      "DownstreamPathTemplate": "/api/PatientProfile/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -27,7 +27,7 @@
           "Port": 5181
         }
       ],
-      "UpstreamPathTemplate": "/api/Patient/{everything}",
+      "UpstreamPathTemplate": "/api/PatientProfile/{everything}",
       "UpstreamHttpMethod": [
         "GET",
         "POST",

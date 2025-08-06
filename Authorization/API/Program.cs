@@ -145,6 +145,15 @@ using (var scope = app.Services.CreateScope())
         patient.PasswordHash = passwordHasher.HashPassword(patient, "Patient");
         dbContext.Users.Add(patient);
 
+        var doctor = new Doctor
+        {
+            Email = "Doctor@mail.ru",
+            Role = UserRole.Doctor
+        };
+
+        doctor.PasswordHash = passwordHasher.HashPassword(doctor, "Doctor");
+        dbContext.Users.Add(doctor);
+
         dbContext.SaveChanges();
     }
 }

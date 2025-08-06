@@ -1,7 +1,7 @@
 ﻿using InnoClinic.Offices.Application.DTOs;
 using InnoClinic.Profiles.Application.DTOs;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
-using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreatePatientProfile;
+using InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfile;
 using InnoClinic.Profiles.Domain.Entities;
 
 namespace InnoClinic.Profiles.Application.Mappings

@@ -3,7 +3,7 @@ using InnoClinic.Profiles.Application.Mappings;
 
 using MediatR;
 
-namespace InnoClinic.Profiles.Application.Features.Doctor.Commands.CreatePatientProfile
+namespace InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfile
 {
     public sealed class CreatePatientProfileCommandHandler : IRequestHandler<CreatePatientProfileCommand, Guid>
     {

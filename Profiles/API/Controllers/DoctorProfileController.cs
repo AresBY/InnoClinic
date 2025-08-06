@@ -1,6 +1,6 @@
 ﻿using InnoClinic.Offices.Application.DTOs;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
-using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetAllDoctors;
+using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll;
 
 using InnoClinicCommon.Enums;
 
@@ -17,11 +17,11 @@ namespace InnoClinic.Profiles.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class DoctorController : ControllerBase
+    public class DoctorProfileController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public DoctorController(IMediator mediator)
+        public DoctorProfileController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -45,10 +45,10 @@ namespace InnoClinic.Profiles.API.Controllers
         /// </summary>
         /// <param name="cancellationToken">Token to cancel the operation.</param>
         /// <returns>A list of <see cref="DoctorProfileDto"/> objects.</returns>
-        [HttpGet(nameof(GetAllDoctors))]
-        public async Task<ActionResult<List<DoctorProfileDto>>> GetAllDoctors(CancellationToken cancellationToken)
+        [HttpGet(nameof(GetDoctorsAll))]
+        public async Task<ActionResult<List<DoctorProfileDto>>> GetDoctorsAll(CancellationToken cancellationToken)
         {
-            var doctors = await _mediator.Send(new GetAllDoctorsQuery(), cancellationToken);
+            var doctors = await _mediator.Send(new GetDoctorsAllQuery(), cancellationToken);
             return Ok(doctors);
         }
     }

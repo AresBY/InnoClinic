@@ -1,9 +1,9 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 
-using InnoClinic.Offices.Application.Features.Doctor.Commands.Examples;
 using InnoClinic.Offices.Infrastructure.Persistence.Repositories;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
+using InnoClinic.Profiles.Application.Features.Doctor.Examples;
 using InnoClinic.Profiles.Application.Interfaces.Repositories;
 using InnoClinic.Profiles.Infrastructure.Persistence.Repositories;
 
