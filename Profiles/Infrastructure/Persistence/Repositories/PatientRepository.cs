@@ -26,5 +26,12 @@ namespace InnoClinic.Profiles.Infrastructure.Persistence.Repositories
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
+
+        public async Task<PatientProfile?> GetPatientProfileByOwnerIdAsync(Guid ownerId, CancellationToken cancellationToken)
+        {
+            return await _context.Patients
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.OwnerId == ownerId, cancellationToken);
+        }
     }
 }

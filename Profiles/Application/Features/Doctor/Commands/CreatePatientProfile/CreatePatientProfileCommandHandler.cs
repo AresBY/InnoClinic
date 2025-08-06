@@ -1,5 +1,5 @@
 ﻿using InnoClinic.Profiles.Application.Interfaces.Repositories;
-using InnoClinic.Profiles.Domain.Entities;
+using InnoClinic.Profiles.Application.Mappings;
 
 using MediatR;
 
@@ -16,16 +16,7 @@ namespace InnoClinic.Profiles.Application.Features.Doctor.Commands.CreatePatient
 
         public async Task<Guid> Handle(CreatePatientProfileCommand request, CancellationToken cancellationToken)
         {
-            var newProfile = new PatientProfile
-            {
-                Id = Guid.NewGuid(),
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                MiddleName = request.MiddleName,
-                PhoneNumber = request.PhoneNumber,
-                DateOfBirth = request.DateOfBirth.ToDateTime(TimeOnly.MinValue),
-                IsLinkedToAccount = true
-            };
+            var newProfile = request.ToEntity();
 
             var newProfileId = await _patientRepository.AddAsync(newProfile, cancellationToken);
 

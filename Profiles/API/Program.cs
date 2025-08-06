@@ -44,7 +44,6 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSet
 JwtServiceExtensions.AddJwtAuthentication(builder.Services, builder.Configuration);
 
 // --- MediatR & FluentValidation ---
-// Замените на свой Command из Profiles
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateDoctorProfileCommand).Assembly)
 );
@@ -53,10 +52,6 @@ builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
-
-// --- Infrastructure ---
-// Если ты создашь метод AddInfrastructure в Profiles.Infrastructure
-// builder.Services.AddInfrastructure(builder.Configuration);
 
 // --- Controllers ---
 builder.Services.AddControllers()

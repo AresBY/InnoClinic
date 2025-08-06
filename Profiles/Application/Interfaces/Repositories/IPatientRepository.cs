@@ -7,5 +7,7 @@ namespace InnoClinic.Profiles.Application.Interfaces.Repositories
         Task<Guid> AddAsync(PatientProfile profile, CancellationToken cancellationToken);
 
         Task<List<PatientProfile>> GetAllPatientsAsync(CancellationToken cancellationToken);
+
+        Task<PatientProfile?> GetPatientProfileByOwnerIdAsync(Guid ownerId, CancellationToken cancellationToken);
     }
 }

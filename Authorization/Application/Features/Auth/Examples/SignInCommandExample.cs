@@ -12,12 +12,12 @@ namespace Application.Features.Auth.Examples
         {
             return new SignInCommand
             {
-                //Email = "Admin@example.com",
-                //Password = "adminadmin",
-                //Role = UserRole.Admin
-                Email = "free21@mail.ru",
-                Password = "free21",
-                Role = UserRole.Receptionist
+                //Email = "Receptionist@mail.ru",
+                //Password = "Receptionist",
+                //Role = UserRole.Receptionist
+                Email = "Patient@mail.ru",
+                Password = "Patient",
+                Role = UserRole.Patient
             };
         }
     }
