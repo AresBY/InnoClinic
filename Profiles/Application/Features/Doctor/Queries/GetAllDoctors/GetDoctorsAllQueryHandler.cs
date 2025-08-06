@@ -18,7 +18,7 @@ namespace InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll
         public async Task<List<DoctorProfileDto>> Handle(GetDoctorsAllQuery request, CancellationToken cancellationToken)
         {
 
-            var doctors = await _repository.GetAllDoctorsAsync(cancellationToken);
+            var doctors = await _repository.GetDoctorsAllAsync(cancellationToken);
 
             var result = doctors.Select(d => d.ToDto()).ToList();
 

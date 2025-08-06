@@ -85,18 +85,7 @@ var app = builder.Build();
 
 //using (var scope = app.Services.CreateScope())
 //{
-//    var dbContext = scope.ServiceProvider.GetRequiredService<ProfileDbContext>();
-
-//    bool deleted = await dbContext.Database.EnsureDeletedAsync();
-
-//    if (deleted)
-//    {
-//        Console.WriteLine("Database was deleted successfully.");
-//    }
-//    else
-//    {
-//        Console.WriteLine("Database does not exist or could not be deleted.");
-//    }
+//    await scope.ServiceProvider.GetRequiredService<ProfileDbContext>().Database.EnsureDeletedAsync();
 //}
 
 // --- Middleware ---
@@ -107,6 +96,25 @@ using (var scope = app.Services.CreateScope())
     var dbContext = scope.ServiceProvider.GetRequiredService<ProfileDbContext>();
 
     dbContext.Database.Migrate();
+    //if (!dbContext.Doctors.Any())
+    //{
+    //    var doctor = new DoctorProfile
+    //    {
+    //        OwnerId = new Guid("be0d5f6b-cc85-4477-96cc-28d37a4a3cc1"),
+    //        FirstName = "John",
+    //        LastName = "Doe",
+    //        MiddleName = "Michael",
+    //        Email = "johndoe@example.com",
+    //        DateOfBirth = new DateTimeOffset(new DateTime(1985, 4, 23)),
+    //        Specialization = DoctorSpecialization.Pediatrician,
+    //        OfficeId = Guid.NewGuid(),
+    //        CareerStartYear = 2010,
+    //    };
+
+    //    dbContext.Doctors.Add(doctor);
+
+    //    dbContext.SaveChanges();
+    //}
 }
 
 if (IsDevelopment || IsDocker)

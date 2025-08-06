@@ -19,7 +19,7 @@ namespace InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientPro
 
         public async Task<PatientProfileDto> Handle(GetPatientProfileByOwnQuery request, CancellationToken cancellationToken)
         {
-            var profile = await _repository.GetPatientProfileByOwnerIdAsync(request.OwnerId, cancellationToken);
+            var profile = await _repository.GetPatientProfileByUserIdAsync(request.OwnerId, cancellationToken);
 
             if (profile is null)
                 throw new NotFoundException($"Profile with OwnerId {request.OwnerId} not found.");

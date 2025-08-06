@@ -1,5 +1,8 @@
-﻿using InnoClinic.Offices.Application.DTOs;
+﻿using System.Security.Claims;
+
+using InnoClinic.Offices.Application.DTOs;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
+using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll;
 
 using InnoClinicCommon.Enums;
@@ -50,6 +53,28 @@ namespace InnoClinic.Profiles.API.Controllers
         {
             var doctors = await _mediator.Send(new GetDoctorsAllQuery(), cancellationToken);
             return Ok(doctors);
+        }
+
+        /// <summary>
+        /// Retrieves detailed information about the specified doctor.
+        /// </summary>
+        /// <param name="id">The ID of the doctor.</param>
+        /// <returns>Detailed information about the doctor.</returns>
+        /// <response code="200">Returns the doctor's profile data</response>
+        /// <response code="404">If the doctor is not found</response>
+        [HttpGet(nameof(GetDoctorProfileByOwn))]
+        public async Task<IActionResult> GetDoctorProfileByOwn()
+        {
+            var doctorId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(doctorId))
+            {
+                return Unauthorized("User ID is missing from the token.");
+            }
+
+            var query = new GetDoctorProfileByOwnQuery(Guid.Parse(doctorId));
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
     }
 }
