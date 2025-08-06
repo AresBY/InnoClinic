@@ -127,15 +127,24 @@ using (var scope = app.Services.CreateScope())
 
     if (!dbContext.Users.Any())
     {
-        var admin = new Admin
+        var receptionist = new Receptionist
         {
-            Email = "admin@example.com",
-            Role = UserRole.Admin
+            Email = "Receptionist@mail.ru",
+            Role = UserRole.Receptionist
         };
 
-        admin.PasswordHash = passwordHasher.HashPassword(admin, "adminadmin");
+        receptionist.PasswordHash = passwordHasher.HashPassword(receptionist, "Receptionist");
+        dbContext.Users.Add(receptionist);
 
-        dbContext.Users.Add(admin);
+        var patient = new Patient
+        {
+            Email = "Patient@mail.ru",
+            Role = UserRole.Patient
+        };
+
+        patient.PasswordHash = passwordHasher.HashPassword(patient, "Patient");
+        dbContext.Users.Add(patient);
+
         dbContext.SaveChanges();
     }
 }

@@ -66,5 +66,20 @@ namespace InnoClinic.Profiles.Application.Mappings
                 IsLinkedToAccount = true
             };
         }
+
+        public static PatientProfile ToEntity(this CreatePatientProfileCommand request)
+        {
+            return new PatientProfile
+            {
+                Id = Guid.NewGuid(),
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                MiddleName = request.MiddleName,
+                PhoneNumber = request.PhoneNumber,
+                DateOfBirth = request.DateOfBirth.ToDateTime(TimeOnly.MinValue),
+                OwnerId = request.OwnerId,
+                IsLinkedToAccount = true
+            };
+        }
     }
 }

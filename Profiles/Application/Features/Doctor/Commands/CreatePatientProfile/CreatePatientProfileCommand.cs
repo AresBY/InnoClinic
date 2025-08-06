@@ -9,5 +9,6 @@ namespace InnoClinic.Profiles.Application.Features.Doctor.Commands.CreatePatient
         public string? MiddleName { get; set; }
         public string PhoneNumber { get; set; } = default!;
         public DateOnly DateOfBirth { get; set; }
+        public Guid OwnerId { get; set; }
     }
 }

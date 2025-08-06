@@ -19,7 +19,7 @@ namespace InnoClinic.Authorization.Infrastructure.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            // Конфигурация TPH (Table per Hierarchy)
+            //Table per Hierarchy
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(u => u.Id);
