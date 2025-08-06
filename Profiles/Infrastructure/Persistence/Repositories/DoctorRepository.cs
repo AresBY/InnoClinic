@@ -18,7 +18,7 @@ namespace InnoClinic.Offices.Infrastructure.Persistence.Repositories
         {
             await _context.Doctors.AddAsync(profile, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
-            return profile.ID;
+            return profile.Id;
         }
 
         public async Task<List<DoctorProfile>> GetAllDoctorsAsync(CancellationToken cancellationToken)

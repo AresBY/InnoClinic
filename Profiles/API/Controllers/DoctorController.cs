@@ -1,6 +1,6 @@
 ﻿using InnoClinic.Offices.Application.DTOs;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
-using InnoClinic.Profiles.Application.Features.Doctor.Queries;
+using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetAllDoctors;
 
 using InnoClinicCommon.Enums;
 
@@ -40,6 +40,11 @@ namespace InnoClinic.Profiles.API.Controllers
             return CreatedAtAction(nameof(CreateDoctorProfile), new { id = result }, result);
         }
 
+        /// <summary>
+        /// Retrieves a list of all doctor profiles.
+        /// </summary>
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        /// <returns>A list of <see cref="DoctorProfileDto"/> objects.</returns>
         [HttpGet(nameof(GetAllDoctors))]
         public async Task<ActionResult<List<DoctorProfileDto>>> GetAllDoctors(CancellationToken cancellationToken)
         {

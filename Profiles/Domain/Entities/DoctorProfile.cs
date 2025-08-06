@@ -1,10 +1,12 @@
-﻿using InnoClinicCommon.Enums;
+﻿using InnoClinic.Offices.Domain.Enums;
+
+using InnoClinicCommon.Enums;
 
 namespace InnoClinic.Profiles.Domain.Entities;
 
-public class DoctorProfile : UserBaseProfile
+public sealed class DoctorProfile : UserBaseProfile
 {
-    public string Specialization { get; set; } = null!;
+    public DoctorSpecialization Specialization { get; set; } = DoctorSpecialization.None;
     public Guid OfficeId { get; set; }
     public int CareerStartYear { get; set; }
     public DoctorStatus Status { get; set; }

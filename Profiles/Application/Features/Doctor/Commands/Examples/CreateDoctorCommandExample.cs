@@ -1,4 +1,5 @@
-﻿using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
+﻿using InnoClinic.Offices.Domain.Enums;
+using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
 
 using InnoClinicCommon.Enums;
 
@@ -17,7 +18,7 @@ namespace InnoClinic.Offices.Application.Features.Doctor.Commands.Examples
                 MiddleName = "Sergeevna",
                 DateOfBirth = new DateTime(1980, 5, 10),
                 Email = "anna.petrova@clinic.com",
-                Specialization = "Therapist",
+                Specialization = DoctorSpecialization.Pediatrician,
                 OfficeId = Guid.Parse("11111111-1111-1111-1111-111111111111"),
                 CareerStartYear = 2005,
                 Status = DoctorStatus.AtWork
