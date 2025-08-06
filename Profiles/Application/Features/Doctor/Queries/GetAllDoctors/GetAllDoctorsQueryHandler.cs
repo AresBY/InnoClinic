@@ -4,7 +4,7 @@ using InnoClinic.Profiles.Application.Mappings;
 
 using MediatR;
 
-namespace InnoClinic.Profiles.Application.Features.Doctor.Queries
+namespace InnoClinic.Profiles.Application.Features.Doctor.Queries.GetAllDoctors
 {
     public class GetAllDoctorsQueryHandler : IRequestHandler<GetAllDoctorsQuery, List<DoctorProfileDto>>
     {

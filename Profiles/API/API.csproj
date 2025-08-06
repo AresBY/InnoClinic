@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	<RootNamespace>InnoClinic.Offices.API</RootNamespace>
+	<RootNamespace>InnoClinic.Profiles.API</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

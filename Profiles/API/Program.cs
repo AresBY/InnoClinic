@@ -5,6 +5,7 @@ using InnoClinic.Offices.Application.Features.Doctor.Commands.Examples;
 using InnoClinic.Offices.Infrastructure.Persistence.Repositories;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
 using InnoClinic.Profiles.Application.Interfaces.Repositories;
+using InnoClinic.Profiles.Infrastructure.Persistence.Repositories;
 
 using InnoClinicCommon.JWT;
 using InnoClinicCommon.Middleware;
@@ -51,6 +52,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(CreateDoctorProfileCommand).As
 builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 
 // --- Infrastructure ---
 // Если ты создашь метод AddInfrastructure в Profiles.Infrastructure
@@ -84,6 +86,23 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var dbContext = scope.ServiceProvider.GetRequiredService<ProfileDbContext>();
+
+//    bool deleted = await dbContext.Database.EnsureDeletedAsync();
+
+//    if (deleted)
+//    {
+//        Console.WriteLine("Database was deleted successfully.");
+//    }
+//    else
+//    {
+//        Console.WriteLine("Database does not exist or could not be deleted.");
+//    }
+//}
 
 // --- Middleware ---
 app.UseMiddleware<ExceptionHandlingMiddleware>();

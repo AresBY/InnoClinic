@@ -1,41 +1,70 @@
 ﻿using InnoClinic.Offices.Application.DTOs;
+using InnoClinic.Profiles.Application.DTOs;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
+using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreatePatientProfile;
 using InnoClinic.Profiles.Domain.Entities;
 
-namespace InnoClinic.Profiles.Application.Mappings;
-
-public static class ProfileMappingExtensions
+namespace InnoClinic.Profiles.Application.Mappings
 {
-    public static DoctorProfile ToDoctorProfileEntity(this CreateDoctorProfileCommand request)
+    public static class ProfileMappingExtensions
     {
-        return new DoctorProfile
+        public static DoctorProfile ToDoctorProfileEntity(this CreateDoctorProfileCommand request)
         {
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            MiddleName = request.MiddleName,
-            DateOfBirth = request.DateOfBirth,
-            Email = request.Email,
-            Specialization = request.Specialization,
-            OfficeId = request.OfficeId,
-            CareerStartYear = request.CareerStartYear,
-            Status = request.Status
-        };
-    }
+            return new DoctorProfile
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                MiddleName = request.MiddleName,
+                DateOfBirth = request.DateOfBirth,
+                Email = request.Email,
+                Specialization = request.Specialization,
+                OfficeId = request.OfficeId,
+                CareerStartYear = request.CareerStartYear,
+                Status = request.Status
+            };
+        }
 
-    public static DoctorProfileDto ToDto(this DoctorProfile entity)
-    {
-        return new DoctorProfileDto
+        public static DoctorProfileDto ToDto(this DoctorProfile entity)
         {
-            Id = entity.ID,
-            FirstName = entity.FirstName,
-            LastName = entity.LastName,
-            MiddleName = entity.MiddleName,
-            DateOfBirth = entity.DateOfBirth,
-            Email = entity.Email,
-            Specialization = entity.Specialization,
-            OfficeId = entity.OfficeId,
-            CareerStartYear = entity.CareerStartYear,
-            Status = entity.Status
-        };
+            return new DoctorProfileDto
+            {
+                Id = entity.Id,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                MiddleName = entity.MiddleName,
+                DateOfBirth = entity.DateOfBirth,
+                Email = entity.Email,
+                Specialization = entity.Specialization,
+                OfficeId = entity.OfficeId,
+                CareerStartYear = entity.CareerStartYear,
+                Status = entity.Status
+            };
+        }
+
+        public static PatientProfileDto ToDto(this PatientProfile entity)
+        {
+            return new PatientProfileDto
+            {
+                Id = entity.Id,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                MiddleName = entity.MiddleName,
+                PhoneNumber = entity.PhoneNumber,
+                DateOfBirth = entity.DateOfBirth
+            };
+        }
+
+        public static PatientProfile ToPatientProfileEntity(this CreatePatientProfileCommand request)
+        {
+            return new PatientProfile
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                MiddleName = request.MiddleName,
+                PhoneNumber = request.PhoneNumber,
+                DateOfBirth = request.DateOfBirth.ToDateTime(TimeOnly.MinValue),
+                IsLinkedToAccount = true
+            };
+        }
     }
 }
