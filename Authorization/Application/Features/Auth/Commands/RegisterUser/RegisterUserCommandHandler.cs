@@ -1,11 +1,11 @@
 ﻿using InnoClinic.Authorization.Application.DTOs;
-using InnoClinic.Authorization.Application.Exceptions;
 using InnoClinic.Authorization.Application.Interfaces;
 using InnoClinic.Authorization.Application.Interfaces.Repositories;
 using InnoClinic.Authorization.Application.Resources;
 using InnoClinic.Authorization.Domain.Entities;
 
 using InnoClinicCommon.Enums;
+using InnoClinicCommon.Exception;
 
 using MediatR;
 
