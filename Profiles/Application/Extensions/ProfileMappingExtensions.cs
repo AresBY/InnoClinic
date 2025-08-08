@@ -20,7 +20,8 @@ namespace InnoClinic.Profiles.Application.Mappings
                 Specialization = request.Specialization,
                 OfficeId = request.OfficeId,
                 CareerStartYear = request.CareerStartYear,
-                Status = request.Status
+                Status = request.Status,
+                OwnerId = request.OwnerId
             };
         }
 
@@ -37,7 +38,8 @@ namespace InnoClinic.Profiles.Application.Mappings
                 Specialization = entity.Specialization,
                 OfficeId = entity.OfficeId,
                 CareerStartYear = entity.CareerStartYear,
-                Status = entity.Status
+                Status = entity.Status,
+                OwnerId = entity.OwnerId
             };
         }
 

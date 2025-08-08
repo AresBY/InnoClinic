@@ -50,8 +50,8 @@ builder.Services.AddMediatR(cfg =>
 builder.Services.AddValidatorsFromAssembly(typeof(CreateDoctorProfileCommand).Assembly);
 builder.Services.AddFluentValidationAutoValidation();
 
-builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
-builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IDoctorProfileRepository, DoctorProfileRepository>();
+builder.Services.AddScoped<IPatientProfileRepository, PatientProfileRepository>();
 
 // --- Controllers ---
 builder.Services.AddControllers()

@@ -32,6 +32,9 @@ namespace InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorP
 
             RuleFor(x => x.Status)
                 .IsInEnum().WithMessage("Invalid status value");
+
+            RuleFor(x => x.OwnerId)
+               .NotEmpty().WithMessage("Please, enter the DoctorId");
         }
     }
 }

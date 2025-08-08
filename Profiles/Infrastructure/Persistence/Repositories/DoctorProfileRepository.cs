@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InnoClinic.Offices.Infrastructure.Persistence.Repositories
 {
-    public class DoctorRepository : IDoctorRepository
+    public class DoctorProfileRepository : IDoctorProfileRepository
     {
         private readonly ProfileDbContext _context;
 
-        public DoctorRepository(ProfileDbContext context)
+        public DoctorProfileRepository(ProfileDbContext context)
         {
             _context = context;
         }
@@ -33,6 +33,15 @@ namespace InnoClinic.Offices.Infrastructure.Persistence.Repositories
             return await _context.Doctors
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.OwnerId == ownerId, cancellationToken);
+        }
+
+        public async Task<Guid> UpdateAsync(DoctorProfile existingProfile, CancellationToken cancellationToken)
+        {
+            _context.Doctors.Update(existingProfile);
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return existingProfile.Id;
         }
     }
 }

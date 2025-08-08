@@ -12,9 +12,9 @@ namespace InnoClinic.Profiles.Application.Features.Doctor.Queries;
 /// </summary>
 public sealed class GetDoctorProfileByOwnQueryHandler : IRequestHandler<GetDoctorProfileByOwnQuery, DoctorProfileDto>
 {
-    private readonly IDoctorRepository _doctorRepository;
+    private readonly IDoctorProfileRepository _doctorRepository;
 
-    public GetDoctorProfileByOwnQueryHandler(IDoctorRepository doctorRepository)
+    public GetDoctorProfileByOwnQueryHandler(IDoctorProfileRepository doctorRepository)
     {
         _doctorRepository = doctorRepository;
     }

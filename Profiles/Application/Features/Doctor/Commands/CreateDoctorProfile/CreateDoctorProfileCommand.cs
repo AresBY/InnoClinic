@@ -22,5 +22,7 @@ namespace InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorP
         public int CareerStartYear { get; set; }
 
         public DoctorStatus Status { get; set; }
+
+        public Guid OwnerId { get; set; }
     }
 }

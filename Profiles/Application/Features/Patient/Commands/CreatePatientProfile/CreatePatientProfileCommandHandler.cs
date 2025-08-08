@@ -7,9 +7,9 @@ namespace InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatien
 {
     public sealed class CreatePatientProfileCommandHandler : IRequestHandler<CreatePatientProfileCommand, Guid>
     {
-        private readonly IPatientRepository _patientRepository;
+        private readonly IPatientProfileRepository _patientRepository;
 
-        public CreatePatientProfileCommandHandler(IPatientRepository patientRepository)
+        public CreatePatientProfileCommandHandler(IPatientProfileRepository patientRepository)
         {
             _patientRepository = patientRepository;
         }
