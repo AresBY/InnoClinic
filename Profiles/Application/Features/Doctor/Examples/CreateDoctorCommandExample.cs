@@ -5,7 +5,7 @@ using InnoClinicCommon.Enums;
 
 using Swashbuckle.AspNetCore.Filters;
 
-namespace InnoClinic.Offices.Application.Features.Doctor.Commands.Examples
+namespace InnoClinic.Profiles.Application.Features.Doctor.Examples
 {
     public class CreateDoctorCommandExample : IExamplesProvider<CreateDoctorProfileCommand>
     {

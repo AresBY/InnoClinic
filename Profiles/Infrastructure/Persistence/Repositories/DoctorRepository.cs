@@ -21,11 +21,18 @@ namespace InnoClinic.Offices.Infrastructure.Persistence.Repositories
             return profile.Id;
         }
 
-        public async Task<List<DoctorProfile>> GetAllDoctorsAsync(CancellationToken cancellationToken)
+        public async Task<List<DoctorProfile>> GetDoctorsAllAsync(CancellationToken cancellationToken)
         {
             return await _context.Doctors
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
+        }
+
+        public async Task<DoctorProfile?> GetDoctorProfileByUserIdAsync(Guid ownerId, CancellationToken cancellationToken)
+        {
+            return await _context.Doctors
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.OwnerId == ownerId, cancellationToken);
         }
     }
 }

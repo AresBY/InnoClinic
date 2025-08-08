@@ -1,8 +1,8 @@
-﻿using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreatePatientProfile;
+﻿using InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfile;
 
 using Swashbuckle.AspNetCore.Filters;
 
-namespace InnoClinic.Profiles.Application.Features.Patient.Commands.Examples
+namespace InnoClinic.Profiles.Application.Features.Patient.Examples
 {
     public class CreatePatientProfileCommandExample : IExamplesProvider<CreatePatientProfileCommand>
     {

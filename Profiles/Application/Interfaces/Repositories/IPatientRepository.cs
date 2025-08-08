@@ -8,6 +8,6 @@ namespace InnoClinic.Profiles.Application.Interfaces.Repositories
 
         Task<List<PatientProfile>> GetAllPatientsAsync(CancellationToken cancellationToken);
 
-        Task<PatientProfile?> GetPatientProfileByOwnerIdAsync(Guid ownerId, CancellationToken cancellationToken);
+        Task<PatientProfile?> GetPatientProfileByUserIdAsync(Guid ownerId, CancellationToken cancellationToken);
     }
 }

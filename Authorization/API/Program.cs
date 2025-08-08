@@ -102,18 +102,7 @@ var app = builder.Build();
 
 //using (var scope = app.Services.CreateScope())
 //{
-//    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-//    bool deleted = await dbContext.Database.EnsureDeletedAsync();
-
-//    if (deleted)
-//    {
-//        Console.WriteLine("Database was deleted successfully.");
-//    }
-//    else
-//    {
-//        Console.WriteLine("Database does not exist or could not be deleted.");
-//    }
+//    await scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureDeletedAsync();
 //}
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
@@ -144,6 +133,15 @@ using (var scope = app.Services.CreateScope())
 
         patient.PasswordHash = passwordHasher.HashPassword(patient, "Patient");
         dbContext.Users.Add(patient);
+
+        var doctor = new Doctor
+        {
+            Email = "Doctor@mail.ru",
+            Role = UserRole.Doctor
+        };
+
+        doctor.PasswordHash = passwordHasher.HashPassword(doctor, "Doctor");
+        dbContext.Users.Add(doctor);
 
         dbContext.SaveChanges();
     }

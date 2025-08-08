@@ -1,9 +1,10 @@
 ﻿using System.Security.Claims;
 
 using InnoClinic.Profiles.Application.DTOs;
-using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreatePatientProfile;
-using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetAllPatients;
-using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetPatientProfile;
+using InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfile;
+using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByDoctor;
+using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByOwn;
+using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientsProfilesAll;
 
 using InnoClinicCommon.Enums;
 
@@ -20,11 +21,11 @@ namespace InnoClinic.Profiles.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class PatientController : ControllerBase
+    public class PatientProfileController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public PatientController(IMediator mediator)
+        public PatientProfileController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -59,10 +60,10 @@ namespace InnoClinic.Profiles.API.Controllers
         /// </summary>
         /// <param name="cancellationToken">Cancellation token for the request.</param>
         /// <returns>A list of patient profile DTOs.</returns>
-        [HttpGet(nameof(GetAllPatients))]
-        public async Task<ActionResult<List<PatientProfileDto>>> GetAllPatients(CancellationToken cancellationToken)
+        [HttpGet(nameof(GetPatientsProfilesAll))]
+        public async Task<ActionResult<List<PatientProfileDto>>> GetPatientsProfilesAll(CancellationToken cancellationToken)
         {
-            var patients = await _mediator.Send(new GetAllPatientsQuery(), cancellationToken);
+            var patients = await _mediator.Send(new GetPatientsProfilesAllQuery(), cancellationToken);
             return Ok(patients);
         }
 
@@ -70,9 +71,9 @@ namespace InnoClinic.Profiles.API.Controllers
         /// Returns the authenticated patient's profile.
         /// </summary>
         /// <returns>Patient profile data</returns>
-        [HttpGet(nameof(GetPatientProfile))]
+        [HttpGet(nameof(GetPatientProfileByOwn))]
         [Authorize(Roles = nameof(UserRole.Patient))]
-        public async Task<IActionResult> GetPatientProfile()
+        public async Task<IActionResult> GetPatientProfileByOwn()
         {
             var patientId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -81,7 +82,21 @@ namespace InnoClinic.Profiles.API.Controllers
                 return Unauthorized("User ID is missing from the token.");
             }
 
-            var query = new GetPatientProfileQuery(Guid.Parse(patientId));
+            var query = new GetPatientProfileByOwnQuery(Guid.Parse(patientId));
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Returns the profile of the specified patient (viewed by a doctor).
+        /// </summary>
+        /// <param name="patientId">The ID of the patient whose profile is being requested</param>
+        /// <returns>Patient profile data</returns>
+        [HttpGet(nameof(GetPatientProfileByDoctor) + "/{patientId:guid}")]
+        [Authorize(Roles = nameof(UserRole.Doctor))]
+        public async Task<IActionResult> GetPatientProfileByDoctor(Guid patientId)
+        {
+            var query = new GetPatientProfileByDoctorQuery(patientId);
             var result = await _mediator.Send(query);
             return Ok(result);
         }

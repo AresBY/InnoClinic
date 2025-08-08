@@ -15,9 +15,14 @@ namespace Application.Features.Auth.Examples
                 //Email = "Receptionist@mail.ru",
                 //Password = "Receptionist",
                 //Role = UserRole.Receptionist
-                Email = "Patient@mail.ru",
-                Password = "Patient",
-                Role = UserRole.Patient
+
+                //Email = "Patient@mail.ru",
+                //Password = "Patient",
+                //Role = UserRole.Patient
+
+                Email = "Doctor@mail.ru",
+                Password = "Doctor",
+                Role = UserRole.Doctor
             };
         }
     }
