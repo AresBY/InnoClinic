@@ -6,16 +6,16 @@ using MediatR;
 
 namespace InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll
 {
-    public class GetDoctorsAllQueryHandler : IRequestHandler<GetDoctorsAllQuery, List<DoctorProfileDto>>
+    public class GetDoctorProfileAllQueryHandler : IRequestHandler<GetDoctorProfileAllQuery, List<DoctorProfileDto>>
     {
-        private readonly IDoctorRepository _repository;
+        private readonly IDoctorProfileRepository _repository;
 
-        public GetDoctorsAllQueryHandler(IDoctorRepository repository)
+        public GetDoctorProfileAllQueryHandler(IDoctorProfileRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<List<DoctorProfileDto>> Handle(GetDoctorsAllQuery request, CancellationToken cancellationToken)
+        public async Task<List<DoctorProfileDto>> Handle(GetDoctorProfileAllQuery request, CancellationToken cancellationToken)
         {
 
             var doctors = await _repository.GetDoctorsAllAsync(cancellationToken);
