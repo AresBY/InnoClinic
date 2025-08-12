@@ -1,4 +1,5 @@
-﻿using InnoClinic.Profiles.Application.Interfaces.Repositories;
+﻿using InnoClinic.Offices.Domain.Enums;
+using InnoClinic.Profiles.Application.Interfaces.Repositories;
 using InnoClinic.Profiles.Domain.Entities;
 
 using Microsoft.EntityFrameworkCore;
@@ -21,11 +22,16 @@ namespace InnoClinic.Offices.Infrastructure.Persistence.Repositories
             return profile.Id;
         }
 
-        public async Task<List<DoctorProfile>> GetDoctorsAllAsync(CancellationToken cancellationToken)
+        public async Task<List<DoctorProfile>> GetDoctorsAllAsync(DoctorSpecialization? specialization, CancellationToken cancellationToken)
         {
-            return await _context.Doctors
-                .AsNoTracking()
-                .ToListAsync(cancellationToken);
+            IQueryable<DoctorProfile> query = _context.Doctors.AsNoTracking();
+
+            if (specialization.HasValue && specialization.Value != DoctorSpecialization.None)
+            {
+                query = query.Where(d => d.Specialization == specialization.Value);
+            }
+
+            return await query.ToListAsync(cancellationToken);
         }
 
         public async Task<DoctorProfile?> GetDoctorProfileByUserIdAsync(Guid ownerId, CancellationToken cancellationToken)

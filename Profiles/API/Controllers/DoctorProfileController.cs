@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-using InnoClinic.Offices.Application.DTOs;
+using InnoClinic.Offices.Domain.Enums;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorProfile;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorProfileByOwn;
@@ -32,38 +32,32 @@ namespace InnoClinic.Profiles.API.Controllers
 
         /// <summary>
         /// Creates a new doctor profile.
+        /// POST /api/doctorprofile
         /// </summary>
-        /// <param name="command">Doctor creation data</param>
-        /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>ID of the created doctor</returns>
-        [HttpPost(nameof(CreateDoctorProfile))]
+        [HttpPost]
         [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> CreateDoctorProfile([FromBody] CreateDoctorProfileCommand command, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateDoctorProfile), new { id = result }, result);
+            return CreatedAtAction(nameof(GetDoctorProfileByOwn), new { id = result }, result);
         }
 
         /// <summary>
-        /// Retrieves a list of all doctor profiles.
+        /// Returns a list of doctors optionally filtered by specialization.
+        /// GET /api/doctorprofile
         /// </summary>
-        /// <param name="cancellationToken">Token to cancel the operation.</param>
-        /// <returns>A list of <see cref="DoctorProfileDto"/> objects.</returns>
-        [HttpGet(nameof(GetDoctorProfileAll))]
-        public async Task<ActionResult<List<DoctorProfileDto>>> GetDoctorProfileAll(CancellationToken cancellationToken)
+        [HttpGet]
+        public async Task<IActionResult> GetDoctors([FromQuery] DoctorSpecialization? specialization, CancellationToken cancellationToken)
         {
-            var doctors = await _mediator.Send(new GetDoctorProfileAllQuery(), cancellationToken);
+            var doctors = await _mediator.Send(new GetDoctorProfileAllQuery(specialization), cancellationToken);
             return Ok(doctors);
         }
 
         /// <summary>
-        /// Retrieves detailed information about the specified doctor.
+        /// Retrieves detailed information about the currently authenticated doctor.
+        /// GET /api/doctorprofile/me
         /// </summary>
-        /// <param name="id">The ID of the doctor.</param>
-        /// <returns>Detailed information about the doctor.</returns>
-        /// <response code="200">Returns the doctor's profile data</response>
-        /// <response code="404">If the doctor is not found</response>
-        [HttpGet(nameof(GetDoctorProfileByOwn))]
+        [HttpGet("me")]
         public async Task<IActionResult> GetDoctorProfileByOwn()
         {
             var doctorId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -80,11 +74,9 @@ namespace InnoClinic.Profiles.API.Controllers
 
         /// <summary>
         /// Edits the profile of the currently authenticated Doctor or Receptionist.
+        /// PUT /api/doctorprofile/me
         /// </summary>
-        /// <param name="command">Updated doctor profile data.</param>
-        /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Updated doctor profile data.</returns>
-        [HttpPut(nameof(EditDoctorOrReceptionistProfileByOwn))]
+        [HttpPut("me")]
         [Authorize(Roles = nameof(UserRole.Doctor) + "," + nameof(UserRole.Receptionist))]
         public async Task<IActionResult> EditDoctorOrReceptionistProfileByOwn([FromBody] EditDoctorOrReceptionistProfileByOwnCommand command, CancellationToken cancellationToken)
         {
