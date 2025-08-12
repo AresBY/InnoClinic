@@ -6,7 +6,7 @@ using InnoClinicCommon.Exception;
 
 using MediatR;
 
-namespace InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorProfile
+namespace InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorOrReceptionistProfileByOwn
 {
     public class EditDoctorOrReceptionistProfileByOwnCommandHandler : IRequestHandler<EditDoctorOrReceptionistProfileByOwnCommand, DoctorProfileDto>
     {

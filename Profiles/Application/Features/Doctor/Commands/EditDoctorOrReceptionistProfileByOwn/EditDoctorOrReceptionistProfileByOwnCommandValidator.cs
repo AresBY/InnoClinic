@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorProfile
+namespace InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorOrReceptionistProfileByOwn
 {
     public class EditDoctorOrReceptionistProfileByOwnCommandValidator : AbstractValidator<EditDoctorOrReceptionistProfileByOwnCommand>
     {
