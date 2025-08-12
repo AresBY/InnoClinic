@@ -49,5 +49,12 @@ namespace InnoClinic.Offices.Infrastructure.Persistence.Repositories
 
             return existingProfile.Id;
         }
+
+        public async Task<DoctorProfile?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return await _context.Doctors
+                .AsNoTracking()
+                .FirstOrDefaultAsync(d => d.Id == id, cancellationToken);
+        }
     }
 }

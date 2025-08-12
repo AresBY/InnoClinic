@@ -1,8 +1,9 @@
 ﻿using System.Security.Claims;
 
 using InnoClinic.Offices.Domain.Enums;
+using InnoClinic.Profiles.Application.Features.Doctor.Commands.ChangeDoctorStatus;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
-using InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorProfile;
+using InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorOrReceptionistProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll;
 
@@ -90,5 +91,28 @@ namespace InnoClinic.Profiles.API.Controllers
             var updatedProfile = await _mediator.Send(command, cancellationToken);
             return Ok(updatedProfile);
         }
+
+        /// <summary>
+        /// Changes the status of a doctor.
+        /// Only accessible by users with the Receptionist role.
+        /// </summary>
+        /// <param name="doctorId">ID of the doctor whose status is to be changed.</param>
+        /// <param name="status">New status to assign to the doctor.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Returns HTTP 204 No Content on success.</returns>
+        [HttpPut("{doctorId}/status")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> ChangeDoctorStatus(Guid doctorId, [FromBody] DoctorStatus status, CancellationToken cancellationToken)
+        {
+            var command = new ChangeDoctorStatusCommand
+            {
+                DoctorId = doctorId,
+                Status = status
+            };
+
+            await _mediator.Send(command, cancellationToken);
+            return NoContent();
+        }
+
     }
 }
