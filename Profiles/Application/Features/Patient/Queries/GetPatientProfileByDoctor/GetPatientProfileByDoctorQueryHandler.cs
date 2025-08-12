@@ -10,9 +10,9 @@ namespace InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientPro
 {
     public class GetPatientProfileByDoctorQueryHandler : IRequestHandler<GetPatientProfileByDoctorQuery, PatientProfileDto>
     {
-        private readonly IPatientRepository _repository;
+        private readonly IPatientProfileRepository _repository;
 
-        public GetPatientProfileByDoctorQueryHandler(IPatientRepository repository)
+        public GetPatientProfileByDoctorQueryHandler(IPatientProfileRepository repository)
         {
             _repository = repository;
         }

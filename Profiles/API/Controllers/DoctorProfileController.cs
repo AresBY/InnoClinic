@@ -2,6 +2,7 @@
 
 using InnoClinic.Offices.Application.DTOs;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
+using InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorProfile;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll;
 
@@ -48,10 +49,10 @@ namespace InnoClinic.Profiles.API.Controllers
         /// </summary>
         /// <param name="cancellationToken">Token to cancel the operation.</param>
         /// <returns>A list of <see cref="DoctorProfileDto"/> objects.</returns>
-        [HttpGet(nameof(GetDoctorsAll))]
-        public async Task<ActionResult<List<DoctorProfileDto>>> GetDoctorsAll(CancellationToken cancellationToken)
+        [HttpGet(nameof(GetDoctorProfileAll))]
+        public async Task<ActionResult<List<DoctorProfileDto>>> GetDoctorProfileAll(CancellationToken cancellationToken)
         {
-            var doctors = await _mediator.Send(new GetDoctorsAllQuery(), cancellationToken);
+            var doctors = await _mediator.Send(new GetDoctorProfileAllQuery(), cancellationToken);
             return Ok(doctors);
         }
 
@@ -75,6 +76,27 @@ namespace InnoClinic.Profiles.API.Controllers
             var query = new GetDoctorProfileByOwnQuery(Guid.Parse(doctorId));
             var result = await _mediator.Send(query);
             return Ok(result);
+        }
+
+        /// <summary>
+        /// Edits the profile of the currently authenticated Doctor or Receptionist.
+        /// </summary>
+        /// <param name="command">Updated doctor profile data.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Updated doctor profile data.</returns>
+        [HttpPut(nameof(EditDoctorOrReceptionistProfileByOwn))]
+        [Authorize(Roles = nameof(UserRole.Doctor) + "," + nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> EditDoctorOrReceptionistProfileByOwn([FromBody] EditDoctorOrReceptionistProfileByOwnCommand command, CancellationToken cancellationToken)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized("User ID is missing from the token.");
+            }
+            command.Id = Guid.Parse(userId);
+
+            var updatedProfile = await _mediator.Send(command, cancellationToken);
+            return Ok(updatedProfile);
         }
     }
 }

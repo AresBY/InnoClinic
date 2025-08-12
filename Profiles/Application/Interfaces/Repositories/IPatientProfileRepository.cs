@@ -2,7 +2,7 @@
 
 namespace InnoClinic.Profiles.Application.Interfaces.Repositories
 {
-    public interface IPatientRepository
+    public interface IPatientProfileRepository
     {
         Task<Guid> AddAsync(PatientProfile profile, CancellationToken cancellationToken);
 

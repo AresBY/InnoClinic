@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InnoClinic.Profiles.Infrastructure.Persistence.Repositories
 {
-    public class PatientRepository : IPatientRepository
+    public class PatientProfileRepository : IPatientProfileRepository
     {
         private readonly ProfileDbContext _context;
 
-        public PatientRepository(ProfileDbContext context)
+        public PatientProfileRepository(ProfileDbContext context)
         {
             _context = context;
         }
