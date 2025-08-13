@@ -7,6 +7,7 @@ using InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorOrRecep
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsByFilter;
+using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsBySpecialization;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetOfficesForMapFromApi;
 
 using InnoClinicCommon.Enums;
@@ -161,6 +162,20 @@ namespace InnoClinic.Profiles.API.Controllers
         {
             var offices = await _mediator.Send(new GetOfficesForMapFromApiQuery(), cancellationToken);
             return Ok(offices);
+        }
+
+        /// <summary>
+        /// Returns a list of doctors filtered by the specified specialization.
+        /// </summary>
+        /// <param name="specialization">The specialization to filter by (optional).</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>HTTP 200 with a collection of doctors matching the specialization.</returns>
+        [HttpGet("filter/by-specialization")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> GetDoctorsBySpecialization([FromQuery] DoctorSpecialization? specialization, CancellationToken cancellationToken)
+        {
+            var doctors = await _mediator.Send(new GetDoctorsBySpecializationQuery(specialization), cancellationToken);
+            return Ok(doctors);
         }
     }
 }

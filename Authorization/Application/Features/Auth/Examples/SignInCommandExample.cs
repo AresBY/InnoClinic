@@ -12,17 +12,17 @@ namespace Application.Features.Auth.Examples
         {
             return new SignInCommand
             {
-                //Email = "Receptionist@mail.ru",
-                //Password = "Receptionist",
-                //Role = UserRole.Receptionist
+                Email = "Receptionist@mail.ru",
+                Password = "Receptionist",
+                Role = UserRole.Receptionist
 
                 //Email = "Patient@mail.ru",
                 //Password = "Patient",
                 //Role = UserRole.Patient
 
-                Email = "Doctor@mail.ru",
-                Password = "Doctor",
-                Role = UserRole.Doctor
+                //Email = "Doctor@mail.ru",
+                //Password = "Doctor",
+                //Role = UserRole.Doctor
             };
         }
     }
