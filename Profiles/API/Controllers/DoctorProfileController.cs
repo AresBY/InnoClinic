@@ -10,6 +10,7 @@ using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsByFilter
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsBySpecialization;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetOfficesForMapFromApi;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.SearchDoctorByName;
+using InnoClinic.Profiles.Application.Features.Doctor.Queries.SearchDoctorByNameForAdmin;
 
 using InnoClinicCommon.Enums;
 
@@ -192,5 +193,18 @@ namespace InnoClinic.Profiles.API.Controllers
             return Ok(doctors);
         }
 
+        /// <summary>
+        /// Searches doctors by full or partial name for Receptionist (first, last, middle name).
+        /// </summary>
+        /// <param name="name">Name to search for (optional).</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>HTTP 200 with list of matching doctors.</returns>
+        [HttpGet("admin/search/by-name")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> SearchDoctorsByNameForAdmin([FromQuery] string name, CancellationToken cancellationToken)
+        {
+            var doctors = await _mediator.Send(new SearchDoctorByNameForAdminQuery(name), cancellationToken);
+            return Ok(doctors);
+        }
     }
 }
