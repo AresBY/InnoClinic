@@ -7,6 +7,7 @@ using InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorOrRecep
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsByFilter;
+using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetOfficesForMapFromApi;
 
 using InnoClinicCommon.Enums;
 
@@ -150,5 +151,16 @@ namespace InnoClinic.Profiles.API.Controllers
             return Ok(doctors);
         }
 
+        /// <summary>
+        /// Returns a list of offices with coordinates, photo and address for displaying on the map.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token for request cancellation.</param>
+        /// <returns>HTTP 200 with a list of OfficeMapDto objects.</returns>
+        [HttpGet("map")]
+        public async Task<IActionResult> GetOfficesForMap(CancellationToken cancellationToken)
+        {
+            var offices = await _mediator.Send(new GetOfficesForMapFromApiQuery(), cancellationToken);
+            return Ok(offices);
+        }
     }
 }

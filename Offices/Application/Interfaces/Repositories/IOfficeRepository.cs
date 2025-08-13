@@ -4,6 +4,7 @@ namespace InnoClinic.Offices.Application.Interfaces.Repositories
 {
     public interface IOfficeRepository
     {
+        IQueryable<Office> Query();
         Task InsertAsync(Office office, CancellationToken cancellationToken);
         Task<List<Office>> GetAllAsync(CancellationToken cancellationToken);
 
