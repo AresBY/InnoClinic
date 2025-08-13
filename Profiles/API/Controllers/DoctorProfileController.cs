@@ -9,6 +9,7 @@ using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsByFilter;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsBySpecialization;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetOfficesForMapFromApi;
+using InnoClinic.Profiles.Application.Features.Doctor.Queries.SearchDoctorByName;
 
 using InnoClinicCommon.Enums;
 
@@ -177,5 +178,19 @@ namespace InnoClinic.Profiles.API.Controllers
             var doctors = await _mediator.Send(new GetDoctorsBySpecializationQuery(specialization), cancellationToken);
             return Ok(doctors);
         }
+
+        /// <summary>
+        /// Searches doctors by full or partial name (first, last, middle).
+        /// </summary>
+        /// <param name="name">Name to search for (optional).</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>HTTP 200 with list of matching doctors.</returns>
+        [HttpGet("search/by-name")]
+        public async Task<IActionResult> SearchDoctorsByName([FromQuery] string name, CancellationToken cancellationToken)
+        {
+            var doctors = await _mediator.Send(new SearchDoctorByNameQuery(name), cancellationToken);
+            return Ok(doctors);
+        }
+
     }
 }
