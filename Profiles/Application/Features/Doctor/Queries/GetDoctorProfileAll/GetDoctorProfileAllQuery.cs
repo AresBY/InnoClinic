@@ -14,5 +14,4 @@ namespace InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll
             Specialization = specialization;
         }
     }
-
 }

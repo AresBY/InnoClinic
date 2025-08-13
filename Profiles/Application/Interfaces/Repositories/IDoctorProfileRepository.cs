@@ -12,4 +12,6 @@ public interface IDoctorProfileRepository
     Task<DoctorProfile?> GetDoctorProfileByUserIdAsync(Guid ownerId, CancellationToken cancellationToken);
     Task<Guid> UpdateAsync(DoctorProfile existingProfile, CancellationToken cancellationToken);
     Task<DoctorProfile?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+
+    IQueryable<DoctorProfile> Query();
 }
