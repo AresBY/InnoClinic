@@ -131,5 +131,24 @@ namespace InnoClinic.Profiles.API.Controllers
             var doctors = await _mediator.Send(new GetDoctorsByFilterQuery(officeId), cancellationToken);
             return Ok(doctors);
         }
+
+        /// <summary>
+        /// Returns a list of doctors filtered by the specified office for Receptionist role.
+        /// Only accessible by users in the "Receptionist" role.
+        /// </summary>
+        /// <param name="officeId">
+        /// Optional office ID to filter doctors. 
+        /// If not provided, all doctors are returned.
+        /// </param>
+        /// <param name="cancellationToken">Cancellation token for request cancellation.</param>
+        /// <returns>HTTP 200 with a list of DoctorProfileDto objects matching the office filter.</returns>
+        [HttpGet("receptionist/filter")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> GetDoctorsByOfficeForReceptionist([FromQuery] Guid? officeId, CancellationToken cancellationToken)
+        {
+            var doctors = await _mediator.Send(new GetDoctorsByFilterQuery(officeId), cancellationToken);
+            return Ok(doctors);
+        }
+
     }
 }
