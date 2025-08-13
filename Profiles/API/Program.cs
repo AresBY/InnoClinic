@@ -4,6 +4,7 @@ using FluentValidation.AspNetCore;
 using InnoClinic.Offices.Infrastructure.Persistence.Repositories;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
 using InnoClinic.Profiles.Application.Features.Doctor.Examples;
+using InnoClinic.Profiles.Application.Interfaces;
 using InnoClinic.Profiles.Application.Interfaces.Repositories;
 using InnoClinic.Profiles.Infrastructure.Persistence.Repositories;
 
@@ -52,6 +53,13 @@ builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddScoped<IDoctorProfileRepository, DoctorProfileRepository>();
 builder.Services.AddScoped<IPatientProfileRepository, PatientProfileRepository>();
+
+
+builder.Services.AddHttpClient<IOfficeApiClient, OfficeApiClient>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5180/");
+});
+
 
 // --- Controllers ---
 builder.Services.AddControllers()

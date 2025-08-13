@@ -53,5 +53,18 @@ namespace InnoClinic.Offices.Application.Mappings
                 CreatedAt = command.CreatedAt,
             };
         }
+
+        public static OfficeMapDto ToMapDto(this Office office)
+        {
+            return new OfficeMapDto
+            {
+                Id = office.Id,
+                Name = $"{office.City}, {office.Street} {office.HouseNumber}" + (string.IsNullOrEmpty(office.OfficeNumber) ? "" : $", {office.OfficeNumber}"),
+                Address = $"{office.City}, {office.Street} {office.HouseNumber}" + (string.IsNullOrEmpty(office.OfficeNumber) ? "" : $", {office.OfficeNumber}"),
+                PhotoUrl = office.PhotoUrl,
+                Latitude = office.Latitude,
+                Longitude = office.Longitude
+            };
+        }
     }
 }

@@ -9,6 +9,11 @@ namespace InnoClinic.Offices.Infrastructure.Persistence.Repositories
     {
         private readonly IMongoCollection<Office> _officeCollection;
 
+        public IQueryable<Office> Query()
+        {
+            return _officeCollection.AsQueryable();
+        }
+
         public MongoOfficeRepository(IMongoDatabase database)
         {
             _officeCollection = database.GetCollection<Office>("offices");

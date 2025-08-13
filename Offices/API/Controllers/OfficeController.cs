@@ -2,6 +2,7 @@
 using InnoClinic.Offices.Application.Features.Office.Commands.UpdateOffice;
 using InnoClinic.Offices.Application.Features.Office.Queries.GetOffice;
 using InnoClinic.Offices.Application.Features.Office.Queries.GetOfficeAll;
+using InnoClinic.Offices.Application.Features.Office.Queries.GetOfficesForMap;
 
 using InnoClinicCommon.Enums;
 
@@ -93,6 +94,18 @@ namespace InnoClinic.Offices.API.Controllers
             if (office == null)
                 return NotFound();
             return Ok(office);
+        }
+
+        /// <summary>
+        /// Returns a list of offices with coordinates, photo and address for displaying on the map.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token for request cancellation.</param>
+        /// <returns>HTTP 200 with a list of OfficeMapDto objects.</returns>
+        [HttpGet("map")]
+        public async Task<IActionResult> GetOfficesForMap(CancellationToken cancellationToken)
+        {
+            var offices = await _mediator.Send(new GetOfficesForMapQuery(), cancellationToken);
+            return Ok(offices);
         }
     }
 }
