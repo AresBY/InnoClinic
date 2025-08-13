@@ -15,6 +15,11 @@ namespace InnoClinic.Offices.Infrastructure.Persistence.Repositories
             _context = context;
         }
 
+        public IQueryable<DoctorProfile> Query()
+        {
+            return _context.Doctors.AsNoTracking();
+        }
+
         public async Task<Guid> AddAsync(DoctorProfile profile, CancellationToken cancellationToken)
         {
             await _context.Doctors.AddAsync(profile, cancellationToken);

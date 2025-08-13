@@ -6,6 +6,7 @@ using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfi
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorOrReceptionistProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll;
+using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsByFilter;
 
 using InnoClinicCommon.Enums;
 
@@ -114,5 +115,21 @@ namespace InnoClinic.Profiles.API.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Returns a list of doctors filtered by the specified office.
+        /// </summary>
+        /// <param name="officeId">
+        /// The ID of the office to filter by (optional). 
+        /// If not provided, all doctors are returned.
+        /// </param>
+        /// <param name="cancellationToken">Cancellation token for the request.</param>
+        /// <returns>HTTP 200 with a collection of doctors matching the filter.</returns>
+
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetDoctorsByFilter([FromQuery] Guid? officeId, CancellationToken cancellationToken)
+        {
+            var doctors = await _mediator.Send(new GetDoctorsByFilterQuery(officeId), cancellationToken);
+            return Ok(doctors);
+        }
     }
 }
