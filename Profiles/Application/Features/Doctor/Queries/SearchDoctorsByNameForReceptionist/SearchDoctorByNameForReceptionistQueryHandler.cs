@@ -6,19 +6,19 @@ using MediatR;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace InnoClinic.Profiles.Application.Features.Doctor.Queries.SearchDoctorByNameForAdmin
+namespace InnoClinic.Profiles.Application.Features.Doctor.Queries.SearchDoctorByNameForReceptionist
 {
-    public sealed class SearchDoctorByNameForAdminQueryHandler
-        : IRequestHandler<SearchDoctorByNameForAdminQuery, List<DoctorProfileDto>>
+    public sealed class SearchDoctorByNameForReceptionistQueryHandler
+        : IRequestHandler<SearchDoctorByNameForReceptionistQuery, List<DoctorProfileDto>>
     {
         private readonly IDoctorProfileRepository _doctorRepository;
 
-        public SearchDoctorByNameForAdminQueryHandler(IDoctorProfileRepository doctorRepository)
+        public SearchDoctorByNameForReceptionistQueryHandler(IDoctorProfileRepository doctorRepository)
         {
             _doctorRepository = doctorRepository;
         }
 
-        public async Task<List<DoctorProfileDto>> Handle(SearchDoctorByNameForAdminQuery request, CancellationToken cancellationToken)
+        public async Task<List<DoctorProfileDto>> Handle(SearchDoctorByNameForReceptionistQuery request, CancellationToken cancellationToken)
         {
             var name = request.Name.Trim().ToLower();
 
