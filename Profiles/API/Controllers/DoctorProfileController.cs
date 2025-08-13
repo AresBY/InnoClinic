@@ -5,12 +5,13 @@ using InnoClinic.Profiles.Application.Features.Doctor.Commands.ChangeDoctorStatu
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.EditDoctorOrReceptionistProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorProfileByOwn;
+using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorProfileForReceptionist;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsByFilter;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsBySpecialization;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetOfficesForMapFromApi;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.SearchDoctorByName;
-using InnoClinic.Profiles.Application.Features.Doctor.Queries.SearchDoctorByNameForAdmin;
+using InnoClinic.Profiles.Application.Features.Doctor.Queries.SearchDoctorByNameForReceptionist;
 
 using InnoClinicCommon.Enums;
 
@@ -199,12 +200,27 @@ namespace InnoClinic.Profiles.API.Controllers
         /// <param name="name">Name to search for (optional).</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>HTTP 200 with list of matching doctors.</returns>
-        [HttpGet("admin/search/by-name")]
+        [HttpGet("receptionist/search/by-name")]
         [Authorize(Roles = nameof(UserRole.Receptionist))]
-        public async Task<IActionResult> SearchDoctorsByNameForAdmin([FromQuery] string name, CancellationToken cancellationToken)
+        public async Task<IActionResult> SearchDoctorsByNameForReceptionist([FromQuery] string name, CancellationToken cancellationToken)
         {
-            var doctors = await _mediator.Send(new SearchDoctorByNameForAdminQuery(name), cancellationToken);
+            var doctors = await _mediator.Send(new SearchDoctorByNameForReceptionistQuery(name), cancellationToken);
             return Ok(doctors);
+        }
+
+        /// <summary>
+        /// Gets detailed profile of a doctor for Receptionist.
+        /// </summary>
+        /// <param name="id">Doctor ID.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>HTTP 200 with doctor profile, or 404 if not found.</returns>
+        [HttpGet("receptionist/profile/{id}")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> GetDoctorProfileForReceptionist(Guid id, CancellationToken cancellationToken)
+        {
+            var profile = await _mediator.Send(new GetDoctorProfileForReceptionistQuery(id), cancellationToken);
+            if (profile == null) return NotFound();
+            return Ok(profile);
         }
     }
 }
