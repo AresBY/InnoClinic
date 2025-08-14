@@ -38,9 +38,9 @@ namespace InnoClinic.Profiles.API.Controllers
         /// <param name="command">The patient profile data submitted by the user.</param>
         /// <param name="cancellationToken">Token for cancelling the operation.</param>
         /// <returns>Created profile ID or match info.</returns>
-        [HttpPost(nameof(CreatePatientProfile))]
+        [HttpPost(nameof(CreatePatientProfileByOwn))]
         [Authorize(Roles = nameof(UserRole.Patient))]
-        public async Task<IActionResult> CreatePatientProfile([FromBody] CreatePatientProfileCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreatePatientProfileByOwn([FromBody] CreatePatientProfileByOwnCommand command, CancellationToken cancellationToken)
         {
             var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -52,7 +52,7 @@ namespace InnoClinic.Profiles.API.Controllers
             command.OwnerId = userId;
 
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreatePatientProfile), new { id = result }, result);
+            return CreatedAtAction(nameof(CreatePatientProfileByOwn), new { id = result }, result);
         }
 
         /// <summary>
@@ -99,6 +99,14 @@ namespace InnoClinic.Profiles.API.Controllers
             var query = new GetPatientProfileByDoctorQuery(patientId);
             var result = await _mediator.Send(query);
             return Ok(result);
+        }
+
+        [HttpPost("receptionist/create")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> CreatePatientProfileByReceptionist([FromBody] CreatePatientProfileByOwnCommand request, CancellationToken cancellationToken)
+        {
+            var patientId = await _mediator.Send(request, cancellationToken);
+            return CreatedAtAction(nameof(CreatePatientProfileByOwn), new { id = patientId }, patientId);
         }
     }
 }

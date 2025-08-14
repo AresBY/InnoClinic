@@ -4,11 +4,11 @@ using Swashbuckle.AspNetCore.Filters;
 
 namespace InnoClinic.Profiles.Application.Features.Patient.Examples
 {
-    public class CreatePatientProfileCommandExample : IExamplesProvider<CreatePatientProfileCommand>
+    public class CreatePatientProfileCommandExample : IExamplesProvider<CreatePatientProfileByOwnCommand>
     {
-        public CreatePatientProfileCommand GetExamples()
+        public CreatePatientProfileByOwnCommand GetExamples()
         {
-            return new CreatePatientProfileCommand
+            return new CreatePatientProfileByOwnCommand
             {
                 FirstName = "John",
                 LastName = "Doe",
