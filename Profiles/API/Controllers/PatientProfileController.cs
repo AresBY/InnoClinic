@@ -6,6 +6,7 @@ using InnoClinic.Profiles.Application.Features.Patient.Commands.DeletePatientPro
 using InnoClinic.Profiles.Application.Features.Patient.Commands.UpdatePatientProfile;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByDoctor;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByOwn;
+using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByReceptionist;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientsProfilesAll;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.SearchPatients;
 
@@ -158,6 +159,20 @@ namespace InnoClinic.Profiles.API.Controllers
         {
             var patients = await _mediator.Send(new SearchPatientsQuery { FullName = fullName }, cancellationToken);
             return Ok(patients);
+        }
+
+        /// <summary>
+        /// Retrieves full patient profile by ID for the receptionist (admin).
+        /// </summary>
+        /// <param name="patientId">Patient identifier</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Patient's profile with personal information</returns>
+        [HttpGet("receptionist/patients/{patientId}")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> GetPatientProfileByReceptionist(Guid patientId, CancellationToken cancellationToken)
+        {
+            var profile = await _mediator.Send(new GetPatientProfileByReceptionistQuery { PatientId = patientId }, cancellationToken);
+            return Ok(profile);
         }
     }
 }
