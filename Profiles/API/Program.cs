@@ -53,6 +53,7 @@ builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddScoped<IDoctorProfileRepository, DoctorProfileRepository>();
 builder.Services.AddScoped<IPatientProfileRepository, PatientProfileRepository>();
+builder.Services.AddScoped<IReceptionistProfileRepository, ReceptionistProfileRepository>();
 
 
 builder.Services.AddHttpClient<IOfficeApiClient, OfficeApiClient>(client =>
