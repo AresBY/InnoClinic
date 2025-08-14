@@ -1,5 +1,6 @@
 ﻿using InnoClinic.Profiles.Application.Features.Receptionist.Commands.CreateReceptionistProfile;
 using InnoClinic.Profiles.Application.Features.Receptionist.Commands.DeleteReceptionistProfile;
+using InnoClinic.Profiles.Application.Features.Receptionist.Commands.EditReceptionistProfile;
 using InnoClinic.Profiles.Application.Features.Receptionist.Queries;
 using InnoClinic.Profiles.Application.Features.Receptionist.Queries.GetReceptionistById;
 
@@ -91,6 +92,20 @@ namespace InnoClinic.Profiles.API.Controllers
             {
                 var result = await _mediator.Send(new GetReceptionistByIdQuery { ProfileId = id }, cancellationToken);
                 return Ok(result);
+            }
+
+            /// <summary>
+            /// Updates an existing receptionist's profile.
+            /// </summary>
+            /// <param name="request">Updated profile data, including ProfileId.</param>
+            /// <param name="cancellationToken">Cancellation token.</param>
+            /// <returns>No content if update succeeded.</returns>
+            [HttpPut("edit")]
+            [Authorize(Roles = nameof(UserRole.Receptionist))]
+            public async Task<IActionResult> EditReceptionistProfile([FromBody] EditReceptionistProfileCommand request, CancellationToken cancellationToken)
+            {
+                await _mediator.Send(request, cancellationToken);
+                return NoContent();
             }
         }
     }
