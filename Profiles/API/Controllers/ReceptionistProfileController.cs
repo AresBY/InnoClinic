@@ -1,4 +1,5 @@
 ﻿using InnoClinic.Profiles.Application.Features.Receptionist.Commands.CreateReceptionistProfile;
+using InnoClinic.Profiles.Application.Features.Receptionist.Commands.DeleteReceptionistProfile;
 
 using InnoClinicCommon.Enums;
 
@@ -40,6 +41,25 @@ namespace InnoClinic.Profiles.API.Controllers
             {
                 var id = await _mediator.Send(request, cancellationToken);
                 return CreatedAtAction(nameof(CreateReceptionistProfile), new { id }, id);
+            }
+
+            /// <summary>
+            /// Deletes a receptionist profile by its ID.
+            /// </summary>
+            /// <param name="profileId">The ID of the receptionist profile to delete.</param>
+            /// <param name="cancellationToken">Cancellation token for request cancellation.</param>
+            /// <remarks>
+            /// Only users with the "Receptionist" role can perform this action.
+            /// Sends a MediatR command to handle the deletion logic, including removing
+            /// the profile, associated account, and photo if applicable.
+            /// Returns HTTP 204 No Content on successful deletion.
+            /// </remarks>
+            [HttpDelete("{profileId}")]
+            [Authorize(Roles = nameof(UserRole.Receptionist))]
+            public async Task<IActionResult> DeleteReceptionistProfile(Guid profileId, CancellationToken cancellationToken)
+            {
+                await _mediator.Send(new DeleteReceptionistProfileCommand { ProfileId = profileId }, cancellationToken);
+                return NoContent();
             }
         }
     }
