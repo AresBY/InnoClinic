@@ -7,6 +7,7 @@ using InnoClinic.Profiles.Application.Features.Patient.Commands.UpdatePatientPro
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByDoctor;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientsProfilesAll;
+using InnoClinic.Profiles.Application.Features.Patient.Queries.SearchPatients;
 
 using InnoClinicCommon.Enums;
 
@@ -143,6 +144,20 @@ namespace InnoClinic.Profiles.API.Controllers
         {
             await _mediator.Send(request, cancellationToken);
             return NoContent();
+        }
+
+        /// <summary>
+        /// Searches patients by full name for the receptionist.
+        /// </summary>
+        /// <param name="fullName">Partial or full name of the patient to search for.</param>
+        /// <param name="cancellationToken">Cancellation token for request cancellation.</param>
+        /// <returns>List of patients matching the search criteria.</returns>
+        [HttpGet("receptionist/search")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> SearchPatients([FromQuery] string? fullName, CancellationToken cancellationToken)
+        {
+            var patients = await _mediator.Send(new SearchPatientsQuery { FullName = fullName }, cancellationToken);
+            return Ok(patients);
         }
     }
 }

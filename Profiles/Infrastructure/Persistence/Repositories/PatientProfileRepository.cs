@@ -1,4 +1,5 @@
-﻿using InnoClinic.Profiles.Application.Interfaces.Repositories;
+﻿
+using InnoClinic.Profiles.Application.Interfaces.Repositories;
 using InnoClinic.Profiles.Domain.Entities;
 
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,11 @@ namespace InnoClinic.Profiles.Infrastructure.Persistence.Repositories
     public class PatientProfileRepository : IPatientProfileRepository
     {
         private readonly ProfileDbContext _context;
+
+        public IQueryable<PatientProfile> Query()
+        {
+            return _context.Patients.AsQueryable();
+        }
 
         public PatientProfileRepository(ProfileDbContext context)
         {
@@ -51,5 +57,6 @@ namespace InnoClinic.Profiles.Infrastructure.Persistence.Repositories
             _context.Patients.Update(patient);
             await _context.SaveChangesAsync(cancellationToken);
         }
+
     }
 }

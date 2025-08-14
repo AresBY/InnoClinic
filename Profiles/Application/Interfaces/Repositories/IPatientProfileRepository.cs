@@ -4,6 +4,7 @@ namespace InnoClinic.Profiles.Application.Interfaces.Repositories
 {
     public interface IPatientProfileRepository
     {
+        IQueryable<PatientProfile> Query();
         Task<Guid> AddAsync(PatientProfile profile, CancellationToken cancellationToken);
         Task DeleteAsync(PatientProfile profile, CancellationToken cancellationToken);
         Task<List<PatientProfile>> GetAllPatientsAsync(CancellationToken cancellationToken);
