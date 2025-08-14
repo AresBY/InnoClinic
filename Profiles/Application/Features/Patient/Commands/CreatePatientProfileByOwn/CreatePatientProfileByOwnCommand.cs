@@ -2,7 +2,7 @@
 
 namespace InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfile
 {
-    public sealed class CreatePatientProfileCommand : IRequest<Guid>
+    public sealed class CreatePatientProfileByOwnCommand : IRequest<Guid>
     {
         public string FirstName { get; set; } = default!;
         public string LastName { get; set; } = default!;

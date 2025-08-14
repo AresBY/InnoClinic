@@ -5,16 +5,16 @@ using MediatR;
 
 namespace InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfile
 {
-    public sealed class CreatePatientProfileCommandHandler : IRequestHandler<CreatePatientProfileCommand, Guid>
+    public sealed class CreatePatientProfileByOwnCommandHandler : IRequestHandler<CreatePatientProfileByOwnCommand, Guid>
     {
         private readonly IPatientProfileRepository _patientRepository;
 
-        public CreatePatientProfileCommandHandler(IPatientProfileRepository patientRepository)
+        public CreatePatientProfileByOwnCommandHandler(IPatientProfileRepository patientRepository)
         {
             _patientRepository = patientRepository;
         }
 
-        public async Task<Guid> Handle(CreatePatientProfileCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreatePatientProfileByOwnCommand request, CancellationToken cancellationToken)
         {
             var newProfile = request.ToEntity();
 

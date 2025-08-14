@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfile
+namespace InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfileByReceptionist
 {
-    public sealed class CreatePatientProfileCommandValidator : AbstractValidator<CreatePatientProfileCommand>
+    public class CreatePatientProfileByReceptionistCommandValidator : AbstractValidator<CreatePatientProfileByReceptionistCommand>
     {
-        public CreatePatientProfileCommandValidator()
+        public CreatePatientProfileByReceptionistCommandValidator()
         {
             RuleFor(x => x.FirstName)
                 .NotEmpty().WithMessage("Please, enter the first name");

@@ -2,6 +2,7 @@
 using InnoClinic.Profiles.Application.DTOs;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
 using InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfile;
+using InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfileByReceptionist;
 using InnoClinic.Profiles.Domain.Entities;
 
 namespace InnoClinic.Profiles.Application.Mappings
@@ -56,7 +57,7 @@ namespace InnoClinic.Profiles.Application.Mappings
             };
         }
 
-        public static PatientProfile ToPatientProfileEntity(this CreatePatientProfileCommand request)
+        public static PatientProfile ToPatientProfileEntity(this CreatePatientProfileByOwnCommand request)
         {
             return new PatientProfile
             {
@@ -69,7 +70,7 @@ namespace InnoClinic.Profiles.Application.Mappings
             };
         }
 
-        public static PatientProfile ToEntity(this CreatePatientProfileCommand request)
+        public static PatientProfile ToEntity(this CreatePatientProfileByOwnCommand request)
         {
             return new PatientProfile
             {
@@ -99,6 +100,20 @@ namespace InnoClinic.Profiles.Application.Mappings
                 OfficeName = officeName,
                 CareerStartYear = entity.CareerStartYear,
                 Status = entity.Status
+            };
+        }
+
+        public static PatientProfile ToEntity(this CreatePatientProfileByReceptionistCommand request)
+        {
+            return new PatientProfile
+            {
+                Id = Guid.NewGuid(),
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                MiddleName = request.MiddleName,
+                PhoneNumber = request.PhoneNumber,
+                DateOfBirth = request.DateOfBirth.ToDateTime(TimeOnly.MinValue),
+                IsLinkedToAccount = false
             };
         }
     }
