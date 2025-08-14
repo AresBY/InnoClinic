@@ -2,6 +2,7 @@
 
 using InnoClinic.Profiles.Application.DTOs;
 using InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfile;
+using InnoClinic.Profiles.Application.Features.Patient.Commands.DeletePatientProfile;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByDoctor;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientsProfilesAll;
@@ -101,12 +102,32 @@ namespace InnoClinic.Profiles.API.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Creates a new patient profile by a Receptionist.
+        /// </summary>
+        /// <param name="request">Patient creation data.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>HTTP 201 with the ID of the created patient.</returns>
         [HttpPost("receptionist/create")]
         [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> CreatePatientProfileByReceptionist([FromBody] CreatePatientProfileByOwnCommand request, CancellationToken cancellationToken)
         {
             var patientId = await _mediator.Send(request, cancellationToken);
             return CreatedAtAction(nameof(CreatePatientProfileByOwn), new { id = patientId }, patientId);
+        }
+
+        /// <summary>
+        /// Deletes a patient profile by a Receptionist.
+        /// </summary>
+        /// <param name="patientId">ID of the patient to delete.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>HTTP 204 No Content if deletion is successful.</returns>
+        [HttpDelete("receptionist/patients/{patientId}")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> DeletePatientProfile(Guid patientId, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(new DeletePatientProfileCommand(patientId), cancellationToken);
+            return NoContent();
         }
     }
 }
