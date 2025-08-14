@@ -83,5 +83,23 @@ namespace InnoClinic.Profiles.Application.Mappings
                 IsLinkedToAccount = true
             };
         }
+
+        public static DoctorProfileDetailDto ToDetailDto(this DoctorProfile entity, string officeName)
+        {
+            return new DoctorProfileDetailDto
+            {
+                Id = entity.Id,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                MiddleName = entity.MiddleName,
+                Email = entity.Email,
+                DateOfBirth = entity.DateOfBirth,
+                Specialization = entity.Specialization,
+                OfficeId = entity.OfficeId,
+                OfficeName = officeName,
+                CareerStartYear = entity.CareerStartYear,
+                Status = entity.Status
+            };
+        }
     }
 }
