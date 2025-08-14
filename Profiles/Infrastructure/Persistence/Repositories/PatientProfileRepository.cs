@@ -45,5 +45,11 @@ namespace InnoClinic.Profiles.Infrastructure.Persistence.Repositories
             return await _context.Patients
                 .FirstOrDefaultAsync(p => p.Id == patientId, cancellationToken);
         }
+
+        public async Task UpdateAsync(PatientProfile patient, CancellationToken cancellationToken)
+        {
+            _context.Patients.Update(patient);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }

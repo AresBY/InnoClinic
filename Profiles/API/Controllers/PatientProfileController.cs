@@ -3,6 +3,7 @@
 using InnoClinic.Profiles.Application.DTOs;
 using InnoClinic.Profiles.Application.Features.Patient.Commands.CreatePatientProfile;
 using InnoClinic.Profiles.Application.Features.Patient.Commands.DeletePatientProfile;
+using InnoClinic.Profiles.Application.Features.Patient.Commands.UpdatePatientProfile;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByDoctor;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfileByOwn;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientsProfilesAll;
@@ -127,6 +128,20 @@ namespace InnoClinic.Profiles.API.Controllers
         public async Task<IActionResult> DeletePatientProfile(Guid patientId, CancellationToken cancellationToken)
         {
             await _mediator.Send(new DeletePatientProfileCommand(patientId), cancellationToken);
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Updates patient profile by Patient or Receptionist.
+        /// </summary>
+        /// <param name="request">Patient update data.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>HTTP 204 No Content.</returns>
+        [HttpPut("edit")]
+        [Authorize(Roles = $"{nameof(UserRole.Patient)},{nameof(UserRole.Receptionist)}")]
+        public async Task<IActionResult> UpdatePatientProfile([FromBody] UpdatePatientProfileCommand request, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(request, cancellationToken);
             return NoContent();
         }
     }
