@@ -36,5 +36,12 @@ namespace InnoClinic.Profiles.Infrastructure.Persistence.Repositories
             return await _context.Receptionists
                 .FirstOrDefaultAsync(r => r.Id == receptionistId, cancellationToken);
         }
+
+        public async Task UpdateAsync(ReceptionistProfile profile, CancellationToken cancellationToken)
+        {
+            _context.Receptionists.Update(profile);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
     }
 }
