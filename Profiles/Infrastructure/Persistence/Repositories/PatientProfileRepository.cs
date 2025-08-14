@@ -9,15 +9,14 @@ namespace InnoClinic.Profiles.Infrastructure.Persistence.Repositories
     public class PatientProfileRepository : IPatientProfileRepository
     {
         private readonly ProfileDbContext _context;
+        public PatientProfileRepository(ProfileDbContext context)
+        {
+            _context = context;
+        }
 
         public IQueryable<PatientProfile> Query()
         {
             return _context.Patients.AsQueryable();
-        }
-
-        public PatientProfileRepository(ProfileDbContext context)
-        {
-            _context = context;
         }
 
         public async Task<Guid> AddAsync(PatientProfile profile, CancellationToken cancellationToken)

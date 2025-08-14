@@ -3,7 +3,7 @@
     "Key": "profile",
     "Name": "Profile API",
     "Port": 5181,
-    "Controllers": [ "DoctorProfile", "PatientProfile" ]
+    "Controllers": [ "DoctorProfile", "PatientProfile", "ReceptionistProfile" ]
   },
   {
     "Key": "office",
