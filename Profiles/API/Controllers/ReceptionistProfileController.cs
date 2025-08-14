@@ -1,5 +1,6 @@
 ﻿using InnoClinic.Profiles.Application.Features.Receptionist.Commands.CreateReceptionistProfile;
 using InnoClinic.Profiles.Application.Features.Receptionist.Commands.DeleteReceptionistProfile;
+using InnoClinic.Profiles.Application.Features.Receptionist.Queries;
 
 using InnoClinicCommon.Enums;
 
@@ -60,6 +61,21 @@ namespace InnoClinic.Profiles.API.Controllers
             {
                 await _mediator.Send(new DeleteReceptionistProfileCommand { ProfileId = profileId }, cancellationToken);
                 return NoContent();
+            }
+
+            /// <summary>
+            /// Retrieves a list of all receptionist profiles in the clinic.
+            /// Only accessible by users with the Receptionist role.
+            /// Returns each receptionist's full name and associated office address.
+            /// </summary>
+            /// <param name="cancellationToken">Token to cancel the request if needed.</param>
+            /// <returns>HTTP 200 with a list of receptionists.</returns>
+            [HttpGet]
+            [Authorize(Roles = nameof(UserRole.Receptionist))]
+            public async Task<IActionResult> GetAllReceptionists(CancellationToken cancellationToken)
+            {
+                var result = await _mediator.Send(new GetAllReceptionistsQuery(), cancellationToken);
+                return Ok(result);
             }
         }
     }

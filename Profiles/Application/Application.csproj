@@ -17,8 +17,4 @@
 	<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="9.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Receptionist\Queries\" />
-  </ItemGroup>
-
 </Project>
