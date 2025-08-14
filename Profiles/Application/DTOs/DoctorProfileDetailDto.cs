@@ -18,5 +18,6 @@ namespace InnoClinic.Profiles.Application.DTOs
         public int CareerStartYear { get; set; }
         public DoctorStatus Status { get; set; }
         public string PhotoUrl { get; set; } = null!;
+
     }
 }

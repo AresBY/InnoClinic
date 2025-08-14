@@ -9,6 +9,7 @@ using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorProfileFo
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsAll;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsByFilter;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsBySpecialization;
+using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorsForReceptionist;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.GetOfficesForMapFromApi;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.SearchDoctorByName;
 using InnoClinic.Profiles.Application.Features.Doctor.Queries.SearchDoctorByNameForReceptionist;
@@ -221,6 +222,21 @@ namespace InnoClinic.Profiles.API.Controllers
             var profile = await _mediator.Send(new GetDoctorProfileForReceptionistQuery(id), cancellationToken);
             if (profile == null) return NotFound();
             return Ok(profile);
+        }
+
+        /// <summary>
+        /// Gets the list of doctors for Receptionist with filtering.
+        /// </summary>
+        /// <param name="fullName">Doctor full name filter.</param>
+        /// <param name="specialization">Specialization filter.</param>
+        /// <param name="officeId">Office filter.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        [HttpGet("receptionist/doctors")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> GetDoctorsForReceptionist([FromQuery] GetDoctorsForReceptionistQuery request, CancellationToken cancellationToken)
+        {
+            var doctors = await _mediator.Send(request, cancellationToken);
+            return Ok(doctors);
         }
     }
 }
