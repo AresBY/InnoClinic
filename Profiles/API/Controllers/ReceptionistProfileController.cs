@@ -1,6 +1,7 @@
 ﻿using InnoClinic.Profiles.Application.Features.Receptionist.Commands.CreateReceptionistProfile;
 using InnoClinic.Profiles.Application.Features.Receptionist.Commands.DeleteReceptionistProfile;
 using InnoClinic.Profiles.Application.Features.Receptionist.Queries;
+using InnoClinic.Profiles.Application.Features.Receptionist.Queries.GetReceptionistById;
 
 using InnoClinicCommon.Enums;
 
@@ -75,6 +76,20 @@ namespace InnoClinic.Profiles.API.Controllers
             public async Task<IActionResult> GetAllReceptionists(CancellationToken cancellationToken)
             {
                 var result = await _mediator.Send(new GetAllReceptionistsQuery(), cancellationToken);
+                return Ok(result);
+            }
+
+            /// <summary>
+            /// Retrieves a single receptionist profile by ID.
+            /// </summary>
+            /// <param name="id">Receptionist profile ID.</param>
+            /// <param name="cancellationToken">Cancellation token.</param>
+            /// <returns>Receptionist profile.</returns>
+            [HttpGet("{id}")]
+            [Authorize(Roles = nameof(UserRole.Receptionist))]
+            public async Task<IActionResult> GetReceptionistById(Guid id, CancellationToken cancellationToken)
+            {
+                var result = await _mediator.Send(new GetReceptionistByIdQuery { ProfileId = id }, cancellationToken);
                 return Ok(result);
             }
         }
