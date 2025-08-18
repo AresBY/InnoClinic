@@ -6,6 +6,7 @@ using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfi
 using InnoClinic.Profiles.Application.Features.Doctor.Examples;
 using InnoClinic.Profiles.Application.Interfaces;
 using InnoClinic.Profiles.Application.Interfaces.Repositories;
+using InnoClinic.Profiles.Application.StaticClases;
 using InnoClinic.Profiles.Infrastructure.Persistence.Repositories;
 
 using InnoClinicCommon.JWT;
@@ -13,6 +14,8 @@ using InnoClinicCommon.Middleware;
 using InnoClinicCommon.Swagger;
 
 using Microsoft.EntityFrameworkCore;
+
+using Serilog;
 
 using Swashbuckle.AspNetCore.Filters;
 
@@ -22,12 +25,27 @@ var builder = WebApplication.CreateBuilder(args);
 bool IsDevelopment = builder.Environment.IsEnvironment("Development");
 bool IsDocker = builder.Environment.IsEnvironment("Docker");
 
+// --- Serilog ---
+var logPath = Path.Combine(Directory.GetCurrentDirectory(), "Logs");
+if (!Directory.Exists(logPath))
+    Directory.CreateDirectory(logPath);
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File(Path.Combine(logPath, "log-.txt"), rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+builder.Host.UseSerilog();
+
 // --- Configuration ---
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
+
+builder.Services.AddApplication();
 
 if (IsDevelopment)
 {
@@ -54,6 +72,8 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddScoped<IDoctorProfileRepository, DoctorProfileRepository>();
 builder.Services.AddScoped<IPatientProfileRepository, PatientProfileRepository>();
 builder.Services.AddScoped<IReceptionistProfileRepository, ReceptionistProfileRepository>();
+
+
 
 
 builder.Services.AddHttpClient<IOfficeApiClient, OfficeApiClient>(client =>
@@ -99,6 +119,8 @@ var app = builder.Build();
 
 // --- Middleware ---
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+app.UseSerilogRequestLogging();
 
 using (var scope = app.Services.CreateScope())
 {
