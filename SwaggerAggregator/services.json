@@ -1,5 +1,11 @@
 [
   {
+    "Key": "service",
+    "Name": "Service API",
+    "Port": 5183,
+    "Controllers": [ "Service" ]
+  },
+  {
     "Key": "profile",
     "Name": "Profile API",
     "Port": 5181,

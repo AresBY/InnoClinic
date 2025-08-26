@@ -17,6 +17,10 @@
       {
         "Path": "SwaggerAggregator\\SwaggerAggregator.csproj",
         "Action": "Start"
+      },
+      {
+        "Path": "Services\\API\\API.csproj",
+        "Action": "Start"
       }
     ]
   }

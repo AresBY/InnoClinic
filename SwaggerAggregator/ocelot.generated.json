@@ -1,6 +1,38 @@
 {
   "Routes": [
     {
+      "DownstreamPathTemplate": "/api/Service/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5183
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Service/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5183
+        }
+      ],
+      "UpstreamPathTemplate": "/swagger/docs/service/swagger.json",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
       "DownstreamPathTemplate": "/api/DoctorProfile/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -134,6 +166,17 @@
     }
   ],
   "SwaggerEndPoints": [
+    {
+      "Key": "service",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "Service API",
+          "Version": "v1",
+          "Url": "http://localhost:5183/swagger/v1/swagger.json"
+        }
+      ]
+    },
     {
       "Key": "profile",
       "TransformByOcelotConfig": false,
