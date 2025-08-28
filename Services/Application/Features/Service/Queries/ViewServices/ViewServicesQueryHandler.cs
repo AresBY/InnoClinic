@@ -4,7 +4,7 @@ using InnoClinic.Services.Domain.Enums;
 
 using MediatR;
 
-namespace InnoClinic.Services.Application.Features.Services.Queries.ViewServices
+namespace InnoClinic.Services.Application.Features.Service.Queries.ViewServices
 {
     public sealed class ViewServicesQueryHandler : IRequestHandler<ViewServicesQuery, ViewServicesResultDto>
     {

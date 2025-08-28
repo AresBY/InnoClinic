@@ -1,6 +1,7 @@
-﻿using InnoClinic.Services.Application.Features.Services.Commands.CreateService;
+﻿using InnoClinic.Services.Application.Features.Service.Queries.ViewServices;
+using InnoClinic.Services.Application.Features.Services.Commands.CreateService;
 using InnoClinic.Services.Application.Features.Services.Commands.EditService;
-using InnoClinic.Services.Application.Features.Services.Queries.ViewServices;
+using InnoClinic.Services.Application.Features.Services.Queries.ViewService;
 
 using InnoClinicCommon.Enums;
 
@@ -68,5 +69,17 @@ namespace InnoClinic.Services.API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Retrieves detailed information about a specific service.
+        /// </summary>
+        /// <param name="serviceId">The ID of the service to view.</param>
+        /// <returns>Returns detailed info of the service.</returns>
+        [HttpGet("{serviceId:guid}")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> ViewService(Guid serviceId, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(new ViewServiceQuery(serviceId));
+            return Ok(result);
+        }
     }
 }
