@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 
-using InnoClinic.Services.Application.Features.Services.Commands.CreateService;
+using InnoClinic.Services.Application.Features.Services.Commands.EditService;
 using InnoClinic.Services.Application.Resources;
 
-public sealed class CreateServiceCommandValidator : AbstractValidator<CreateServiceCommand>
+public sealed class EditServiceCommandValidator : AbstractValidator<EditServiceCommand>
 {
-    public CreateServiceCommandValidator()
+    public EditServiceCommandValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage(ValidationMessages.ServiceName_Required);
@@ -15,9 +15,5 @@ public sealed class CreateServiceCommandValidator : AbstractValidator<CreateServ
 
         RuleFor(x => x.Category)
             .IsInEnum().WithMessage(ValidationMessages.ServiceCategory_Required);
-
-        RuleFor(x => x.Status)
-            .Must(x => x == true || x == false)
-            .WithMessage(ValidationMessages.ServiceStatus_Invalid);
     }
 }
