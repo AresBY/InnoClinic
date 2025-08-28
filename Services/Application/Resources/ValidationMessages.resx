@@ -120,6 +120,9 @@
   <data name="ServiceCategory_Required" xml:space="preserve">
     <value>Please, choose the service category</value>
   </data>
+  <data name="ServiceId_Required" xml:space="preserve">
+    <value>ServiceId is required.</value>
+  </data>
   <data name="ServiceName_Required" xml:space="preserve">
     <value>Please, enter the name</value>
   </data>

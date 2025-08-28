@@ -55,5 +55,13 @@ namespace InnoClinic.Services.Infrastructure.Repositories
                 .OrderBy(s => s.Name)
                 .ToListAsync(cancellationToken);
         }
+
+        public async Task UpdateStatusOnlyAsync(Service service, CancellationToken cancellationToken)
+        {
+            _context.Services.Attach(service);
+            _context.Entry(service).Property(s => s.Status).IsModified = true;
+
+            await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }
