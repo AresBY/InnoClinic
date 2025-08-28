@@ -122,7 +122,7 @@ if (IsDevelopment || IsDocker)
     app.UseDeveloperExceptionPage();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseCors();
 
 app.UseAuthentication();
