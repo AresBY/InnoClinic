@@ -2,7 +2,7 @@
 
 using MediatR;
 
-namespace InnoClinic.Services.Application.Features.Services.Queries.ViewServices
+namespace InnoClinic.Services.Application.Features.Service.Queries.ViewServices
 {
     public sealed class ViewServicesQuery : IRequest<ViewServicesResultDto>
     {
