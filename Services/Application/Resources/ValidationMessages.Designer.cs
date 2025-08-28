@@ -70,6 +70,15 @@ namespace InnoClinic.Services.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ServiceId is required..
+        /// </summary>
+        internal static string ServiceId_Required {
+            get {
+                return ResourceManager.GetString("ServiceId_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please, enter the name.
         /// </summary>
         internal static string ServiceName_Required {

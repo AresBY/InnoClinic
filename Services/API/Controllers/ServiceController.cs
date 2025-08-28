@@ -81,5 +81,22 @@ namespace InnoClinic.Services.API.Controllers
             var result = await _mediator.Send(new ViewServiceQuery(serviceId));
             return Ok(result);
         }
+
+        /// <summary>
+        /// Changes the status of a service (Active/Inactive).
+        /// </summary>
+        /// <remarks>
+        /// Only Receptionist can change service status. When set to Inactive, the service becomes invisible to patients.
+        /// </remarks>
+        /// <param name="command">Command containing ServiceId and new Status.</param>
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        /// <returns>Returns HTTP 200 if status is successfully updated.</returns>
+        [HttpPatch("ChangeStatus")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> ChangeStatus([FromBody] ChangeServiceStatusCommand command, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(command, cancellationToken);
+            return Ok();
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace InnoClinic.Services.Application.Interfaces.Repositories
         Task UpdateAsync(Service service, CancellationToken cancellationToken);
         Task DeleteAsync(Guid id, CancellationToken cancellationToken);
         Task<IReadOnlyList<Service>> GetActiveServicesByCategoryAsync(ServiceCategory category, CancellationToken cancellationToken);
+        Task UpdateStatusOnlyAsync(Service service, CancellationToken cancellationToken);
     }
 }
