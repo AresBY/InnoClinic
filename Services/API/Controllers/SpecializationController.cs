@@ -1,4 +1,5 @@
-﻿using InnoClinic.Services.Application.Features.Specialization.Commands.CreateSpecialization;
+﻿using InnoClinic.Services.Application.Features.Specialization.Commands.ChangeStatus;
+using InnoClinic.Services.Application.Features.Specialization.Commands.CreateSpecialization;
 
 using InnoClinicCommon.Enums;
 
@@ -26,6 +27,14 @@ namespace InnoClinic.Specializations.API.Controllers
         {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new { SpecializationId = result });
+        }
+
+        [HttpPatch("ChangeStatus")]
+        [Authorize(Roles = nameof(UserRole.Receptionist))]
+        public async Task<IActionResult> ChangeStatus([FromBody] ChangeSpecializationStatusCommand command, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 }

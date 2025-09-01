@@ -96,6 +96,11 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddHttpClient();
+builder.Services.AddHttpContextAccessor();
+
+
+
 var app = builder.Build();
 
 

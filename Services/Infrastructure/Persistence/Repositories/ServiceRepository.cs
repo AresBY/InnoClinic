@@ -63,5 +63,12 @@ namespace InnoClinic.Services.Infrastructure.Repositories
 
             await _context.SaveChangesAsync(cancellationToken);
         }
+
+        public async Task<IEnumerable<Service>> GetBySpecializationIdAsync(Guid specializationId, CancellationToken cancellationToken)
+        {
+            return await _context.Services
+                .Where(s => s.SpecializationId == specializationId)
+                .ToListAsync(cancellationToken);
+        }
     }
 }
