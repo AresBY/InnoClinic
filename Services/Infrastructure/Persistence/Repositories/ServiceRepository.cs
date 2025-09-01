@@ -51,7 +51,7 @@ namespace InnoClinic.Services.Infrastructure.Repositories
         public async Task<IReadOnlyList<Service>> GetActiveServicesByCategoryAsync(ServiceCategory category, CancellationToken cancellationToken)
         {
             return await _context.Services
-                .Where(s => s.Status && s.Category == category)
+                .Where(s => s.IsActive && s.Category == category)
                 .OrderBy(s => s.Name)
                 .ToListAsync(cancellationToken);
         }
@@ -59,7 +59,7 @@ namespace InnoClinic.Services.Infrastructure.Repositories
         public async Task UpdateStatusOnlyAsync(Service service, CancellationToken cancellationToken)
         {
             _context.Services.Attach(service);
-            _context.Entry(service).Property(s => s.Status).IsModified = true;
+            _context.Entry(service).Property(s => s.IsActive).IsModified = true;
 
             await _context.SaveChangesAsync(cancellationToken);
         }

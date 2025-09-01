@@ -10,5 +10,7 @@ namespace InnoClinic.Services.Application.Features.Services.Commands.CreateServi
         public decimal Price { get; init; }
         public ServiceCategory Category { get; init; }
         public bool Status { get; init; } = false;
+
+        public Guid SpecializationId { get; init; }
     }
 }

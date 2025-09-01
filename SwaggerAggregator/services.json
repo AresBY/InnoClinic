@@ -3,7 +3,7 @@
     "Key": "service",
     "Name": "Service API",
     "Port": 5183,
-    "Controllers": [ "Service" ]
+    "Controllers": [ "Service", "Specialization" ]
   },
   {
     "Key": "profile",

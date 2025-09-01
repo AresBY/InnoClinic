@@ -19,11 +19,10 @@ namespace InnoClinic.Services.Application.Features.Service.Queries.ViewServices
         {
             var result = new ViewServicesResultDto();
 
-            // --- Consultations (группировка по Specialization) ---
             var consultations = await _repository.GetActiveServicesByCategoryAsync(ServiceCategory.Consultation, cancellationToken);
 
             var groupedConsultations = consultations
-                .GroupBy(s => s.Specialization ?? "Unknown")
+                .GroupBy(s => s.Specialization?.Name ?? "Unknown")
                 .Select(g => new ConsultationGroupDto
                 {
                     Specialization = g.Key,
@@ -32,8 +31,7 @@ namespace InnoClinic.Services.Application.Features.Service.Queries.ViewServices
                         Id = s.Id,
                         Name = s.Name,
                         Price = s.Price,
-                        Category = s.Category,
-                        Specialization = s.Specialization
+                        Category = s.Category
                     }).ToList()
                 })
                 .ToList();
@@ -46,8 +44,7 @@ namespace InnoClinic.Services.Application.Features.Service.Queries.ViewServices
                 Id = s.Id,
                 Name = s.Name,
                 Price = s.Price,
-                Category = s.Category,
-                Specialization = s.Specialization
+                Category = s.Category
             }).ToList();
 
             var analyses = await _repository.GetActiveServicesByCategoryAsync(ServiceCategory.Analyses, cancellationToken);
@@ -56,8 +53,7 @@ namespace InnoClinic.Services.Application.Features.Service.Queries.ViewServices
                 Id = s.Id,
                 Name = s.Name,
                 Price = s.Price,
-                Category = s.Category,
-                Specialization = s.Specialization
+                Category = s.Category
             }).ToList();
 
             return result;

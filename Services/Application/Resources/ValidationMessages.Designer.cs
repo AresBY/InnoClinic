@@ -70,6 +70,15 @@ namespace InnoClinic.Services.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid service category.
+        /// </summary>
+        internal static string ServiceCategoryInvalid {
+            get {
+                return ResourceManager.GetString("ServiceCategoryInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ServiceId is required..
         /// </summary>
         internal static string ServiceId_Required {
@@ -88,6 +97,15 @@ namespace InnoClinic.Services.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Service name is required.
+        /// </summary>
+        internal static string ServiceNameRequired {
+            get {
+                return ResourceManager.GetString("ServiceNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You&apos;ve entered an invalid price.
         /// </summary>
         internal static string ServicePrice_Invalid {
@@ -97,11 +115,38 @@ namespace InnoClinic.Services.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price must be greater than 0.
+        /// </summary>
+        internal static string ServicePriceInvalid {
+            get {
+                return ResourceManager.GetString("ServicePriceInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one service is required.
+        /// </summary>
+        internal static string ServicesRequired {
+            get {
+                return ResourceManager.GetString("ServicesRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status must be true (Active) or false (Inactive).
         /// </summary>
         internal static string ServiceStatus_Invalid {
             get {
                 return ResourceManager.GetString("ServiceStatus_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please, enter the name.
+        /// </summary>
+        internal static string SpecializationNameRequired {
+            get {
+                return ResourceManager.GetString("SpecializationNameRequired", resourceCulture);
             }
         }
     }

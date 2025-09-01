@@ -32,4 +32,8 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Features\Specialization\Queries\" />
+	</ItemGroup>
+
 </Project>

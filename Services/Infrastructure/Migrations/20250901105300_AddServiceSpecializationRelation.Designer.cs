@@ -4,6 +4,7 @@ using InnoClinic.Services.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InnoClinic.Services.Infrastructure.Migrations
 {
     [DbContext(typeof(ServicesDbContext))]
-    partial class ServicesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250901105300_AddServiceSpecializationRelation")]
+    partial class AddServiceSpecializationRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,11 @@ namespace InnoClinic.Services.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Category")
+                        .HasMaxLength(100)
                         .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
+                        .HasMaxLength(50)
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")

@@ -9,6 +9,7 @@ namespace InnoClinic.Services.Application.Features.Services.Commands.EditService
         string Name,
         decimal Price,
         ServiceCategory Category,
-        bool Status
+        bool Status,
+        Guid SpecializationId
     ) : IRequest<Unit>;
 }

@@ -24,7 +24,8 @@ namespace InnoClinic.Services.Application.Features.Services.Commands.EditService
             service.Name = request.Name;
             service.Price = request.Price;
             service.Category = request.Category;
-            service.Status = request.Status;
+            service.IsActive = request.Status;
+            service.SpecializationId = request.SpecializationId;
 
             await _repository.UpdateAsync(service, cancellationToken);
 

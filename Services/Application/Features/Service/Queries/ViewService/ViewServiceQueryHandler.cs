@@ -27,7 +27,7 @@ namespace InnoClinic.Services.Application.Features.Services.Queries.ViewService
                 service.Name,
                 service.Price,
                 service.Category,
-                service.Status
+                service.IsActive
             );
         }
     }
