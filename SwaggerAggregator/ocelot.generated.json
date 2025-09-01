@@ -19,6 +19,24 @@
       ]
     },
     {
+      "DownstreamPathTemplate": "/api/Specialization/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5183
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Specialization/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH"
+      ]
+    },
+    {
       "DownstreamPathTemplate": "/swagger/v1/swagger.json",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

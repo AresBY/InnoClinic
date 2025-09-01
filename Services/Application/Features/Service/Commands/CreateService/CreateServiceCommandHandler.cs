@@ -21,7 +21,8 @@ namespace InnoClinic.Services.Application.Features.Services.Commands.CreateServi
                 Name = request.Name,
                 Price = request.Price,
                 Category = request.Category,
-                Status = request.Status
+                IsActive = request.Status,
+                SpecializationId = request.SpecializationId
             };
 
             await _serviceRepository.AddAsync(service, cancellationToken);

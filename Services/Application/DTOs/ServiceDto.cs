@@ -8,6 +8,6 @@ namespace InnoClinic.Services.Application.DTOs
         public string Name { get; set; } = null!;
         public decimal Price { get; set; }
         public ServiceCategory Category { get; set; }
-        public string? Specialization { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }

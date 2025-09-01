@@ -66,6 +66,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(CreateServiceCommandValidator)
 builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<ISpecializationRepository, SpecializationRepository>();
 
 
 // --- Controllers ---

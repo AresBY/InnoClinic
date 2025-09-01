@@ -21,7 +21,7 @@ namespace InnoClinic.Services.Application.Features.Services.Commands.ChangeServi
             if (service is null)
                 throw new NotFoundException($"Service with id {request.ServiceId} not found");
 
-            service.Status = request.Status;
+            service.IsActive = request.Status;
 
             await _repository.UpdateStatusOnlyAsync(service, cancellationToken);
 

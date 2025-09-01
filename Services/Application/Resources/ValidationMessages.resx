@@ -117,19 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ServiceCategoryInvalid" xml:space="preserve">
+    <value>Invalid service category</value>
+  </data>
   <data name="ServiceCategory_Required" xml:space="preserve">
     <value>Please, choose the service category</value>
   </data>
   <data name="ServiceId_Required" xml:space="preserve">
     <value>ServiceId is required.</value>
   </data>
+  <data name="ServiceNameRequired" xml:space="preserve">
+    <value>Service name is required</value>
+  </data>
   <data name="ServiceName_Required" xml:space="preserve">
     <value>Please, enter the name</value>
+  </data>
+  <data name="ServicePriceInvalid" xml:space="preserve">
+    <value>Price must be greater than 0</value>
   </data>
   <data name="ServicePrice_Invalid" xml:space="preserve">
     <value>You've entered an invalid price</value>
   </data>
+  <data name="ServicesRequired" xml:space="preserve">
+    <value>At least one service is required</value>
+  </data>
   <data name="ServiceStatus_Invalid" xml:space="preserve">
     <value>Status must be true (Active) or false (Inactive)</value>
+  </data>
+  <data name="SpecializationNameRequired" xml:space="preserve">
+    <value>Please, enter the name</value>
   </data>
 </root>

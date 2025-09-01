@@ -1,4 +1,5 @@
 ﻿using InnoClinic.Services.Domain.Entities;
+using InnoClinic.Specializations.Domain.Entities;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,8 @@ namespace InnoClinic.Services.Infrastructure.Persistence
         }
 
         public DbSet<Service> Services { get; set; } = null!;
+
+        public DbSet<Specialization> Specializations { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,12 +34,11 @@ namespace InnoClinic.Services.Infrastructure.Persistence
                       .HasColumnType("decimal(18,2)");
 
                 entity.Property(e => e.Category)
-                      .IsRequired()
-                      .HasMaxLength(100);
+                      .IsRequired();
 
-                entity.Property(e => e.Status)
-                      .IsRequired()
-                      .HasMaxLength(50);
+                entity.Property(e => e.IsActive)
+                      .IsRequired();
+
             });
         }
     }
