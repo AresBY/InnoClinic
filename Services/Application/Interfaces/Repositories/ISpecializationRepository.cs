@@ -9,5 +9,6 @@ namespace InnoClinic.Services.Application.Interfaces.Repositories
         Task<List<Specialization>> GetAllAsync(CancellationToken cancellationToken);
         Task UpdateAsync(Specialization specialization, CancellationToken cancellationToken);
         Task DeleteAsync(Guid id, CancellationToken cancellationToken);
+        Task<Specialization?> GetByIdWithServicesAsync(Guid specializationId, CancellationToken cancellationToken);
     }
 }
