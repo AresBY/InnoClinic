@@ -3,7 +3,9 @@ using FluentValidation.AspNetCore;
 
 using InnoClinic.Services.Application.Features.Service.Examples;
 using InnoClinic.Services.Application.Features.Services.Commands.CreateService;
+using InnoClinic.Services.Application.Interfaces.Caching;
 using InnoClinic.Services.Application.Interfaces.Repositories;
+using InnoClinic.Services.Infrastructure.Caching;
 using InnoClinic.Services.Infrastructure.Persistence;
 using InnoClinic.Services.Infrastructure.Repositories;
 
@@ -18,6 +20,18 @@ using Serilog;
 using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// in-memory cash
+builder.Services.AddMemoryCache();
+
+// Redis
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = "localhost:6379";
+    options.InstanceName = "InnoClinic:";
+});
+
+builder.Services.AddScoped<ICacheService, CacheService>();
 
 // --- Environment Flags ---
 bool IsDevelopment = builder.Environment.IsEnvironment("Development");
