@@ -18,6 +18,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Resources\CacheKeys.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>CacheKeys.resx</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\ValidationMessages.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -26,6 +31,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Update="Resources\CacheKeys.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>CacheKeys.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Resources\ValidationMessages.resx">
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
