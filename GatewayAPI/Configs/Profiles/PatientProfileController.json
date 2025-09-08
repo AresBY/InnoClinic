@@ -1,0 +1,52 @@
+{
+  "Name": "PatientProfileController",
+  "BaseUrl": "http://localhost:5181",
+  "Port": 5181,
+  "Endpoints": [
+    {
+      "Path": "/api/PatientProfile/CreatePatientProfileByOwn",
+      "Method": "POST",
+      "Roles": [ "Patient" ]
+    },
+    {
+      "Path": "/api/PatientProfile/GetPatientsProfilesAll",
+      "Method": "GET",
+      "Roles": []
+    },
+    {
+      "Path": "/api/PatientProfile/GetPatientProfileByOwn",
+      "Method": "GET",
+      "Roles": [ "Patient" ]
+    },
+    {
+      "Path": "/api/PatientProfile/GetPatientProfileByDoctor/{patientId}",
+      "Method": "GET",
+      "Roles": [ "Doctor" ]
+    },
+    {
+      "Path": "/api/PatientProfile/receptionist/create",
+      "Method": "POST",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/PatientProfile/receptionist/patients/{patientId}",
+      "Method": "DELETE",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/PatientProfile/edit",
+      "Method": "PUT",
+      "Roles": [ "Patient", "Receptionist" ]
+    },
+    {
+      "Path": "/api/PatientProfile/receptionist/search",
+      "Method": "GET",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/PatientProfile/receptionist/patients/{patientId}",
+      "Method": "GET",
+      "Roles": [ "Receptionist" ]
+    }
+  ]
+}

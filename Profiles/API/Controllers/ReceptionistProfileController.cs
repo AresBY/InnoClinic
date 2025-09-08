@@ -4,11 +4,8 @@ using InnoClinic.Profiles.Application.Features.Receptionist.Commands.EditRecepti
 using InnoClinic.Profiles.Application.Features.Receptionist.Queries;
 using InnoClinic.Profiles.Application.Features.Receptionist.Queries.GetReceptionistById;
 
-using InnoClinicCommon.Enums;
-
 using MediatR;
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnoClinic.Profiles.API.Controllers
@@ -39,7 +36,6 @@ namespace InnoClinic.Profiles.API.Controllers
             /// <param name="cancellationToken">Cancellation token.</param>
             /// <returns>HTTP 201 with ID of the created receptionist profile.</returns>
             [HttpPost("receptionist/create")]
-            [Authorize(Roles = nameof(UserRole.Receptionist))]
             public async Task<IActionResult> CreateReceptionistProfile([FromBody] CreateReceptionistProfileCommand request, CancellationToken cancellationToken)
             {
                 var id = await _mediator.Send(request, cancellationToken);
@@ -58,7 +54,6 @@ namespace InnoClinic.Profiles.API.Controllers
             /// Returns HTTP 204 No Content on successful deletion.
             /// </remarks>
             [HttpDelete("{profileId}")]
-            [Authorize(Roles = nameof(UserRole.Receptionist))]
             public async Task<IActionResult> DeleteReceptionistProfile(Guid profileId, CancellationToken cancellationToken)
             {
                 await _mediator.Send(new DeleteReceptionistProfileCommand { ProfileId = profileId }, cancellationToken);
@@ -73,7 +68,6 @@ namespace InnoClinic.Profiles.API.Controllers
             /// <param name="cancellationToken">Token to cancel the request if needed.</param>
             /// <returns>HTTP 200 with a list of receptionists.</returns>
             [HttpGet]
-            [Authorize(Roles = nameof(UserRole.Receptionist))]
             public async Task<IActionResult> GetAllReceptionists(CancellationToken cancellationToken)
             {
                 var result = await _mediator.Send(new GetAllReceptionistsQuery(), cancellationToken);
@@ -87,7 +81,6 @@ namespace InnoClinic.Profiles.API.Controllers
             /// <param name="cancellationToken">Cancellation token.</param>
             /// <returns>Receptionist profile.</returns>
             [HttpGet("{id}")]
-            [Authorize(Roles = nameof(UserRole.Receptionist))]
             public async Task<IActionResult> GetReceptionistById(Guid id, CancellationToken cancellationToken)
             {
                 var result = await _mediator.Send(new GetReceptionistByIdQuery { ProfileId = id }, cancellationToken);
@@ -101,7 +94,6 @@ namespace InnoClinic.Profiles.API.Controllers
             /// <param name="cancellationToken">Cancellation token.</param>
             /// <returns>No content if update succeeded.</returns>
             [HttpPut("edit")]
-            [Authorize(Roles = nameof(UserRole.Receptionist))]
             public async Task<IActionResult> EditReceptionistProfile([FromBody] EditReceptionistProfileCommand request, CancellationToken cancellationToken)
             {
                 await _mediator.Send(request, cancellationToken);

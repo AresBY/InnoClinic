@@ -4,11 +4,8 @@ using InnoClinic.Services.Application.Features.Specialization.Commands.Update;
 using InnoClinic.Services.Application.Features.Specialization.Queries.GetAll;
 using InnoClinic.Services.Application.Features.Specialization.Queries.GetById;
 
-using InnoClinicCommon.Enums;
-
 using MediatR;
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnoClinic.Specializations.API.Controllers
@@ -29,7 +26,6 @@ namespace InnoClinic.Specializations.API.Controllers
         /// Accessible only for Receptionists.
         /// </summary>
         [HttpPost]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> CreateSpecialization([FromBody] CreateSpecializationCommand command, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(command, cancellationToken);
@@ -41,7 +37,6 @@ namespace InnoClinic.Specializations.API.Controllers
         /// Accessible only for Receptionists.
         /// </summary>
         [HttpPatch("ChangeStatus")]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> ChangeStatus([FromBody] ChangeSpecializationStatusCommand command, CancellationToken cancellationToken)
         {
             await _mediator.Send(command);

@@ -9,7 +9,6 @@ using InnoClinic.Profiles.Application.Interfaces.Repositories;
 using InnoClinic.Profiles.Application.StaticClases;
 using InnoClinic.Profiles.Infrastructure.Persistence.Repositories;
 
-using InnoClinicCommon.JWT;
 using InnoClinicCommon.Middleware;
 using InnoClinicCommon.Swagger;
 
@@ -57,10 +56,6 @@ else if (IsDocker)
     builder.Services.AddDbContext<ProfileDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 }
-
-// --- JWT ---
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-JwtServiceExtensions.AddJwtAuthentication(builder.Services, builder.Configuration);
 
 // --- MediatR & FluentValidation ---
 builder.Services.AddMediatR(cfg =>
@@ -158,8 +153,6 @@ if (IsDevelopment || IsDocker)
 app.UseHttpsRedirection();
 app.UseCors();
 
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.MapControllers();
 app.Run();

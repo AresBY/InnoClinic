@@ -21,6 +21,10 @@
       {
         "Path": "Services\\API\\API.csproj",
         "Action": "Start"
+      },
+      {
+        "Path": "GatewayAPI\\GatewayAPI.csproj",
+        "Action": "Start"
       }
     ]
   }

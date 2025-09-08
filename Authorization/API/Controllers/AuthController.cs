@@ -11,7 +11,6 @@ using InnoClinicCommon.Enums;
 
 using MediatR;
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using Swashbuckle.AspNetCore.Filters;
@@ -55,7 +54,6 @@ namespace InnoClinic.Authorization.API.Controllers
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Basic user info (ID and email)</returns>
         [HttpPost(nameof(Register))]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> Register([FromBody] RegisterUserCommand command, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(command, cancellationToken);

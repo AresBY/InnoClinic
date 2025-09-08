@@ -1,0 +1,32 @@
+{
+  "Name": "ReceptionistProfileController",
+  "BaseUrl": "http://localhost:5181",
+  "Port": 5181,
+  "Endpoints": [
+    {
+      "Path": "/api/ReceptionistProfile/receptionist/create",
+      "Method": "POST",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/ReceptionistProfile/{profileId}",
+      "Method": "DELETE",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/ReceptionistProfile",
+      "Method": "GET",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/ReceptionistProfile/{id}",
+      "Method": "GET",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/ReceptionistProfile/edit",
+      "Method": "PUT",
+      "Roles": [ "Receptionist" ]
+    }
+  ]
+}

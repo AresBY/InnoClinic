@@ -1,0 +1,32 @@
+{
+  "Name": "OfficeController",
+  "BaseUrl": "http://localhost:5180",
+  "Port": 5180,
+  "Endpoints": [
+    {
+      "Path": "/api/Office/CreateOffice",
+      "Method": "POST",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/Office/UpdateOffice/{id}",
+      "Method": "PUT",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/Office/GetOfficeAll",
+      "Method": "GET",
+      "Roles": []
+    },
+    {
+      "Path": "/api/Office/GetOffice/{id}",
+      "Method": "GET",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/Office/map",
+      "Method": "GET",
+      "Roles": []
+    }
+  ]
+}

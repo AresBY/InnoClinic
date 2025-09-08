@@ -10,11 +10,8 @@ using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientProfile
 using InnoClinic.Profiles.Application.Features.Patient.Queries.GetPatientsProfilesAll;
 using InnoClinic.Profiles.Application.Features.Patient.Queries.SearchPatients;
 
-using InnoClinicCommon.Enums;
-
 using MediatR;
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnoClinic.Profiles.API.Controllers
@@ -43,7 +40,6 @@ namespace InnoClinic.Profiles.API.Controllers
         /// <param name="cancellationToken">Token for cancelling the operation.</param>
         /// <returns>Created profile ID or match info.</returns>
         [HttpPost(nameof(CreatePatientProfileByOwn))]
-        [Authorize(Roles = nameof(UserRole.Patient))]
         public async Task<IActionResult> CreatePatientProfileByOwn([FromBody] CreatePatientProfileByOwnCommand command, CancellationToken cancellationToken)
         {
             var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -76,7 +72,6 @@ namespace InnoClinic.Profiles.API.Controllers
         /// </summary>
         /// <returns>Patient profile data</returns>
         [HttpGet(nameof(GetPatientProfileByOwn))]
-        [Authorize(Roles = nameof(UserRole.Patient))]
         public async Task<IActionResult> GetPatientProfileByOwn()
         {
             var patientId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -97,7 +92,6 @@ namespace InnoClinic.Profiles.API.Controllers
         /// <param name="patientId">The ID of the patient whose profile is being requested</param>
         /// <returns>Patient profile data</returns>
         [HttpGet(nameof(GetPatientProfileByDoctor) + "/{patientId:guid}")]
-        [Authorize(Roles = nameof(UserRole.Doctor))]
         public async Task<IActionResult> GetPatientProfileByDoctor(Guid patientId)
         {
             var query = new GetPatientProfileByDoctorQuery(patientId);
@@ -112,7 +106,6 @@ namespace InnoClinic.Profiles.API.Controllers
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>HTTP 201 with the ID of the created patient.</returns>
         [HttpPost("receptionist/create")]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> CreatePatientProfileByReceptionist([FromBody] CreatePatientProfileByOwnCommand request, CancellationToken cancellationToken)
         {
             var patientId = await _mediator.Send(request, cancellationToken);
@@ -126,7 +119,6 @@ namespace InnoClinic.Profiles.API.Controllers
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>HTTP 204 No Content if deletion is successful.</returns>
         [HttpDelete("receptionist/patients/{patientId}")]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> DeletePatientProfile(Guid patientId, CancellationToken cancellationToken)
         {
             await _mediator.Send(new DeletePatientProfileCommand(patientId), cancellationToken);
@@ -140,7 +132,6 @@ namespace InnoClinic.Profiles.API.Controllers
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>HTTP 204 No Content.</returns>
         [HttpPut("edit")]
-        [Authorize(Roles = $"{nameof(UserRole.Patient)},{nameof(UserRole.Receptionist)}")]
         public async Task<IActionResult> UpdatePatientProfile([FromBody] UpdatePatientProfileCommand request, CancellationToken cancellationToken)
         {
             await _mediator.Send(request, cancellationToken);
@@ -154,7 +145,6 @@ namespace InnoClinic.Profiles.API.Controllers
         /// <param name="cancellationToken">Cancellation token for request cancellation.</param>
         /// <returns>List of patients matching the search criteria.</returns>
         [HttpGet("receptionist/search")]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> SearchPatients([FromQuery] string? fullName, CancellationToken cancellationToken)
         {
             var patients = await _mediator.Send(new SearchPatientsQuery { FullName = fullName }, cancellationToken);
@@ -168,7 +158,6 @@ namespace InnoClinic.Profiles.API.Controllers
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Patient's profile with personal information</returns>
         [HttpGet("receptionist/patients/{patientId}")]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> GetPatientProfileByReceptionist(Guid patientId, CancellationToken cancellationToken)
         {
             var profile = await _mediator.Send(new GetPatientProfileByReceptionistQuery { PatientId = patientId }, cancellationToken);

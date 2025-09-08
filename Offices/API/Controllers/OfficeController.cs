@@ -4,11 +4,8 @@ using InnoClinic.Offices.Application.Features.Office.Queries.GetOffice;
 using InnoClinic.Offices.Application.Features.Office.Queries.GetOfficeAll;
 using InnoClinic.Offices.Application.Features.Office.Queries.GetOfficesForMap;
 
-using InnoClinicCommon.Enums;
-
 using MediatR;
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnoClinic.Offices.API.Controllers
@@ -35,7 +32,6 @@ namespace InnoClinic.Offices.API.Controllers
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ID of the created office</returns>
         [HttpPost(nameof(CreateOffice))]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> CreateOffice([FromBody] CreateOfficeCommand command, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(command, cancellationToken);
@@ -50,7 +46,6 @@ namespace InnoClinic.Offices.API.Controllers
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Returns 200 OK if update is successful; 400 Bad Request if IDs do not match.</returns>
         [HttpPut(nameof(UpdateOffice) + "/{id}")]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> UpdateOffice(string id, [FromBody] UpdateOfficeCommand command, CancellationToken cancellationToken)
         {
             if (id != command.Id)
@@ -87,7 +82,6 @@ namespace InnoClinic.Offices.API.Controllers
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Office details</returns>
         [HttpGet(nameof(GetOffice) + "/{id}")]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> GetOffice(string id, CancellationToken cancellationToken)
         {
             var office = await _mediator.Send(new GetOfficeByIdQuery(id), cancellationToken);

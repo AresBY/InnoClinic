@@ -3,11 +3,8 @@ using InnoClinic.Services.Application.Features.Services.Commands.CreateService;
 using InnoClinic.Services.Application.Features.Services.Commands.EditService;
 using InnoClinic.Services.Application.Features.Services.Queries.ViewService;
 
-using InnoClinicCommon.Enums;
-
 using MediatR;
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnoClinic.Services.API.Controllers
@@ -37,7 +34,6 @@ namespace InnoClinic.Services.API.Controllers
         /// <param name="cancellationToken">Token to cancel the operation.</param>
         /// <returns>Returns the ID of the newly created service.</returns>
         [HttpPost]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> CreateService([FromBody] CreateServiceCommand command, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(command, cancellationToken);
@@ -62,7 +58,6 @@ namespace InnoClinic.Services.API.Controllers
         /// <param name="cancellationToken">Token to cancel the operation.</param>
         /// <returns>Returns HTTP 200 if the update is successful.</returns>
         [HttpPut]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> EditService([FromBody] EditServiceCommand command, CancellationToken cancellationToken)
         {
             await _mediator.Send(command, cancellationToken);
@@ -75,7 +70,6 @@ namespace InnoClinic.Services.API.Controllers
         /// <param name="serviceId">The ID of the service to view.</param>
         /// <returns>Returns detailed info of the service.</returns>
         [HttpGet("{serviceId:guid}")]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> ViewService(Guid serviceId, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new ViewServiceQuery(serviceId));
@@ -92,7 +86,6 @@ namespace InnoClinic.Services.API.Controllers
         /// <param name="cancellationToken">Token to cancel the operation.</param>
         /// <returns>Returns HTTP 200 if status is successfully updated.</returns>
         [HttpPatch("ChangeStatus")]
-        [Authorize(Roles = nameof(UserRole.Receptionist))]
         public async Task<IActionResult> ChangeStatus([FromBody] ChangeServiceStatusCommand command, CancellationToken cancellationToken)
         {
             await _mediator.Send(command, cancellationToken);

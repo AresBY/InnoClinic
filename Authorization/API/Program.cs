@@ -38,7 +38,6 @@ builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("Email:Gmail"));
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-JwtServiceExtensions.AddJwtAuthentication(builder.Services, builder.Configuration);
 
 bool IsDevelopment = builder.Environment.IsEnvironment("Development");
 bool IsDocker = builder.Environment.IsEnvironment("Docker");
@@ -155,9 +154,6 @@ if (IsDevelopment || IsDocker)
 
 }
 app.UseCors();
-
-app.UseAuthentication();
-app.UseAuthorization();
 
 
 app.MapControllers();
