@@ -1,36 +1,70 @@
 services:
-  db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: innoclinic-mssql
+  gateway:
+    build:
+      context: .
+      dockerfile: GatewayAPI/Dockerfile
+    container_name: innoclinic-gateway
     ports:
-      - "1433:1433"
-    environment:
-      - SA_PASSWORD=Your_strong_password123
-      - ACCEPT_EULA=Y
-    volumes:
-      - mssqldata:/var/opt/mssql
-    restart: unless-stopped
+      - "5000:8080"
+    depends_on:
+      - authorization
+      - profiles
+      - services
+      - offices
+    networks:
+      - innoclinic_net
+    restart: always
 
   authorization:
     build:
       context: .
       dockerfile: Authorization/API/Dockerfile
-    ports:
-      - "5179:80"
+    container_name: innoclinic-authorization
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=db;Database=InnoClinic_Auth;User=sa;Password=Your_strong_password123;TrustServerCertificate=True;
+      - ConnectionStrings__DefaultConnection=Server=mssql;Database=InnoClinic_Auth;User=sa;Password=Your_strong_password123;TrustServerCertificate=True;
     depends_on:
-      - db
+      - mssql
+    networks:
+      - innoclinic_net
+    restart: always
+
+  profiles:
+    build:
+      context: .
+      dockerfile: Profiles/API/Dockerfile
+    container_name: innoclinic-profiles
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=mssql;Database=InnoClinic_Profiles;User=sa;Password=Your_strong_password123;TrustServerCertificate=True;
+    depends_on:
+      - mssql
+    networks:
+      - innoclinic_net
+    restart: always
+
+  services:
+    build:
+      context: .
+      dockerfile: Services/API/Dockerfile
+    container_name: innoclinic-services
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=mssql;Database=InnoClinic_Services;User=sa;Password=Your_strong_password123;TrustServerCertificate=True;
+    depends_on:
+      - mssql
+    networks:
+      - innoclinic_net
     restart: always
 
   offices:
     build:
       context: .
       dockerfile: Offices/API/Dockerfile
-    ports:
-      - "5180:80"
+    container_name: innoclinic-offices
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
@@ -38,16 +72,48 @@ services:
       - Mongo__DatabaseName=InnoClinic_Offices
     depends_on:
       - office-mongo
+    networks:
+      - innoclinic_net
     restart: always
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: innoclinic-mssql
+    environment:
+      - SA_PASSWORD=Your_strong_password123
+      - ACCEPT_EULA=Y
+    volumes:
+      - mssqldata:/var/opt/mssql
+    networks:
+      - innoclinic_net
+    restart: unless-stopped
 
   office-mongo:
     image: mongo:6.0
-    ports:
-      - "27017:27017"
+    container_name: innoclinic-office-mongo
     volumes:
       - mongo_data:/data/db
+    networks:
+      - innoclinic_net
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: innoclinic-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - innoclinic_net
     restart: unless-stopped
 
 volumes:
-  mongo_data:
   mssqldata:
+  mongo_data:
+
+networks:
+  innoclinic_net:
+    driver: bridge

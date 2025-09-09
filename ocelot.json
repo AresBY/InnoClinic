@@ -1,852 +1,12 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/Auth/RegisterPatient",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5179
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Auth/RegisterPatient",
-      "UpstreamHttpMethod": [
-        "POST"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/Auth/Register",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5179
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Auth/Register",
-      "UpstreamHttpMethod": [
-        "POST"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/Auth/GetAllUsers",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5179
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Auth/GetAllUsers",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/Auth/ConfirmEmail",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5179
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Auth/ConfirmEmail",
-      "UpstreamHttpMethod": [
-        "POST"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/Auth/SignIn",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5179
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Auth/SignIn",
-      "UpstreamHttpMethod": [
-        "POST"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/Auth/CheckEmailExists",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5179
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Auth/CheckEmailExists",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/Auth/Logout",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5179
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Auth/Logout",
-      "UpstreamHttpMethod": [
-        "POST"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/Auth/RefreshToken",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5179
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Auth/RefreshToken",
-      "UpstreamHttpMethod": [
-        "POST"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/Office/CreateOffice",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5180
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Office/CreateOffice",
-      "UpstreamHttpMethod": [
-        "POST"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/Office/UpdateOffice/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5180
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Office/UpdateOffice/{id}",
-      "UpstreamHttpMethod": [
-        "PUT"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/Office/GetOfficeAll",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5180
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Office/GetOfficeAll",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/Office/GetOffice/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5180
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Office/GetOffice/{id}",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/Office/map",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5180
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Office/map",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile",
-      "UpstreamHttpMethod": [
-        "POST"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile/me",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile/me",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Doctor"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile/me",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile/me",
-      "UpstreamHttpMethod": [
-        "PUT"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Doctor,Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile/{doctorId}/status",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile/{doctorId}/status",
-      "UpstreamHttpMethod": [
-        "PUT"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile/filter",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile/filter",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile/receptionist/filter",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile/receptionist/filter",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile/map",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile/map",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile/filter/by-specialization",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile/filter/by-specialization",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile/search/by-name",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile/search/by-name",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile/receptionist/search/by-name",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile/receptionist/search/by-name",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile/receptionist/profile/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile/receptionist/profile/{id}",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/DoctorProfile/receptionist/doctors",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/DoctorProfile/receptionist/doctors",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/PatientProfile/CreatePatientProfileByOwn",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/PatientProfile/CreatePatientProfileByOwn",
-      "UpstreamHttpMethod": [
-        "POST"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Patient"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/PatientProfile/GetPatientsProfilesAll",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/PatientProfile/GetPatientsProfilesAll",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/PatientProfile/GetPatientProfileByOwn",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/PatientProfile/GetPatientProfileByOwn",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Patient"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/PatientProfile/GetPatientProfileByDoctor/{patientId}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/PatientProfile/GetPatientProfileByDoctor/{patientId}",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Doctor"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/PatientProfile/receptionist/create",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/PatientProfile/receptionist/create",
-      "UpstreamHttpMethod": [
-        "POST"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/PatientProfile/receptionist/patients/{patientId}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/PatientProfile/receptionist/patients/{patientId}",
-      "UpstreamHttpMethod": [
-        "DELETE"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/PatientProfile/edit",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/PatientProfile/edit",
-      "UpstreamHttpMethod": [
-        "PUT"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Patient,Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/PatientProfile/receptionist/search",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/PatientProfile/receptionist/search",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/PatientProfile/receptionist/patients/{patientId}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/PatientProfile/receptionist/patients/{patientId}",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/ReceptionistProfile/receptionist/create",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/ReceptionistProfile/receptionist/create",
-      "UpstreamHttpMethod": [
-        "POST"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/ReceptionistProfile/{profileId}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/ReceptionistProfile/{profileId}",
-      "UpstreamHttpMethod": [
-        "DELETE"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/ReceptionistProfile",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/ReceptionistProfile",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/ReceptionistProfile/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/ReceptionistProfile/{id}",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/ReceptionistProfile/edit",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5181
-        }
-      ],
-      "UpstreamPathTemplate": "/api/ReceptionistProfile/edit",
-      "UpstreamHttpMethod": [
-        "PUT"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/Service",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5183
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Service",
-      "UpstreamHttpMethod": [
-        "POST"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/Service",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5183
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Service",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/Service",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5183
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Service",
-      "UpstreamHttpMethod": [
-        "PUT"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/Service/{serviceId}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5183
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Service/{serviceId}",
-      "UpstreamHttpMethod": [
-        "GET"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/Service/ChangeStatus",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5183
-        }
-      ],
-      "UpstreamPathTemplate": "/api/Service/ChangeStatus",
-      "UpstreamHttpMethod": [
-        "PATCH"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
-      }
-    },
-    {
       "DownstreamPathTemplate": "/api/Specialization",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5183
+          "Host": "services",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/Specialization",
@@ -866,8 +26,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5183
+          "Host": "services",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/Specialization/ChangeStatus",
@@ -887,8 +47,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5183
+          "Host": "services",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/Specialization/{id}",
@@ -901,8 +61,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5183
+          "Host": "services",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/Specialization",
@@ -915,11 +75,851 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5183
+          "Host": "services",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/Specialization/{id}",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Service",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "services",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Service",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Service",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "services",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Service",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Service",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "services",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Service",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Service/{serviceId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "services",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Service/{serviceId}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Service/ChangeStatus",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "services",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Service/ChangeStatus",
+      "UpstreamHttpMethod": [
+        "PATCH"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Office/CreateOffice",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "offices",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Office/CreateOffice",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Office/UpdateOffice/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "offices",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Office/UpdateOffice/{id}",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Office/GetOfficeAll",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "offices",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Office/GetOfficeAll",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Office/GetOffice/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "offices",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Office/GetOffice/{id}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Office/map",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "offices",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Office/map",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/RegisterPatient",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/RegisterPatient",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/Register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/Register",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/GetAllUsers",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/GetAllUsers",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/ConfirmEmail",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/ConfirmEmail",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/SignIn",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/SignIn",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/CheckEmailExists",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/CheckEmailExists",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/Logout",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/Logout",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/RefreshToken",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/RefreshToken",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile/me",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile/me",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Doctor"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile/me",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile/me",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Doctor,Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile/{doctorId}/status",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile/{doctorId}/status",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile/filter",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile/filter",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile/receptionist/filter",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile/receptionist/filter",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile/map",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile/map",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile/filter/by-specialization",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile/filter/by-specialization",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile/search/by-name",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile/search/by-name",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile/receptionist/search/by-name",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile/receptionist/search/by-name",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile/receptionist/profile/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile/receptionist/profile/{id}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/DoctorProfile/receptionist/doctors",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/DoctorProfile/receptionist/doctors",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/PatientProfile/CreatePatientProfileByOwn",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PatientProfile/CreatePatientProfileByOwn",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Patient"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/PatientProfile/GetPatientsProfilesAll",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PatientProfile/GetPatientsProfilesAll",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/PatientProfile/GetPatientProfileByOwn",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PatientProfile/GetPatientProfileByOwn",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Patient"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/PatientProfile/GetPatientProfileByDoctor/{patientId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PatientProfile/GetPatientProfileByDoctor/{patientId}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Doctor"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/PatientProfile/receptionist/create",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PatientProfile/receptionist/create",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/PatientProfile/receptionist/patients/{patientId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PatientProfile/receptionist/patients/{patientId}",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/PatientProfile/edit",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PatientProfile/edit",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Patient,Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/PatientProfile/receptionist/search",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PatientProfile/receptionist/search",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/PatientProfile/receptionist/patients/{patientId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PatientProfile/receptionist/patients/{patientId}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/ReceptionistProfile/receptionist/create",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/ReceptionistProfile/receptionist/create",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/ReceptionistProfile/{profileId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/ReceptionistProfile/{profileId}",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/ReceptionistProfile",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/ReceptionistProfile",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/ReceptionistProfile/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/ReceptionistProfile/{id}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Receptionist"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/ReceptionistProfile/edit",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profiles",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/ReceptionistProfile/edit",
       "UpstreamHttpMethod": [
         "PUT"
       ],
@@ -934,13 +934,13 @@
   ],
   "SwaggerEndPoints": [
     {
-      "Key": "authorization",
+      "Key": "services",
       "TransformByOcelotConfig": false,
       "Config": [
         {
-          "Name": "Authorization API",
+          "Name": "Services API",
           "Version": "v1",
-          "Url": "http://localhost:5179/swagger/v1/swagger.json"
+          "Url": "http://services:80/swagger/v1/swagger.json"
         }
       ]
     },
@@ -951,7 +951,18 @@
         {
           "Name": "Offices API",
           "Version": "v1",
-          "Url": "http://localhost:5180/swagger/v1/swagger.json"
+          "Url": "http://offices:80/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "auth",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "Auth API",
+          "Version": "v1",
+          "Url": "http://auth:80/swagger/v1/swagger.json"
         }
       ]
     },
@@ -962,25 +973,134 @@
         {
           "Name": "Profiles API",
           "Version": "v1",
-          "Url": "http://localhost:5181/swagger/v1/swagger.json"
-        }
-      ]
-    },
-    {
-      "Key": "services",
-      "TransformByOcelotConfig": false,
-      "Config": [
-        {
-          "Name": "Services API",
-          "Version": "v1",
-          "Url": "http://localhost:5183/swagger/v1/swagger.json"
+          "Url": "http://profiles:80/swagger/v1/swagger.json"
         }
       ]
     }
   ],
   "Microservices": [
     {
-      "Microservice": "Authorization",
+      "Microservice": "Services",
+      "Controllers": [
+        {
+          "Controller": "SpecializationController",
+          "Endpoints": [
+            {
+              "Path": "/api/Specialization",
+              "Method": "POST",
+              "Roles": [
+                3
+              ]
+            },
+            {
+              "Path": "/api/Specialization/ChangeStatus",
+              "Method": "PATCH",
+              "Roles": [
+                3
+              ]
+            },
+            {
+              "Path": "/api/Specialization/{id}",
+              "Method": "GET",
+              "Roles": []
+            },
+            {
+              "Path": "/api/Specialization",
+              "Method": "GET",
+              "Roles": []
+            },
+            {
+              "Path": "/api/Specialization/{id}",
+              "Method": "PUT",
+              "Roles": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "Controller": "ServiceController",
+          "Endpoints": [
+            {
+              "Path": "/api/Service",
+              "Method": "POST",
+              "Roles": [
+                3
+              ]
+            },
+            {
+              "Path": "/api/Service",
+              "Method": "GET",
+              "Roles": []
+            },
+            {
+              "Path": "/api/Service",
+              "Method": "PUT",
+              "Roles": [
+                3
+              ]
+            },
+            {
+              "Path": "/api/Service/{serviceId}",
+              "Method": "GET",
+              "Roles": [
+                3
+              ]
+            },
+            {
+              "Path": "/api/Service/ChangeStatus",
+              "Method": "PATCH",
+              "Roles": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Microservice": "Offices",
+      "Controllers": [
+        {
+          "Controller": "OfficeController",
+          "Endpoints": [
+            {
+              "Path": "/api/Office/CreateOffice",
+              "Method": "POST",
+              "Roles": [
+                3
+              ]
+            },
+            {
+              "Path": "/api/Office/UpdateOffice/{id}",
+              "Method": "PUT",
+              "Roles": [
+                3
+              ]
+            },
+            {
+              "Path": "/api/Office/GetOfficeAll",
+              "Method": "GET",
+              "Roles": []
+            },
+            {
+              "Path": "/api/Office/GetOffice/{id}",
+              "Method": "GET",
+              "Roles": [
+                3
+              ]
+            },
+            {
+              "Path": "/api/Office/map",
+              "Method": "GET",
+              "Roles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Microservice": "Auth",
       "Controllers": [
         {
           "Controller": "AuthController",
@@ -1025,47 +1145,6 @@
             {
               "Path": "/api/Auth/RefreshToken",
               "Method": "POST",
-              "Roles": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Microservice": "Offices",
-      "Controllers": [
-        {
-          "Controller": "OfficeController",
-          "Endpoints": [
-            {
-              "Path": "/api/Office/CreateOffice",
-              "Method": "POST",
-              "Roles": [
-                3
-              ]
-            },
-            {
-              "Path": "/api/Office/UpdateOffice/{id}",
-              "Method": "PUT",
-              "Roles": [
-                3
-              ]
-            },
-            {
-              "Path": "/api/Office/GetOfficeAll",
-              "Method": "GET",
-              "Roles": []
-            },
-            {
-              "Path": "/api/Office/GetOffice/{id}",
-              "Method": "GET",
-              "Roles": [
-                3
-              ]
-            },
-            {
-              "Path": "/api/Office/map",
-              "Method": "GET",
               "Roles": []
             }
           ]
@@ -1264,85 +1343,6 @@
             },
             {
               "Path": "/api/ReceptionistProfile/edit",
-              "Method": "PUT",
-              "Roles": [
-                3
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Microservice": "Services",
-      "Controllers": [
-        {
-          "Controller": "ServiceController",
-          "Endpoints": [
-            {
-              "Path": "/api/Service",
-              "Method": "POST",
-              "Roles": [
-                3
-              ]
-            },
-            {
-              "Path": "/api/Service",
-              "Method": "GET",
-              "Roles": []
-            },
-            {
-              "Path": "/api/Service",
-              "Method": "PUT",
-              "Roles": [
-                3
-              ]
-            },
-            {
-              "Path": "/api/Service/{serviceId}",
-              "Method": "GET",
-              "Roles": [
-                3
-              ]
-            },
-            {
-              "Path": "/api/Service/ChangeStatus",
-              "Method": "PATCH",
-              "Roles": [
-                3
-              ]
-            }
-          ]
-        },
-        {
-          "Controller": "SpecializationController",
-          "Endpoints": [
-            {
-              "Path": "/api/Specialization",
-              "Method": "POST",
-              "Roles": [
-                3
-              ]
-            },
-            {
-              "Path": "/api/Specialization/ChangeStatus",
-              "Method": "PATCH",
-              "Roles": [
-                3
-              ]
-            },
-            {
-              "Path": "/api/Specialization/{id}",
-              "Method": "GET",
-              "Roles": []
-            },
-            {
-              "Path": "/api/Specialization",
-              "Method": "GET",
-              "Roles": []
-            },
-            {
-              "Path": "/api/Specialization/{id}",
               "Method": "PUT",
               "Roles": [
                 3

@@ -26,6 +26,8 @@ namespace GatewayAPI
                 Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
             };
 
+            bool useDockerHosts = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+
             foreach (var msDir in microserviceDirs)
             {
                 var msName = Path.GetFileName(msDir);
@@ -51,17 +53,18 @@ namespace GatewayAPI
 
                     foreach (var ep in ctrlConfig.Endpoints)
                     {
-                        // Base route object
+                        string hostName = useDockerHosts ? msName.ToLower() : "localhost";
+                        int containerPort = useDockerHosts ? 80 : port;
+
                         var route = new Dictionary<string, object?>
                         {
                             ["DownstreamPathTemplate"] = ep.Path,
                             ["DownstreamScheme"] = "http",
-                            ["DownstreamHostAndPorts"] = new[] { new { Host = "localhost", Port = port } },
+                            ["DownstreamHostAndPorts"] = new[] { new { Host = hostName, Port = containerPort } },
                             ["UpstreamPathTemplate"] = ep.Path,
                             ["UpstreamHttpMethod"] = new[] { ep.Method.ToUpper() }
                         };
 
-                        // If roles exist → private route with authentication
                         if (ep.Roles.Count > 0)
                         {
                             route["AuthenticationOptions"] = new
@@ -83,6 +86,10 @@ namespace GatewayAPI
                 // Swagger endpoint config
                 if (baseUrl != null)
                 {
+                    string swaggerUrl = useDockerHosts
+                        ? $"http://{msName.ToLower()}:80/swagger/v1/swagger.json"
+                        : $"{baseUrl}/swagger/v1/swagger.json";
+
                     swaggerEndpoints.Add(new
                     {
                         Key = msName.ToLower(),
@@ -93,7 +100,7 @@ namespace GatewayAPI
                             {
                                 Name = msName + " API",
                                 Version = "v1",
-                                Url = $"{baseUrl}/swagger/v1/swagger.json"
+                                Url = swaggerUrl
                             }
                         }
                     });
