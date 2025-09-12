@@ -4,12 +4,11 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	<RootNamespace>InnoClinic.Profiles.Domain</RootNamespace>
+    <RootNamespace>InnoClinic.Saga.Infrastructure</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="InnoClinicCommon" Version="1.2.0" />
-	  <PackageReference Include="MassTransit" Version="7.3.0" />
+    <ProjectReference Include="..\Application\Application.csproj" />
   </ItemGroup>
 
 </Project>

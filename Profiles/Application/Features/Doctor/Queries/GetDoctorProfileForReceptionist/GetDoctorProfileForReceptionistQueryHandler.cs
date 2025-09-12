@@ -1,5 +1,4 @@
 ﻿using InnoClinic.Profiles.Application.DTOs;
-using InnoClinic.Profiles.Application.Interfaces;
 using InnoClinic.Profiles.Application.Interfaces.Repositories;
 
 using MediatR;
@@ -14,8 +13,7 @@ namespace InnoClinic.Profiles.Application.Features.Doctor.Queries.GetDoctorProfi
         private readonly IDoctorProfileRepository _doctorRepository;
 
         public GetDoctorProfileForReceptionistQueryHandler(
-            IDoctorProfileRepository doctorRepository,
-            IOfficeApiClient officeApiClient)
+            IDoctorProfileRepository doctorRepository)
         {
             _doctorRepository = doctorRepository;
         }

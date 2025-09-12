@@ -11,6 +11,7 @@ services:
       - profiles
       - services
       - offices
+      - saga
     networks:
       - innoclinic_net
     restart: always
@@ -98,17 +99,38 @@ services:
     restart: unless-stopped
 
   rabbitmq:
-    image: rabbitmq:3-management
-    container_name: innoclinic-rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
+   image: rabbitmq:3-management
+   ports:
+     - "5672:5672"
+     - "15672:15672"
+   environment:
+     - RABBITMQ_DEFAULT_USER=guest
+     - RABBITMQ_DEFAULT_PASS=guest
+   networks:
+     - innoclinic_net
+   restart: unless-stopped
+   healthcheck:
+     test: ["CMD", "rabbitmqctl", "status"]
+     interval: 10s
+     timeout: 5s
+     retries: 5
+
+  saga:
+    build:
+      context: .
+      dockerfile: Saga/API/Dockerfile
+    container_name: innoclinic-saga
     environment:
-      - RABBITMQ_DEFAULT_USER=guest
-      - RABBITMQ_DEFAULT_PASS=guest
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - RabbitMq__Host=rabbitmq
+    depends_on:
+      - rabbitmq
+      - profiles
+      - offices
     networks:
       - innoclinic_net
-    restart: unless-stopped
+    restart: always
 
 volumes:
   mssqldata:

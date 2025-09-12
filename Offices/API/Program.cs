@@ -1,11 +1,14 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 
+using InnoClinic.Offices.API.Consumers;
 using InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice;
 using InnoClinic.Offices.Infrastructure.Extensions;
 
 using InnoClinicCommon.Middleware;
 using InnoClinicCommon.Swagger;
+
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +30,25 @@ if (IsDevelopment || IsDocker)
     SwaggerServiceExtensions.AddSwaggerWithJwt(builder.Services);
 }
 
+var isLocal = builder.Environment.IsDevelopment();
 
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<GetOfficeConsumer>();
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(isLocal ? "localhost" : "rabbitmq", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        cfg.ConfigureEndpoints(context);
+    });
+});
+
+builder.Services.AddMassTransitHostedService();
 // Controllers
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();

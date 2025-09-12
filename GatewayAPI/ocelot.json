@@ -743,6 +743,20 @@
       }
     },
     {
+      "DownstreamPathTemplate": "/api/saga/doctors",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5177
+        }
+      ],
+      "UpstreamPathTemplate": "/api/saga/doctors",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
       "DownstreamPathTemplate": "/api/Service",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -963,6 +977,17 @@
           "Name": "Profiles API",
           "Version": "v1",
           "Url": "http://localhost:5181/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "saga",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "Saga API",
+          "Version": "v1",
+          "Url": "http://localhost:5177/swagger/v1/swagger.json"
         }
       ]
     },
@@ -1268,6 +1293,21 @@
               "Roles": [
                 3
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Microservice": "Saga",
+      "Controllers": [
+        {
+          "Controller": "SagaController",
+          "Endpoints": [
+            {
+              "Path": "/api/saga/doctors",
+              "Method": "GET",
+              "Roles": []
             }
           ]
         }
