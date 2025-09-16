@@ -1,5 +1,6 @@
 using InnoClinic.Saga.Application.DTOs;
 using InnoClinic.Saga.Application.Features.Doctor.Queries;
+using InnoClinic.Saga.Application.Features.Sagas;
 using InnoClinic.Saga.Contract;
 
 using InnoClinicCommon.Swagger;
@@ -19,8 +20,10 @@ var isLocal = builder.Environment.IsDevelopment();
 builder.Services.AddMassTransit(x =>
 {
     x.AddRequestClient<GetDoctorsForReceptionistRequest>();
-
     x.AddRequestClient<GetOfficeRequest>();
+
+    x.AddSagaStateMachine<RegisterPatientStateMachine, RegisterPatientState>()
+    .InMemoryRepository();
 
     x.UsingRabbitMq((context, cfg) =>
     {

@@ -20,6 +20,8 @@ using InnoClinicCommon.JWT;
 using InnoClinicCommon.Middleware;
 using InnoClinicCommon.Swagger;
 
+using MassTransit;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -85,6 +87,20 @@ if (IsDevelopment || IsDocker)
     builder.Services.AddSwaggerGen(c => c.ExampleFilters());
 }
 
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(builder.Environment.IsDevelopment() ? "localhost" : "rabbitmq", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+    });
+});
+
+
+builder.Services.AddMassTransitHostedService();
 
 builder.Services.AddCors(options =>
 {

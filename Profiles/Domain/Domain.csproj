@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="InnoClinicCommon" Version="1.2.0" />
+    <PackageReference Include="InnoClinicCommon" Version="1.2.4" />
 	  <PackageReference Include="MassTransit" Version="7.3.0" />
   </ItemGroup>
 

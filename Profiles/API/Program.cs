@@ -5,6 +5,7 @@ using InnoClinic.Offices.Infrastructure.Persistence.Repositories;
 using InnoClinic.Profiles.API.Consumers;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
 using InnoClinic.Profiles.Application.Features.Doctor.Examples;
+using InnoClinic.Profiles.Application.Features.Patient.Consumers;
 using InnoClinic.Profiles.Application.Interfaces.Repositories;
 using InnoClinic.Profiles.Application.StaticClases;
 using InnoClinic.Profiles.Infrastructure.Persistence.Repositories;
@@ -75,6 +76,7 @@ var isLocal = builder.Environment.IsDevelopment();
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<GetDoctorsForReceptionistConsumer>();
+    x.AddConsumer<RegisterPatientConsumer>();
 
     x.UsingRabbitMq((context, cfg) =>
     {

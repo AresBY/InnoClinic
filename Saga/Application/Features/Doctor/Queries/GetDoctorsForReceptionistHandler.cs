@@ -45,15 +45,16 @@ public class GetDoctorsForReceptionistHandler
                 officeAddress = officeResponse.Message?.Address ?? string.Empty;
             }
 
-            result.Add(new DoctorDto(
-                doctor.Id,
-                doctor.FullName,
-                doctor.Specialization,
-                doctor.Status,
-                doctor.DateOfBirth,
-                doctor.OfficeId,
-                officeAddress
-            ));
+            result.Add(new DoctorDto
+            {
+                Id = doctor.Id,
+                FullName = doctor.FullName,
+                Specialization = doctor.Specialization,
+                Status = doctor.Status,
+                DateOfBirth = doctor.DateOfBirth,
+                OfficeId = doctor.OfficeId,
+                OfficeAddress = officeAddress
+            });
         }
 
         return result;

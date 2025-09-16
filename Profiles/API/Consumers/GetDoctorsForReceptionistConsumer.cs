@@ -44,16 +44,17 @@ namespace InnoClinic.Profiles.API.Consumers
             var doctors = await query.ToListAsync(context.CancellationToken);
 
             var response = new GetDoctorsForReceptionistResponse(
-                doctors.Select(d => new DoctorDto(
-                    d.Id,
-                    $"{d.FirstName} {d.LastName} {d.MiddleName}".Trim(),
-                    (int)d.Specialization,
-                    (int)d.Status,
-                    d.DateOfBirth.DateTime,
-                    d.OfficeId,
-                    string.Empty
-                )).ToList()
-            );
+            doctors.Select(d => new DoctorDto
+            {
+                Id = d.Id,
+                FullName = $"{d.FirstName} {d.LastName} {d.MiddleName}".Trim(),
+                Specialization = ((int)d.Specialization).ToString(),
+                Status = ((int)d.Status).ToString(),
+                DateOfBirth = d.DateOfBirth.DateTime,
+                OfficeId = d.OfficeId,
+                OfficeAddress = string.Empty
+            }).ToList()
+        );
 
             await context.RespondAsync(response);
 
