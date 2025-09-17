@@ -1,7 +1,11 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 
+using Hangfire;
+using Hangfire.MemoryStorage;
+
 using InnoClinic.Offices.Infrastructure.Persistence.Repositories;
+using InnoClinic.Profiles.API.BackgroundPdfService;
 using InnoClinic.Profiles.API.Consumers;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
 using InnoClinic.Profiles.Application.Features.Doctor.Examples;
@@ -71,6 +75,28 @@ builder.Services.AddScoped<IDoctorProfileRepository, DoctorProfileRepository>();
 builder.Services.AddScoped<IPatientProfileRepository, PatientProfileRepository>();
 builder.Services.AddScoped<IReceptionistProfileRepository, ReceptionistProfileRepository>();
 
+
+builder.Services.AddSingleton<PdfGeneratorService>();
+
+
+
+var useHangfire = builder.Configuration.GetValue<bool>("UseHangfireForReceptionistPdf");
+
+builder.Services.AddSingleton<PdfGeneratorService>();
+
+if (useHangfire)
+{
+    builder.Services.AddHangfire(config => config.UseMemoryStorage());
+    builder.Services.AddHangfireServer();
+
+    builder.Services.AddSingleton<ReceptionistPdfHangfireService>();
+}
+else
+{
+    builder.Services.AddHostedService<ReceptionistPdfBackgroundService>();
+}
+
+
 var isLocal = builder.Environment.IsDevelopment();
 
 builder.Services.AddMassTransit(x =>
@@ -122,6 +148,21 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+if (useHangfire)
+{
+    var hangfireService = app.Services.GetRequiredService<ReceptionistPdfHangfireService>();
+    var recurringJobManager = app.Services.GetRequiredService<IRecurringJobManager>();
+
+    recurringJobManager.AddOrUpdate(
+        "GenerateReceptionistsPdf",
+        () => hangfireService.GeneratePdfForAllReceptionists(),
+        "*/10 * * * * *"
+    );
+
+    app.UseHangfireDashboard();
+}
+
 
 
 //using (var scope = app.Services.CreateScope())
