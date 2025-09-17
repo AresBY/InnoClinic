@@ -20,6 +20,8 @@ using InnoClinicCommon.JWT;
 using InnoClinicCommon.Middleware;
 using InnoClinicCommon.Swagger;
 
+using MassTransit;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,7 +40,6 @@ builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("Email:Gmail"));
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-JwtServiceExtensions.AddJwtAuthentication(builder.Services, builder.Configuration);
 
 bool IsDevelopment = builder.Environment.IsEnvironment("Development");
 bool IsDocker = builder.Environment.IsEnvironment("Docker");
@@ -86,6 +87,20 @@ if (IsDevelopment || IsDocker)
     builder.Services.AddSwaggerGen(c => c.ExampleFilters());
 }
 
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(builder.Environment.IsDevelopment() ? "localhost" : "rabbitmq", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+    });
+});
+
+
+builder.Services.AddMassTransitHostedService();
 
 builder.Services.AddCors(options =>
 {
@@ -155,9 +170,6 @@ if (IsDevelopment || IsDocker)
 
 }
 app.UseCors();
-
-app.UseAuthentication();
-app.UseAuthorization();
 
 
 app.MapControllers();

@@ -1,0 +1,12 @@
+{
+  "Name": "SagaController",
+  "BaseUrl": "http://localhost:5177",
+  "Port": 5177,
+  "Endpoints": [
+    {
+      "Path": "/api/saga/doctors",
+      "Method": "GET",
+      "Roles": []
+    }
+  ]
+}

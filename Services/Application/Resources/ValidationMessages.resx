@@ -144,6 +144,9 @@
   <data name="ServiceStatus_Invalid" xml:space="preserve">
     <value>Status must be true (Active) or false (Inactive)</value>
   </data>
+  <data name="SpecializationIdInvalid" xml:space="preserve">
+    <value>Specialization with this Id does not exist.</value>
+  </data>
   <data name="SpecializationNameRequired" xml:space="preserve">
     <value>Please, enter the name</value>
   </data>

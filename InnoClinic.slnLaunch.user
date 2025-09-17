@@ -15,11 +15,15 @@
         "Action": "Start"
       },
       {
-        "Path": "SwaggerAggregator\\SwaggerAggregator.csproj",
+        "Path": "Services\\API\\API.csproj",
         "Action": "Start"
       },
       {
-        "Path": "Services\\API\\API.csproj",
+        "Path": "GatewayAPI\\GatewayAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Saga\\API\\API.csproj",
         "Action": "Start"
       }
     ]

@@ -1,0 +1,47 @@
+{
+  "Name": "AuthController",
+  "BaseUrl": "http://localhost:5179",
+  "Port": 5179,
+  "Endpoints": [
+    {
+      "Path": "/api/Auth/RegisterPatient",
+      "Method": "POST",
+      "Roles": []
+    },
+    {
+      "Path": "/api/Auth/Register",
+      "Method": "POST",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/Auth/GetAllUsers",
+      "Method": "GET",
+      "Roles": []
+    },
+    {
+      "Path": "/api/Auth/ConfirmEmail",
+      "Method": "POST",
+      "Roles": []
+    },
+    {
+      "Path": "/api/Auth/SignIn",
+      "Method": "POST",
+      "Roles": []
+    },
+    {
+      "Path": "/api/Auth/CheckEmailExists",
+      "Method": "GET",
+      "Roles": []
+    },
+    {
+      "Path": "/api/Auth/Logout",
+      "Method": "POST",
+      "Roles": []
+    },
+    {
+      "Path": "/api/Auth/RefreshToken",
+      "Method": "POST",
+      "Roles": []
+    }
+  ]
+}

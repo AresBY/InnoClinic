@@ -1,12 +1,14 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 
+using InnoClinic.Offices.API.Consumers;
 using InnoClinic.Offices.Application.Features.Office.Commands.CreateOffice;
 using InnoClinic.Offices.Infrastructure.Extensions;
 
-using InnoClinicCommon.JWT;
 using InnoClinicCommon.Middleware;
 using InnoClinicCommon.Swagger;
+
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,9 +21,6 @@ builder.Services.AddValidatorsFromAssembly(typeof(CreateOfficeCommandValidator).
 bool IsDevelopment = builder.Environment.IsEnvironment("Development");
 bool IsDocker = builder.Environment.IsEnvironment("Docker");
 
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-JwtServiceExtensions.AddJwtAuthentication(builder.Services, builder.Configuration);
-
 // Infrastructure
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -31,7 +30,25 @@ if (IsDevelopment || IsDocker)
     SwaggerServiceExtensions.AddSwaggerWithJwt(builder.Services);
 }
 
+var isLocal = builder.Environment.IsDevelopment();
 
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<GetOfficeConsumer>();
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(isLocal ? "localhost" : "rabbitmq", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        cfg.ConfigureEndpoints(context);
+    });
+});
+
+builder.Services.AddMassTransitHostedService();
 // Controllers
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();
@@ -62,9 +79,6 @@ if (IsDevelopment || IsDocker)
 
 app.UseHttpsRedirection();
 app.UseCors();
-
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.MapControllers();
 app.Run();

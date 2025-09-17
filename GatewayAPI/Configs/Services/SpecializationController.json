@@ -1,0 +1,32 @@
+{
+  "Name": "SpecializationController",
+  "BaseUrl": "http://localhost:5183",
+  "Port": 5183,
+  "Endpoints": [
+    {
+      "Path": "/api/Specialization",
+      "Method": "POST",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/Specialization/ChangeStatus",
+      "Method": "PATCH",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/Specialization/{id}",
+      "Method": "GET",
+      "Roles": []
+    },
+    {
+      "Path": "/api/Specialization",
+      "Method": "GET",
+      "Roles": []
+    },
+    {
+      "Path": "/api/Specialization/{id}",
+      "Method": "PUT",
+      "Roles": [ "Receptionist" ]
+    }
+  ]
+}

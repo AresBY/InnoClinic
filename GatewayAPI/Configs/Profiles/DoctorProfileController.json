@@ -1,0 +1,72 @@
+{
+  "Name": "DoctorProfileController",
+  "BaseUrl": "http://localhost:5181",
+  "Port": 5181,
+  "Endpoints": [
+    {
+      "Path": "/api/DoctorProfile",
+      "Method": "POST",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/DoctorProfile",
+      "Method": "GET",
+      "Roles": []
+    },
+    {
+      "Path": "/api/DoctorProfile/me",
+      "Method": "GET",
+      "Roles": [ "Doctor" ]
+    },
+    {
+      "Path": "/api/DoctorProfile/me",
+      "Method": "PUT",
+      "Roles": [ "Doctor", "Receptionist" ]
+    },
+    {
+      "Path": "/api/DoctorProfile/{doctorId}/status",
+      "Method": "PUT",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/DoctorProfile/filter",
+      "Method": "GET",
+      "Roles": []
+    },
+    {
+      "Path": "/api/DoctorProfile/receptionist/filter",
+      "Method": "GET",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/DoctorProfile/map",
+      "Method": "GET",
+      "Roles": []
+    },
+    {
+      "Path": "/api/DoctorProfile/filter/by-specialization",
+      "Method": "GET",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/DoctorProfile/search/by-name",
+      "Method": "GET",
+      "Roles": []
+    },
+    {
+      "Path": "/api/DoctorProfile/receptionist/search/by-name",
+      "Method": "GET",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/DoctorProfile/receptionist/profile/{id}",
+      "Method": "GET",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/DoctorProfile/receptionist/doctors",
+      "Method": "GET",
+      "Roles": [ "Receptionist" ]
+    }
+  ]
+}

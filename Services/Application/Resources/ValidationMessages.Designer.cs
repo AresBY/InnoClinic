@@ -142,6 +142,15 @@ namespace InnoClinic.Services.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specialization with this Id does not exist..
+        /// </summary>
+        internal static string SpecializationIdInvalid {
+            get {
+                return ResourceManager.GetString("SpecializationIdInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please, enter the name.
         /// </summary>
         internal static string SpecializationNameRequired {

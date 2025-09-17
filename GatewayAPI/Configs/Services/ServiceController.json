@@ -1,0 +1,32 @@
+{
+  "Name": "ServiceController",
+  "BaseUrl": "http://localhost:5183",
+  "Port": 5183,
+  "Endpoints": [
+    {
+      "Path": "/api/Service",
+      "Method": "POST",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/Service",
+      "Method": "GET",
+      "Roles": []
+    },
+    {
+      "Path": "/api/Service",
+      "Method": "PUT",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/Service/{serviceId}",
+      "Method": "GET",
+      "Roles": [ "Receptionist" ]
+    },
+    {
+      "Path": "/api/Service/ChangeStatus",
+      "Method": "PATCH",
+      "Roles": [ "Receptionist" ]
+    }
+  ]
+}

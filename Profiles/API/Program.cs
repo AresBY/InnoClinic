@@ -2,16 +2,18 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 
 using InnoClinic.Offices.Infrastructure.Persistence.Repositories;
+using InnoClinic.Profiles.API.Consumers;
 using InnoClinic.Profiles.Application.Features.Doctor.Commands.CreateDoctorProfile;
 using InnoClinic.Profiles.Application.Features.Doctor.Examples;
-using InnoClinic.Profiles.Application.Interfaces;
+using InnoClinic.Profiles.Application.Features.Patient.Consumers;
 using InnoClinic.Profiles.Application.Interfaces.Repositories;
 using InnoClinic.Profiles.Application.StaticClases;
 using InnoClinic.Profiles.Infrastructure.Persistence.Repositories;
 
-using InnoClinicCommon.JWT;
 using InnoClinicCommon.Middleware;
 using InnoClinicCommon.Swagger;
+
+using MassTransit;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -58,10 +60,6 @@ else if (IsDocker)
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 }
 
-// --- JWT ---
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-JwtServiceExtensions.AddJwtAuthentication(builder.Services, builder.Configuration);
-
 // --- MediatR & FluentValidation ---
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateDoctorProfileCommand).Assembly)
@@ -73,13 +71,26 @@ builder.Services.AddScoped<IDoctorProfileRepository, DoctorProfileRepository>();
 builder.Services.AddScoped<IPatientProfileRepository, PatientProfileRepository>();
 builder.Services.AddScoped<IReceptionistProfileRepository, ReceptionistProfileRepository>();
 
+var isLocal = builder.Environment.IsDevelopment();
 
-
-
-builder.Services.AddHttpClient<IOfficeApiClient, OfficeApiClient>(client =>
+builder.Services.AddMassTransit(x =>
 {
-    client.BaseAddress = new Uri("http://localhost:5180/");
+    x.AddConsumer<GetDoctorsForReceptionistConsumer>();
+    x.AddConsumer<RegisterPatientConsumer>();
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(isLocal ? "localhost" : "rabbitmq", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        cfg.ConfigureEndpoints(context);
+    });
 });
+
+builder.Services.AddMassTransitHostedService();
 
 
 // --- Controllers ---
@@ -108,6 +119,7 @@ builder.Services.AddCors(options =>
               .AllowCredentials();
     });
 });
+
 
 var app = builder.Build();
 
@@ -158,8 +170,6 @@ if (IsDevelopment || IsDocker)
 app.UseHttpsRedirection();
 app.UseCors();
 
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.MapControllers();
 app.Run();
