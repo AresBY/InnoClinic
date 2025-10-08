@@ -62,6 +62,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Saga\Domain\Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Saga\Infrastructure\Infrastructure.csproj", "{09D35059-60AA-40EE-A5A8-1D281235C5CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Authorization\UnitTests\UnitTests.csproj", "{E2BFDDB7-C21D-48AF-8078-A5F3C268BF2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -152,6 +154,10 @@ Global
 		{09D35059-60AA-40EE-A5A8-1D281235C5CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09D35059-60AA-40EE-A5A8-1D281235C5CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09D35059-60AA-40EE-A5A8-1D281235C5CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2BFDDB7-C21D-48AF-8078-A5F3C268BF2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2BFDDB7-C21D-48AF-8078-A5F3C268BF2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2BFDDB7-C21D-48AF-8078-A5F3C268BF2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2BFDDB7-C21D-48AF-8078-A5F3C268BF2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,6 +183,7 @@ Global
 		{26644B70-2892-47BB-A860-91F6503B0C21} = {547F36F0-8825-47FA-8B50-532634381C53}
 		{F1B43277-AEDF-4832-9CC6-95B8CD66C9D0} = {547F36F0-8825-47FA-8B50-532634381C53}
 		{09D35059-60AA-40EE-A5A8-1D281235C5CD} = {547F36F0-8825-47FA-8B50-532634381C53}
+		{E2BFDDB7-C21D-48AF-8078-A5F3C268BF2B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {632F3A2A-A628-423D-9210-E8A9C5B93DAC}
